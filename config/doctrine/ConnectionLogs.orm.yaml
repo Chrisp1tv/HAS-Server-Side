@@ -1,0 +1,16 @@
+App\Entity\ConnectionLogs:
+    type: entity
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        connectionDate:
+            type: datetime
+            column: connection_date
+        IPConnection:
+            type: string
+            column: ip_connection
+    manyToOne:
+        administrator:
+            targetEntity: App\Entity\Administrator

@@ -1,0 +1,25 @@
+recipient_groups_index:
+    path: /
+    controller: App\Controller\RecipientGroupsController::index
+
+recipient_groups_new:
+    path: /new
+    controller: App\Controller\RecipientGroupsController::new
+
+recipient_groups_modify:
+    path: /modify/{id}
+    controller: App\Controller\RecipientGroupsController::modify
+    requirements:
+        id: '\d+'
+
+recipient_groups_remove:
+    path: /remove/{id}
+    controller: App\Controller\RecipientGroupsController::remove
+    requirements:
+        id: '\d+'
+
+recipient_groups_show:
+    path: /show/{id}
+    controller: App\Controller\RecipientGroupsController::show
+    requirements:
+        id: '\d+'

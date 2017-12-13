@@ -1,0 +1,31 @@
+App\Entity\Campaign:
+    type: entity
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+        sendingDate:
+            type: datetime
+            column: sending_date
+        endDate:
+            type: datetime
+            column: end_date
+        repetitionFrequency:
+            type: integer
+            column: repetition_frequency
+    oneToOne:
+        message:
+            targetEntity: App\Entity\Message
+    manyToOne:
+        sender:
+            targetEntity: App\Entity\Administrator
+    manyToMany:
+        recipients:
+            targetEntity: App\Entity\Recipient
+        recipientGroups:
+            targetEntity: App\Entity\RecipientGroup
+            joinTable: recipient_groups

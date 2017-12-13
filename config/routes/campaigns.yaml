@@ -1,0 +1,31 @@
+campaings_index:
+    path: /
+    controller: App\Controller\CampaignsController::index
+
+campaigns_new:
+    path: /new
+    controller: App\Controller\CampaignsController::new
+
+campaigns_modify:
+    path: /modify/{id}
+    controller: App\Controller\CampaignsController::modify
+    requirements:
+        id: '\d+'
+
+campaigns_remove:
+    path: /remove/{id}
+    controller: App\Controller\CampaignsController::remove
+    requirements:
+        id: '\d+'
+
+campaigns_duplicate:
+    path: /duplicate/{id}
+    controller: App\Controller\CampaignsController::duplicate
+    requirements:
+        id: '\d+'
+
+campaigns_show:
+    path: /show/{id}
+    controller: App\Controller\CampaignsController::show
+    requirements:
+        id: '\d+'

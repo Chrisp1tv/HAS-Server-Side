@@ -1,0 +1,11 @@
+recipients_index:
+    path: /{search}
+    controller: App\Controller\RecipientsController::index
+    requirements:
+        search: '[a-zA-Z0-9]+'
+
+recipients_show:
+    path: /show/{id}
+    controller: App\Controller\RecipientsController::show
+    requirements:
+        id: '\d+'

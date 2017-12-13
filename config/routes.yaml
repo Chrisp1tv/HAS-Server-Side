@@ -1,3 +1,18 @@
-#index:
-#    path: /
-#    defaults: { _controller: 'App\Controller\DefaultController::index' }
+home:
+    resource: 'routes/home.yaml'
+
+administrators:
+    resource: 'routes/administrators.yaml'
+    prefix: /administrators
+
+campaigns:
+    resource: 'routes/campaigns.yaml'
+    prefix: /campaigns
+
+recipients:
+    resource: 'routes/recipients.yaml'
+    prefix: /recipients
+
+recipientGroups:
+    resource: 'routes/recipient-groups.yaml'
+    prefix: /recipient-groups

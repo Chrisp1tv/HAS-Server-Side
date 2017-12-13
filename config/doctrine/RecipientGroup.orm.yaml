@@ -1,0 +1,11 @@
+App\Entity\RecipientGroup:
+    type: entity
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+    manyToMany:
+        targetEntity: App\Entity\Recipient

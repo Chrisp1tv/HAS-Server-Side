@@ -1,0 +1,13 @@
+App\Entity\Message:
+    type: entity
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        content:
+            type: text
+        color:
+            type: string
+        bold:
+            type: boolean

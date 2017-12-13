@@ -1,0 +1,23 @@
+administrators_index:
+    path: /
+    controller: App\Controller\AdministratorsController::index
+
+administrators_new:
+    path: /new
+    controller: App\Conroller\AdministratorsController::new
+
+administrators_remove:
+    path: /remove/{id}
+    controller: App\Conroller\AdministratorsController::remove
+    requirements:
+        id: '\d+'
+
+administrators_show:
+    path: /show/{id}
+    controller: App\Conroller\AdministratorsController::show
+    requirements:
+        id: '\d+'
+
+administrators_show_logs:
+    path: /logs
+    controller: App\Conroller\AdministratorsController::showConnectionLogs
