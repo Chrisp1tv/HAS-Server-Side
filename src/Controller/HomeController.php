@@ -13,5 +13,7 @@ class HomeController extends Controller
 {
     public function indexAction() {
 
+
+        $this->render("templates/home/index.html.twig");
     }
 }

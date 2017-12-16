@@ -13,9 +13,12 @@ class RecipientsController extends Controller
 {
     public function indexAction(string $search = null) {
 
+
+        $this->render("templates/recipients/index.html.twig");
     }
 
     public function showAction(int $id) {
 
+        $this->render("templates/recipients/show.html.twig");
     }
 }
