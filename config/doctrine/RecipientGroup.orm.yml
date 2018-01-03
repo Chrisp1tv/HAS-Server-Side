@@ -8,4 +8,5 @@ App\Entity\RecipientGroup:
         name:
             type: string
     manyToMany:
-        targetEntity: App\Entity\Recipient
+        recipients:
+            targetEntity: App\Entity\Recipient

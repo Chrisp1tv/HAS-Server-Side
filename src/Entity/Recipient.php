@@ -23,4 +23,52 @@ class Recipient
      * @var string
      */
     private $linkingIdentifier;
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return Recipient
+     */
+    public function setName(string $name): Recipient
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLinkingIdentifier(): string
+    {
+        return $this->linkingIdentifier;
+    }
+
+    /**
+     * @param string $linkingIdentifier
+     *
+     * @return Recipient
+     */
+    public function setLinkingIdentifier(string $linkingIdentifier): Recipient
+    {
+        $this->linkingIdentifier = $linkingIdentifier;
+
+        return $this;
+    }
 }

@@ -13,4 +13,12 @@ class Administrator
      * @var int
      */
     private $id;
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
 }

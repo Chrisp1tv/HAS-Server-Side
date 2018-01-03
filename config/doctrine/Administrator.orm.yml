@@ -1,0 +1,6 @@
+App\Entity\Administrator:
+    type: entity
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }

@@ -28,4 +28,5 @@ App\Entity\Campaign:
             targetEntity: App\Entity\Recipient
         recipientGroups:
             targetEntity: App\Entity\RecipientGroup
-            joinTable: recipient_groups
+            joinTable:
+                name: recipient_groups
