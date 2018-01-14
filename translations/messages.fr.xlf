@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+        <body>
+            <!-- Forms -->
+            <!-- Forms labels -->
+            <trans-unit id="form.label.name">
+                <source>form.label.name</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="form.label.content">
+                <source>form.label.content</source>
+                <target>Contenu</target>
+            </trans-unit>
+            <trans-unit id="form.label.color">
+                <source>form.label.color</source>
+                <target>Couleur (code hexadécimal)</target>
+            </trans-unit>
+            <trans-unit id="form.label.bold">
+                <source>form.label.bold</source>
+                <target>Gras</target>
+            </trans-unit>
+            <trans-unit id="form.label.message">
+                <source>form.label.message</source>
+                <target>Message</target>
+            </trans-unit>
+            <trans-unit id="form.label.sendingDate">
+                <source>form.label.sendingDate</source>
+                <target>Date et heure d'envoi</target>
+            </trans-unit>
+            <trans-unit id="form.label.endDate">
+                <source>form.label.endDate</source>
+                <target>Date d'expiration</target>
+            </trans-unit>
+            <trans-unit id="form.label.repetitionFrequency">
+                <source>form.label.repetitionFrequency</source>
+                <target>Fréquence de répétition (en minutes)</target>
+            </trans-unit>
+            <trans-unit id="form.label.recipients">
+                <source>form.label.recipients</source>
+                <target>Destinataires</target>
+            </trans-unit>
+            <trans-unit id="form.label.recipientGroups">
+                <source>form.label.recipientGroups</source>
+                <target>Groupes de destinataires</target>
+            </trans-unit>
+            <trans-unit id="form.label.linkingIdentifier">
+                <source>form.label.linkingIdentifier</source>
+                <target>Identifiant de liaison</target>
+            </trans-unit>
+            <!-- Form placeholders -->
+            <trans-unit id="form.placeholder.repetitionFrequency">
+                <source>form.placeholder.repetitionFrequency</source>
+                <target>Laissez vide si aucune répétition</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

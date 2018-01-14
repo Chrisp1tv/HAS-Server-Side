@@ -62,6 +62,19 @@ class Campaign
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+    public function __clone() {
+        $this->id = null;
+        $this->message = clone $this->message;
+    }
+
+    /**
      * @return int
      */
     public function getId(): int

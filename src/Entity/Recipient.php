@@ -25,6 +25,14 @@ class Recipient
     private $linkingIdentifier;
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName() ?? $this->getLinkingIdentifier();
+    }
+
+    /**
      * @return int
      */
     public function getId(): int

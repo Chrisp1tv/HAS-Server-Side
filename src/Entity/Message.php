@@ -30,6 +30,19 @@ class Message
     private $bold;
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getContent();
+    }
+
+    public function __clone()
+    {
+        $this->id = null;
+    }
+
+    /**
      * @return int
      */
     public function getId(): int
