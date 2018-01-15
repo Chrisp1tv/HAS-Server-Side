@@ -14,6 +14,6 @@ class HomeController extends Controller
     public function indexAction() {
         // TODO @CA
 
-        $this->render("templates/home/index.html.twig");
+        $this->render("home/index.html.twig");
     }
 }

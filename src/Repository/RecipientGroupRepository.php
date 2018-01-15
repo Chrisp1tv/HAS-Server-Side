@@ -17,4 +17,16 @@ class RecipientGroupRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, RecipientGroup::class);
     }
+
+    public function find($id)
+    {
+        $queryBuilder = $this->createQueryBuilder('recipientGroup')
+            ->join('recipientGroup.recipients', 'recipients')
+            ->where('recipientGroup.id = :id')
+            ->setParameter('id', $id);
+
+        return $queryBuilder
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

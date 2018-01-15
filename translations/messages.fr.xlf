@@ -53,6 +53,19 @@
                 <source>form.placeholder.repetitionFrequency</source>
                 <target>Laissez vide si aucune répétition</target>
             </trans-unit>
+            <!-- Flash messages -->
+            <trans-unit id="flash.campaignDuplicated">
+                <source>flash.campaignDuplicated</source>
+                <target>La campagne a bien été dupliquée en tenant compte des informations fournies.</target>
+            </trans-unit>
+            <trans-unit id="flash.recipientGroupCreated">
+                <source>flash.recipientGroupCreated</source>
+                <target>Le groupe de destinataires a bien été créé.</target>
+            </trans-unit>
+            <trans-unit id="flash.recipientGroupModified">
+                <source>flash.recipientGroupModified</source>
+                <target>Le groupe de destinataires a bien été modifié.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
