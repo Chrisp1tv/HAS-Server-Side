@@ -1,0 +1,74 @@
+/* Base and Reset */
+
+/* Reset */
+
+html, body, div, p, ul, ol, li, header, article, footer, section, aside, main, nav, img, iframe table, input, select, h1, h2, h3, h4, h5, h6, dl, dd, dt, iframe, object, video, table, tr, td, th, a, textarea {
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+input::-webkit-input-placeholder {
+    color: #cfcfcf;
+    font-style: italic;
+    font-weight: bold;
+}
+
+input:focus::-webkit-input-placeholder {
+    opacity: 0;
+}
+
+input::-moz-placeholder {
+    color: #cfcfcf;
+    font-style: italic;
+    font-weight: bold;
+}
+
+input:focus::-moz-placeholder {
+    opacity: 0;
+}
+
+input:-ms-input-placeholder {
+    color: #cfcfcf;
+    font-style: italic;
+    font-weight: bold;
+}
+
+input:focus:-ms-input-placeholder {
+    opacity: 0;
+}
+
+html {
+    font: 85% "Open Sans", "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+}
+
+body {
+    background: #f2f2f3;
+    min-width: 220px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 4px 0;
+    padding: 2px 0 2px 0;
+    color: #b91533;
+    font-weight: 400;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .1);
+}
+
+a {
+    color: #b91533;
+    text-decoration: none;
+    transition: all 0.2s ease-out;
+}
+
+a:hover {
+    color: #ff6849;
+}
+
+ul, ol {
+    list-style: square inside;
+    margin: 7px 0;
+}

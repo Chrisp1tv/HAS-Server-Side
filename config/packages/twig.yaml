@@ -1,0 +1,4 @@
+twig:
+    globals:
+        christopheranciauxgithublink: '%christopheranciauxgithublink%'
+        alexandreszymuragithublink: '%alexandreszymuragithublink%'

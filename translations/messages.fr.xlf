@@ -2,8 +2,58 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
         <body>
+            <!-- General -->
+            <!-- Words and simple expressions -->
+            <trans-unit id="and">
+                <source>and</source>
+                <target>et</target>
+            </trans-unit>
+            <trans-unit id="alertSystem">
+                <source>alertSystem</source>
+                <target>Système d'alertes</target>
+            </trans-unit>
+            <trans-unit id="homepage">
+                <source>homepage</source>
+                <target>Accueil</target>
+            </trans-unit>
+            <trans-unit id="administrators">
+                <source>administrators</source>
+                <target>Administrateurs</target>
+            </trans-unit>
+            <trans-unit id="campaigns">
+                <source>campaigns</source>
+                <target>Campagnes de messages</target>
+            </trans-unit>
+            <trans-unit id="recipients">
+                <source>recipients</source>
+                <target>Destinataires</target>
+            </trans-unit>
+            <trans-unit id="recipientGroups">
+                <source>recipientGroups</source>
+                <target>Groupes de destinataires</target>
+            </trans-unit>
+            <trans-unit id="realization">
+                <source>realizedBy</source>
+                <target>Réalisation :</target>
+            </trans-unit>
+            <trans-unit id="duplicateCampaign">
+                <source>duplicateCampaign</source>
+                <target>Dupliquer une campagne</target>
+            </trans-unit>
+            <trans-unit id="newRecipientGroup">
+                <source>newRecipientGroup</source>
+                <target>Nouveau groupe de destinataires</target>
+            </trans-unit>
+            <trans-unit id="modifyRecipientGroup">
+                <source>modifyRecipientGroup</source>
+                <target>Modifier le groupe %groupName%</target>
+            </trans-unit>
             <!-- Forms -->
             <!-- Forms labels -->
+            <trans-unit id="form.label.save">
+                <source>form.label.save</source>
+                <target>Sauvegarder</target>
+            </trans-unit>
             <trans-unit id="form.label.name">
                 <source>form.label.name</source>
                 <target>Nom</target>

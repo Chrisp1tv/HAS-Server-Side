@@ -1,0 +1,24 @@
+/* Top overlay */
+
+.top-overlay {
+    position: fixed;
+    z-index: 8021;
+    width: 100%;
+    opacity: 1;
+    top: 20px;
+    transition: all 0.2s ease-out;
+    text-align: center;
+}
+
+.top-overlay > * {
+    display: inline-block;
+    box-shadow: 0 1px 8px 3px rgba(0, 0, 0, 0.5);
+}
+
+.top-overlay:empty {
+    opacity: 0;
+}
+
+.top-overlay > .flash-message:first-of-type, .top-overlay > .flash-message:last-of-type {
+    margin: 0;
+}
