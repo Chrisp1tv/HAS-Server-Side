@@ -36,4 +36,32 @@ class CampaignRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    /**
+     * @return int
+     */
+    public function countAll(): int
+    {
+        $queryBuilder = $this->createQueryBuilder('campaign')
+            ->select('count(campaign.id)');
+
+        return $queryBuilder
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * @return int
+     */
+    public function countUnsent(): int
+    {
+        $queryBuilder = $this->createQueryBuilder('campaign')
+            ->select('count(campaign.id)')
+            ->where('campaign.sendingDate > :now')
+            ->setParameter('now', new \DateTime());
+
+        return $queryBuilder
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

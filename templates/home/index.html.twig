@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ 'homepage'|trans }}
+{% endblock %}
+
+{% block main %}
+    {% if lastConnection is not null %}
+        <p>
+            {{ 'sentence.lastConnectionDate'|trans({'%connectionDate%': lastConnection.connectionDate|localizeddate('long', 'long', app.request.locale), '%IPConnection': lastConnection.IPConnection}) }}
+        </p>
+    {% endif %}
+    <p>
+        {{ 'sentence.numberOfCampaigns'|transchoice(numberOfCampaings) }} {{ 'sentence.numberOfUnsentCampaigns'|transchoice(numberOfUnsentCampaigns) }}
+    </p>
+    <p>
+        {{ 'sentence.numberOfLinkedRecipients'|transchoice(numberOfLinkedRecipients) }}
+    </p>
+{% endblock %}

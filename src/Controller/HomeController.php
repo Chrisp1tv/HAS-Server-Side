@@ -11,9 +11,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class HomeController extends Controller
 {
-    public function indexAction() {
-        // TODO @CA
+    public function indexAction()
+    {
+        $doctrine = $this->getDoctrine();
 
-        $this->render("home/index.html.twig");
+        $lastConnection = $doctrine->getRepository('App\Entity\ConnectionLogs')->findPenultimateConnectionByAdministrator($this->get('security.context')->getToken()->getUser());
+        $numberOfCampaigns = $doctrine->getRepository('App\Entity\Campaign')->countAll();
+        $numberOfUnsentCampaigns = $doctrine->getRepository('App\Entity\Campaign')->countUnsent();
+        $numberOfLinkedRecipients = $doctrine->getRepository('App\Entity\Recipient')->countAll();
+
+        $this->render("home/index.html.twig", array(
+            'lastConnection'           => $lastConnection,
+            'numberOfCampaigns'        => $numberOfCampaigns,
+            'numberOfUnsentCampaigns'  => $numberOfUnsentCampaigns,
+            'numberOfLinkedRecipients' => $numberOfLinkedRecipients,
+        ));
     }
 }

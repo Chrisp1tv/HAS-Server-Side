@@ -48,6 +48,37 @@
                 <source>modifyRecipientGroup</source>
                 <target>Modifier le groupe %groupName%</target>
             </trans-unit>
+            <!-- Sentences -->
+            <trans-unit id="sentence.numberOfCampaigns">
+                <source>sentence.numberOfCampaigns</source>
+                <target>
+                    {0}Aucune campagne n'est enregistrée.
+                    |{1}Une campagne de message est enreigstée.
+                    |] 1, Inf]%count% campagnes de messages sont enregistrées.
+                </target>
+            </trans-unit>
+            <trans-unit id="sentence.numberOfUnsentCampaigns">
+                <source>sentence.numberOfUnsentCampaigns</source>
+                <target>
+                    {0}
+                    |{1}Une campagne doit encore être envoyée.
+                    |]1, Inf[%count% doivent encore être envoyées.
+                </target>
+            </trans-unit>
+            <trans-unit id="sentence.lastConnectionDate">
+                <source>sentence.lastConnectionDate</source>
+                <target>La dernière connexion à votre compte administrateur a eu lieu le %connectionDate%, via l'IP
+                    %IPConnection%
+                </target>
+            </trans-unit>
+            <trans-unit id="sentence.numberOfLinkedRecipients">
+                <source>sentence.numberOfLinkedRecipients</source>
+                <target>
+                    {0}Aucun ordinateur n'est lié au système d'alertes.
+                    |{1}Un ordinateur est lié au système d'alertes.
+                    |]1, Inf[%count% ordinateurs sont liés au système d'alertes.
+                </target>
+            </trans-unit>
             <!-- Forms -->
             <!-- Forms labels -->
             <trans-unit id="form.label.save">

@@ -17,4 +17,17 @@ class RecipientRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Recipient::class);
     }
+
+    /**
+     * @return int
+     */
+    public function countAll(): int
+    {
+        $queryBuilder = $this->createQueryBuilder('recipient')
+            ->select('count(recipient.id)');
+
+        return $queryBuilder
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }
