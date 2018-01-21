@@ -1,0 +1,9 @@
+old_sound_rabbit_mq:
+    connections:
+        default:
+            url: '%env(RABBITMQ_URL)%'
+    producers:
+        # use 'old_sound_rabbit_mq.campaign_producer' service to send data.
+        campaign:
+            connection: default
+            exchange_options: { name: 'campaign', type: direct }
