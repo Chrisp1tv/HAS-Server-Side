@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Administrator;
 use App\Entity\ConnectionLogs;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -19,6 +20,15 @@ class ConnectionLogsRepository extends ServiceEntityRepository
         parent::__construct($registry, ConnectionLogs::class);
     }
 
+    public function findConnectionLogsByAdministrator(Administrator $administrator): array
+    {
+        $queryBuilder = $this->findByAdministrator($administrator);
+
+        return $queryBuilder
+            ->getQuery()
+            ->getArrayResult();
+    }
+
     /**
      * @param Administrator $administrator
      *
@@ -26,15 +36,22 @@ class ConnectionLogsRepository extends ServiceEntityRepository
      */
     public function findPenultimateConnectionByAdministrator(Administrator $administrator): ?ConnectionLogs
     {
-        $queryBuilder = $this->createQueryBuilder('connectionLogs')
-            ->where('connectionLogs.administrator = :administrator')
-            ->setParameter('administrator', $administrator)
-            ->orderBy('connectionLogs.connectionDate', 'DESC');
+        $queryBuilder = $this->findByAdministrator($administrator);
 
         return $queryBuilder
             ->getQuery()
             ->setFirstResult(1)
             ->setMaxResults(1)
             ->getOneOrNullResult();
+    }
+
+    private function findByAdministrator(Administrator $administrator): QueryBuilder
+    {
+        $queryBuilder = $this->createQueryBuilder('connectionLogs')
+            ->where('connectionLogs.administrator = :administrator')
+            ->setParameter('administrator', $administrator)
+            ->orderBy('connectionLogs.connectionDate', 'DESC');
+
+        return $queryBuilder;
     }
 }

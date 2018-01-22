@@ -4,3 +4,12 @@ App\Entity\Administrator:
         id:
             type: integer
             generator: { strategy: AUTO }
+    fields:
+        username:
+            type: string
+            length: 255
+        password:
+            type: string
+            length: 62
+        roles:
+            type: simple_array

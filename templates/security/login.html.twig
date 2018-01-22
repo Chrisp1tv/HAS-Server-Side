@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ 'login'|trans }}
+{% endblock %}
+
+{% block main %}
+    <form action="{{ path("login_check") }}" method="POST">
+        <label for="username">{{ 'username'|trans }}</label>
+        <input type="text" required="required" value="{{ last_username }}" name="_username" id="username">
+
+        <label for="password">{{ 'password'|trans }}</label>
+        <input type="password" name="_password" required="required" id="password">
+
+        <button type="submit">{{ 'login'|trans }}</button>
+    </form>
+{% endblock %}

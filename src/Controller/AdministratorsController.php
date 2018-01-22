@@ -2,7 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Administrator;
+use App\Form\AdministratorType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * AdministratorsController
@@ -11,31 +16,69 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class AdministratorsController extends Controller
 {
-    public function indexAction() {
+    public function indexAction()
+    {
+        $administrators = $this->getDoctrine()->getRepository('App\Entity\Administrator')->findAll();
 
-
-        $this->render("administrators/index.html.twig");
+        $this->render("administrators/index.html.twig", array(
+            'administrators' => $administrators,
+        ));
     }
 
-    public function newAction() {
+    public function newAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
 
+        $administrator = new Administrator();
+        $form = $this->createForm(AdministratorType::class, $administrator);
+
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $password = $passwordEncoder->encodePassword($administrator, $administrator->getPassword());
+            $administrator->setPassword($password);
+            $administrator->addRole('ROLE_USER');
+
+            $entityManager->persist($administrator);
+            $entityManager->flush();
+
+            $this->addFlash('success', $this->get('translator.default')->trans('flash.administratorCreated'));
+            $this->redirectToRoute('administrators_show', array(
+                'id' => $administrator->getId(),
+            ));
+        }
 
         $this->render("administrators/new.html.twig");
     }
 
-    public function removeAction(int $id) {
-
+    public function removeAction(int $id)
+    {
+        // TODO @CA
     }
 
-    public function showAction(int $id) {
+    public function showAction(int $id)
+    {
+        $administrator = $this->getDoctrine()->getRepository('App\Entity\Administrator')->find($id);
 
+        if (null == $administrator) {
+            throw new NotFoundHttpException();
+        }
 
-        $this->render("administrators/show.html.twig");
+        $doctrine = $this->getDoctrine();
+        $connectionLogs = $doctrine->getRepository('App\Entity\ConnectionLogs')->findConnectionLogsByAdministrator($administrator);
+        $sentCampaigns = $doctrine->getRepository('App\Entity\Campaign')->findBySender($administrator);
+
+        $this->render("administrators/show.html.twig", array(
+            'connectionLogs' => $connectionLogs,
+            'sentCampaigns'  => $sentCampaigns,
+        ));
     }
 
-    public function showConnectionLogsAction() {
+    public function showConnectionLogsAction()
+    {
+        $connectionLogs = $this->getDoctrine()->getRepository('App\Entity\ConnectionLogs')->findConnectionLogsByAdministrator($this->getUser());
 
-
-        $this->render("administrators/show-connection-logs.html.twig");
+        $this->render("administrators/show-connection-logs.html.twig", array(
+            'connectionLogs' => $connectionLogs,
+        ));
     }
 }

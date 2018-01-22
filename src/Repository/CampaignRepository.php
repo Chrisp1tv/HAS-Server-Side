@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Administrator;
 use App\Entity\Campaign;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -16,6 +17,23 @@ class CampaignRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Campaign::class);
+    }
+
+    /**
+     * @param Administrator $administrator
+     *
+     * @return array
+     */
+    public function findBySender(Administrator $administrator): array
+    {
+        $queryBuilder = $this->createQueryBuilder('campaign')
+            ->where('campaign.sender = :sender')
+            ->setParameter('sender', $administrator)
+            ->orderBy('campaign.sendingDate', 'DESC');
+
+        return $queryBuilder
+            ->getQuery()
+            ->getArrayResult();
     }
 
     /**

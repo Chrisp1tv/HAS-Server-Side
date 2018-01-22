@@ -1,6 +1,9 @@
 home:
     resource: 'routes/home.yaml'
 
+security:
+    resource: 'routes/security.yaml'
+
 administrators:
     resource: 'routes/administrators.yaml'
     prefix: /administrators

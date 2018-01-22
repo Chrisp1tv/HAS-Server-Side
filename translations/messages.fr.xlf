@@ -48,6 +48,18 @@
                 <source>modifyRecipientGroup</source>
                 <target>Modifier le groupe %groupName%</target>
             </trans-unit>
+            <trans-unit id="login">
+                <source>login</source>
+                <target>Connexion</target>
+            </trans-unit>
+            <trans-unit id="username">
+                <source>username</source>
+                <target>Nom d'utilisateur</target>
+            </trans-unit>
+            <trans-unit id="password">
+                <source>password</source>
+                <target>Mot de passe</target>
+            </trans-unit>
             <!-- Sentences -->
             <trans-unit id="sentence.numberOfCampaigns">
                 <source>sentence.numberOfCampaigns</source>
@@ -146,6 +158,10 @@
             <trans-unit id="flash.recipientGroupModified">
                 <source>flash.recipientGroupModified</source>
                 <target>Le groupe de destinataires a bien été modifié.</target>
+            </trans-unit>
+            <trans-unit id="flash.administratorCreated">
+                <source>flash.administratorCreated</source>
+                <target>L'administrateur a bien été créé.</target>
             </trans-unit>
         </body>
     </file>

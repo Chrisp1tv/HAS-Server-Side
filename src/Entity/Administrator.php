@@ -2,12 +2,15 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Security\Core\User\EquatableInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 /**
  * Administrator
  *
  * @author Christopher Anciaux <christopher.anciaux@gmail.com>
  */
-class Administrator
+class Administrator implements UserInterface, EquatableInterface
 {
     /**
      * @var int
@@ -15,10 +18,136 @@ class Administrator
     private $id;
 
     /**
+     * @var string
+     */
+    private $username;
+
+    /**
+     * @var string
+     */
+    private $password;
+
+    /**
+     * @var array
+     */
+    private $roles;
+
+    /**
      * @return int
      */
     public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
+     * @param string $role
+     *
+     * @return bool
+     */
+    public function hasRole(string $role): bool
+    {
+        return in_array($role, $this->roles);
+    }
+
+    /**
+     * @param array $roles
+     *
+     * @return Administrator
+     */
+    public function setRoles(array $roles): Administrator
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @param string $role
+     *
+     * @return Administrator
+     */
+    public function addRole(string $role): Administrator
+    {
+        $this->roles[] = $role;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param string $password
+     *
+     * @return Administrator
+     */
+    public function setPassword(string $password): Administrator
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @param string $username
+     *
+     * @return Administrator
+     */
+    public function setUsername(string $username): Administrator
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function isEqualTo(UserInterface $user)
+    {
+        if (!$user instanceof Administrator) {
+            return false;
+        }
+
+        if ($this->password !== $user->getPassword()) {
+            return false;
+        }
+
+        if ($this->username !== $user->getUsername()) {
+            return false;
+        }
+
+        return true;
     }
 }

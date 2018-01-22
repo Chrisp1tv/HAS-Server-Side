@@ -1,0 +1,22 @@
+security:
+    providers:
+        main:
+            entity:
+                class: App\Entity\Administrator
+                property: username
+    encoders:
+        App\Entity\Administrator:
+            algorithm: bcrypt
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        unlogged:
+            pattern: ^/login
+            anonymous: true
+        main:
+            pattern: ^/
+            form_login:
+                login_path: /login
+                check_path: /login_check
+            anonymous: true
