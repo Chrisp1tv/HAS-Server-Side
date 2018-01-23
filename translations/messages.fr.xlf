@@ -146,6 +146,103 @@
                 <source>form.placeholder.repetitionFrequency</source>
                 <target>Laissez vide si aucune répétition</target>
             </trans-unit>
+            <!-- Validation -->
+            <!-- Administrator validation -->
+            <trans-unit id="validation.administrator.username.notBlank">
+                <source>validation.administrator.username.notBlank</source>
+                <target>Veuillez renseigner le nom d'utilisateur de la campagne.</target>
+            </trans-unit>
+            <trans-unit id="validation.administrator.username.length.min">
+                <source>validation.administrator.username.length.min</source>
+                <target>Le nom d'utilisateur doit posséder au moins {{ limit }} caractères.</target>
+            </trans-unit>
+            <trans-unit id="validation.administrator.username.length.max">
+                <source>validation.administrator.username.length.max</source>
+                <target>Le nom d'utilisateur ne peut posséder plus de {{ limit }} caractères.</target>
+            </trans-unit>
+            <trans-unit id="validation.administrator.password.notBlank">
+                <source>validation.administrator.password.notBlank</source>
+                <target>Veuillez renseigner le mot de passe de l'administrateur.</target>
+            </trans-unit>
+            <trans-unit id="validation.administrator.password.length.min">
+                <source>validation.administrator.password.length.min</source>
+                <target>Le mot de passe doit posséder au moins {{ limit }} caractères.</target>
+            </trans-unit>
+            <trans-unit id="validation.administrator.password.length.max">
+                <source>validation.administrator.password.length.max</source>
+                <target>Le mot de passe ne peut posséder plus de {{ limit }} caractères.</target>
+            </trans-unit>
+            <!-- Campaign validation -->
+            <trans-unit id="validation.campaign.expression">
+                <source>validation.campaign.expression</source>
+                <target>La campagne doit obligatoirement posséder des destinataires (individuels ou groupés).</target>
+            </trans-unit>
+            <trans-unit id="validation.campaign.name.notBlank">
+                <source>validation.campaign.name.notBlank</source>
+                <target>La campagne doit obligatoirement posséder un nom.</target>
+            </trans-unit>
+            <trans-unit id="validation.campaign.name.length.min">
+                <source>validation.campaign.name.length.min</source>
+                <target>Le nom de la campagne doit posséder au moins {{ limit }} caractères.</target>
+            </trans-unit>
+            <trans-unit id="validation.campaign.name.length.max">
+                <source>validation.campaign.name.length.max</source>
+                <target>Le nom de la campagne ne peut posséder plus de {{ limit }} caractères.</target>
+            </trans-unit>
+            <trans-unit id="validation.campaign.sender.notNull">
+                <source>validation.campaign.sender.notNull</source>
+                <target>La campagne doit posséder un émetteur.</target>
+            </trans-unit>
+            <trans-unit id="validation.campaign.message.notNull">
+                <source>validation.campaign.message.notNull</source>
+                <target>La campagne doit posséder un message.</target>
+            </trans-unit>
+            <trans-unit id="validation.campaign.sendingDate.date">
+                <source>validation.campaign.sendingDate.date</source>
+                <target>La date d'envoi saisie n'est pas valide.</target>
+            </trans-unit>
+            <trans-unit id="validation.campaign.sendingDate.greaterThan">
+                <source>validation.campaign.sendingDate.greaterThan</source>
+                <target>Il n'est pas possible d'envoyer une campagne dans le passé.</target>
+            </trans-unit>
+            <trans-unit id="validation.campaign.endDate.date">
+                <source>validation.campaign.endDate.date</source>
+                <target>La date de fin saisie n'est pas valide.</target>
+            </trans-unit>
+            <trans-unit id="validation.campaign.endDate.expression">
+                <source>validation.campaign.endDate.expression</source>
+                <target>La campagne ne peut se terminer avant d'avoir commencé.</target>
+            </trans-unit>
+            <trans-unit id="validation.campaign.repetitionFrequency.range.min">
+                <source>validation.campaign.repetitionFrequency.range.min</source>
+                <target>La fréquence minimale de répétition ne peut être inférieure à {{ limit }} minutes.</target>
+            </trans-unit>
+            <!-- Message validation -->
+            <trans-unit id="validation.message.content.notBlank">
+                <source>validation.message.content.notBlank</source>
+                <target>Votre message doit impérativement posséder un contenu.</target>
+            </trans-unit>
+            <trans-unit id="validation.message.color.regex">
+                <source>validation.message.color.regex</source>
+                <target>La couleur saisie n'a pas été reconnue.</target>
+            </trans-unit>
+            <!-- RecipientGroup validation -->
+            <trans-unit id="validation.recipientGroup.name.notBlank">
+                <source>validation.recipientGroup.name.notBlank</source>
+                <target>Votre groupe doit impérativement posséder un nom.</target>
+            </trans-unit>
+            <trans-unit id="validation.recipientGroup.name.length.min">
+                <source>validation.recipientGroup.name.length.min</source>
+                <target>Le nom de votre groupe doit posséder au moins {{ limit }} caractères.</target>
+            </trans-unit>
+            <trans-unit id="validation.recipientGroup.name.length.max">
+                <source>validation.recipientGroup.name.length.max</source>
+                <target>Le nom de votre groupe ne peut posséder plus de {{ limit }} caractères.</target>
+            </trans-unit>
+            <trans-unit id="validation.recipientGroup.recipients.min">
+                <source>validation.recipientGroup.recipients.min</source>
+                <target>Votre groupe doit posséder au moins {{ limit }} destinataires.</target>
+            </trans-unit>
             <!-- Flash messages -->
             <trans-unit id="flash.campaignDuplicated">
                 <source>flash.campaignDuplicated</source>

@@ -1,0 +1,80 @@
+App\Entity\Administrator:
+    properties:
+        username:
+            - NotBlank:
+                message: "validation.administrator.username.notBlank"
+            - Length:
+                min: 4
+                max: 50
+                minMessage: "validation.administrator.username.length.min"
+                maxMessage: "validation.administrator.username.length.max"
+        password:
+            - NotBlank:
+                message: "validation.administrator.password.notBlank"
+            - Length:
+                min: 8
+                max: 155
+                minMessage: "validation.administrator.password.length.min"
+                maxMessage: "validation.administrator.password.length.max"
+
+App\Entity\Campaign:
+    constraints:
+        - Expression:
+            expression: "this.getRecipients.count() > 0 or this.getRecipientGroups().count() > 0"
+            message: "validation.campaign.expression"
+    properties:
+        name:
+            - NotBlank:
+                message: "validation.campaign.name.notBlank"
+            - Length:
+                min: 4
+                max: 100
+                minMessage: "validation.campaign.name.length.min"
+                maxMessage: "validation.campaign.name.length.max"
+        sender:
+            - NotNull:
+                message: "validation.campaign.sender.notNull"
+        message:
+            - NotNull:
+                message: "validation.campaign.message.notNull"
+        sendingDate:
+            - Date:
+                message: "validation.campaign.sendingDate.date"
+            - GreaterThan:
+                value: "now"
+                message: "validation.campaign.sendingDate.greaterThan"
+        endDate:
+            - Date:
+                message: "validation.campaing.endDate.date"
+            - Expression:
+                expression: "null == this.getEndDate() or this.getEndDate() > this.getSendingDate()"
+                message: "validation.campaign.endDate.expression"
+        repetitionFrequency:
+            - Range:
+                min: 5
+                minMessage: "validation.campaign.repetitionFrequency.range.min"
+
+App\Entity\Message:
+    properties:
+        content:
+            - NotBlank:
+                message: "validation.message.content.notBlank"
+        color:
+            - Regex:
+                pattern: "^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+                message: "validation.message.color.regex"
+
+App\Entity\RecipientGroup:
+    properties:
+        name:
+            - NotBlank:
+                message: "validation.recipientGroup.name.notBkank"
+            - Length:
+                min: 4
+                max: 25
+                minMessage: "validation.recipientGroup.name.length.min"
+                maxMessage: "validation.recipientGroup.name.length.max"
+        recipients:
+            - Count:
+                min: 2
+                minMessage: "validation.recipientGroup.recipients.min"
