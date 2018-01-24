@@ -15,9 +15,12 @@ class SecurityController extends Controller
 {
     public function loginAction(Request $request)
     {
+        if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('homepage');
+        }
+
         $session = $request->getSession();
         $authenticationError = Security::AUTHENTICATION_ERROR;
-        $lastUsername = Security::LAST_USERNAME;
 
         if ($request->attributes->has($authenticationError)) {
             $error = $request->attributes->get($authenticationError);
@@ -27,7 +30,7 @@ class SecurityController extends Controller
         }
 
         return $this->render('security/login.html.twig', array(
-            'last_username' => $session->get($lastUsername),
+            'last_username' => $session->get(Security::LAST_USERNAME),
             'error'         => $error,
         ));
     }

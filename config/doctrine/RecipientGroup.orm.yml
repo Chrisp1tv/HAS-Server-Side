@@ -1,5 +1,6 @@
 App\Entity\RecipientGroup:
     type: entity
+    repositoryClass: App\Repository\RecipientGroupRepository
     id:
         id:
             type: integer
@@ -10,3 +11,5 @@ App\Entity\RecipientGroup:
     manyToMany:
         recipients:
             targetEntity: App\Entity\Recipient
+            joinTable:
+                name: recipient_groups_recipients

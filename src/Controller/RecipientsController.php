@@ -14,12 +14,12 @@ class RecipientsController extends Controller
     public function indexAction(string $search = null) {
         // TODO @AS
 
-        $this->render("recipients/index.html.twig");
+        return $this->render("recipients/index.html.twig");
     }
 
     public function showAction(int $id) {
         // TODO @AS @CA Needs discussion
 
-        $this->render("recipients/show.html.twig");
+        return $this->render("recipients/show.html.twig");
     }
 }

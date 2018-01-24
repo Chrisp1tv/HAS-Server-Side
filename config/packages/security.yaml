@@ -11,12 +11,13 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        unlogged:
-            pattern: ^/login
-            anonymous: true
         main:
             pattern: ^/
+            anonymous: true
             form_login:
                 login_path: /login
                 check_path: /login_check
-            anonymous: true
+                default_target_path: homepage
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, role: ROLE_USER }

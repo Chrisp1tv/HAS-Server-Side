@@ -17,7 +17,7 @@ class RecipientGroupsController extends Controller
     public function indexAction() {
         // TODO @AS
 
-        $this->render("recipient-groups/index.html.twig");
+        return $this->render("recipient-groups/index.html.twig");
     }
 
     public function newAction(Request $request)
@@ -38,7 +38,7 @@ class RecipientGroupsController extends Controller
             ));
         }
 
-        $this->render("recipient-groups/new.html.twig", array(
+        return $this->render("recipient-groups/new.html.twig", array(
             'recipientGroup' => $recipientGroup,
             'form'           => $form->createView(),
         ));
@@ -62,7 +62,7 @@ class RecipientGroupsController extends Controller
             $this->addFlash('success', $this->get('translator.default')->trans('flash.recipientGroupModified'));
         }
 
-        $this->render("recipient-groups/modify.html.twig", array(
+        return $this->render("recipient-groups/modify.html.twig", array(
             'recipientGroup' => $recipientGroup,
             'form'           => $form->createView(),
         ));
@@ -75,6 +75,6 @@ class RecipientGroupsController extends Controller
     public function showAction(int $id) {
         // TODO @AS @CA Needs discussion
 
-        $this->render("recipient-groups/show.html.twig");
+        return $this->render("recipient-groups/show.html.twig");
     }
 }

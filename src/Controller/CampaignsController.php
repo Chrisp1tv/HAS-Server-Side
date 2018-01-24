@@ -18,21 +18,21 @@ class CampaignsController extends Controller
     {
         // TODO @AS
 
-        $this->render("campaigns/index.html.twig");
+        return $this->render("campaigns/index.html.twig");
     }
 
     public function newAction()
     {
         // TODO @AS
 
-        $this->render("campaigns/new.html.twig");
+        return $this->render("campaigns/new.html.twig");
     }
 
     public function modifyAction(int $id)
     {
         // TODO @AS
 
-        $this->render("campaigns/modify.html.twig");
+        return $this->render("campaigns/modify.html.twig");
     }
 
     public function removeAction(int $id)
@@ -41,10 +41,10 @@ class CampaignsController extends Controller
     }
 
     /**
-     * Clones a campaign and allows user to modify this clone to save it afterwards
+     * @param Request $request
+     * @param int     $id
      *
-     * @param Request $request The request
-     * @param int     $id      The id of the campaign
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function duplicateAction(Request $request, int $id)
     {
@@ -67,16 +67,16 @@ class CampaignsController extends Controller
             $this->redirectToRoute('campaigns_modify', array('id' => $campaign->getId()));
         }
 
-        $this->render("campaigns/duplicate.html.twig", array(
+        return $this->render("campaigns/duplicate.html.twig", array(
             'campaign' => $campaign,
             'form'     => $form->createView(),
         ));
     }
 
     /**
-     * Shows a campaign and its statistics
+     * @param int $id
      *
-     * @param int $id The id of the campaign
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction(int $id)
     {
@@ -86,7 +86,7 @@ class CampaignsController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $this->render("campaigns/show.html.twig", array(
+        return $this->render("campaigns/show.html.twig", array(
             'campaign' => $campaign,
         ));
     }

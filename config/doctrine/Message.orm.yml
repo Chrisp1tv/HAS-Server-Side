@@ -1,5 +1,6 @@
 App\Entity\Message:
     type: entity
+    repositoryClass: App\Repository\MessageRepository
     id:
         id:
             type: integer

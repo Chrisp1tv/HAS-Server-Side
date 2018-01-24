@@ -15,12 +15,12 @@ class HomeController extends Controller
     {
         $doctrine = $this->getDoctrine();
 
-        $lastConnection = $doctrine->getRepository('App\Entity\ConnectionLogs')->findPenultimateConnectionByAdministrator($this->get('security.context')->getToken()->getUser());
+        $lastConnection = $doctrine->getRepository('App\Entity\ConnectionLogs')->findPenultimateConnectionByAdministrator($this->getUser());
         $numberOfCampaigns = $doctrine->getRepository('App\Entity\Campaign')->countAll();
         $numberOfUnsentCampaigns = $doctrine->getRepository('App\Entity\Campaign')->countUnsent();
         $numberOfLinkedRecipients = $doctrine->getRepository('App\Entity\Recipient')->countAll();
 
-        $this->render("home/index.html.twig", array(
+        return $this->render("home/index.html.twig", array(
             'lastConnection'           => $lastConnection,
             'numberOfCampaigns'        => $numberOfCampaigns,
             'numberOfUnsentCampaigns'  => $numberOfUnsentCampaigns,

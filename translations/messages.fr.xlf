@@ -32,7 +32,7 @@
                 <source>recipientGroups</source>
                 <target>Groupes de destinataires</target>
             </trans-unit>
-            <trans-unit id="realization">
+            <trans-unit id="realizedBy">
                 <source>realizedBy</source>
                 <target>Réalisation :</target>
             </trans-unit>

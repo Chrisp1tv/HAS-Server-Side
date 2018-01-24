@@ -20,7 +20,7 @@ class AdministratorsController extends Controller
     {
         $administrators = $this->getDoctrine()->getRepository('App\Entity\Administrator')->findAll();
 
-        $this->render("administrators/index.html.twig", array(
+        return $this->render("administrators/index.html.twig", array(
             'administrators' => $administrators,
         ));
     }
@@ -47,7 +47,7 @@ class AdministratorsController extends Controller
             ));
         }
 
-        $this->render("administrators/new.html.twig");
+        return $this->render("administrators/new.html.twig");
     }
 
     public function removeAction(int $id)
@@ -67,7 +67,7 @@ class AdministratorsController extends Controller
         $connectionLogs = $doctrine->getRepository('App\Entity\ConnectionLogs')->findConnectionLogsByAdministrator($administrator);
         $sentCampaigns = $doctrine->getRepository('App\Entity\Campaign')->findBySender($administrator);
 
-        $this->render("administrators/show.html.twig", array(
+        return $this->render("administrators/show.html.twig", array(
             'connectionLogs' => $connectionLogs,
             'sentCampaigns'  => $sentCampaigns,
         ));
@@ -77,7 +77,7 @@ class AdministratorsController extends Controller
     {
         $connectionLogs = $this->getDoctrine()->getRepository('App\Entity\ConnectionLogs')->findConnectionLogsByAdministrator($this->getUser());
 
-        $this->render("administrators/show-connection-logs.html.twig", array(
+        return $this->render("administrators/show-connection-logs.html.twig", array(
             'connectionLogs' => $connectionLogs,
         ));
     }

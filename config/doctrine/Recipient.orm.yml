@@ -1,5 +1,6 @@
 App\Entity\Recipient:
     type: entity
+    repositoryClass: App\Repository\RecipientRepository
     id:
         id:
             type: integer

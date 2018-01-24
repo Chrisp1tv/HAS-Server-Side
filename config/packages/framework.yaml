@@ -1,9 +1,7 @@
 framework:
     secret: '%env(APP_SECRET)%'
     default_locale: fr
-    templating:
-        engines:
-            - twig
+    session: ~
     translator:
         enabled: true
     validation:

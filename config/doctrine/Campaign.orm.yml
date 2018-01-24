@@ -1,5 +1,6 @@
 App\Entity\Campaign:
     type: entity
+    repositoryClass: App\Repository\CampaignRepository
     id:
         id:
             type: integer
@@ -26,7 +27,9 @@ App\Entity\Campaign:
     manyToMany:
         recipients:
             targetEntity: App\Entity\Recipient
+            joinTable:
+                name: campaigns_recipients
         recipientGroups:
             targetEntity: App\Entity\RecipientGroup
             joinTable:
-                name: recipient_groups
+                name: campaigns_recipient_groups

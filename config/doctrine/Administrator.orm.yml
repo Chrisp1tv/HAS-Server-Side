@@ -1,5 +1,6 @@
 App\Entity\Administrator:
     type: entity
+    repositoryClass: App\Repository\AdministratorRepository
     id:
         id:
             type: integer

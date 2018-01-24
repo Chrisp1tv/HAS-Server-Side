@@ -1,11 +1,11 @@
 login:
     path: /login
-    controller: App\SecurityController::login
+    controller: App\Controller\SecurityController::loginAction
 
 login_check:
     path: /login_check
-    controller: App\SecurityController::loginCheck
+    controller: App\Controller\SecurityController::loginCheckAction
 
 logout:
     path: /logout
-    controller: App\SecurityController::logout
+    controller: App\Controller\SecurityController::logoutAction

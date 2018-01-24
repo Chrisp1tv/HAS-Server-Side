@@ -1,5 +1,6 @@
 App\Entity\ConnectionLogs:
     type: entity
+    repositoryClass: App\Repository\ConnectionLogsRepository
     id:
         id:
             type: integer

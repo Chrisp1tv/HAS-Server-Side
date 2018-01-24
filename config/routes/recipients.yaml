@@ -1,11 +1,13 @@
 recipients_index:
     path: /{search}
-    controller: App\Controller\RecipientsController::index
+    controller: App\Controller\RecipientsController::indexAction
+    defaults:
+        search: null
     requirements:
         search: '[a-zA-Z0-9]+'
 
 recipients_show:
     path: /show/{id}
-    controller: App\Controller\RecipientsController::show
+    controller: App\Controller\RecipientsController::showAction
     requirements:
         id: '\d+'
