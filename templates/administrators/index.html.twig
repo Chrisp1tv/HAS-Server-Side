@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ 'administrators'|trans }}
+{% endblock %}
+
+{% block main %}
+    <table class="table-alternate-rows">
+        <tr>
+            <th>{{ 'name'|trans }}</th>
+            <th>{{ 'actions'|trans }}</th>
+        </tr>
+        {% for administrator in administrators %}
+            <tr>
+                <td>{{ administrator.username }}</td>
+                <td>
+                    <a class="link-button"
+                       href="{{ path('administrators_show', {id: administrator.id}) }}">{{ 'show'|trans }}</a>
+                    <a class="link-button"
+                       href="{{ path('administrators_remove', {id: administrator.id}) }}">{{ 'remove'|trans }}</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

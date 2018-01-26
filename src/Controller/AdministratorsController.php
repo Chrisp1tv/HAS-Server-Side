@@ -47,7 +47,9 @@ class AdministratorsController extends Controller
             ));
         }
 
-        return $this->render("administrators/new.html.twig");
+        return $this->render("administrators/new.html.twig", array(
+            'form' => $form->createView(),
+        ));
     }
 
     public function removeAction(int $id)

@@ -1,5 +1,5 @@
 {% extends "form-page.html.twig" %}
 
 {% block title %}
-    {{ 'duplicateCampaign'|trans }}
+    {{ 'duplicateCampaign'|trans({'%campaignName%': campaign.name}) }}
 {% endblock %}

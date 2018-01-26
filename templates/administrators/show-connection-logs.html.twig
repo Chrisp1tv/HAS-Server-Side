@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ 'connectionLogs'|trans }}
+{% endblock %}
+
+{% block main %}
+    <table class="table-alternate-rows">
+        <tr>
+            <th>{{ 'date'|trans }}</th>
+            <th>{{ 'connectionAddress'|trans }}</th>
+        </tr>
+        {% for connectionLog in connectionLogs %}
+            <tr>
+                <td>{{ connectionLog.connectionDate|localizeddate('long', 'long', app.request.locale) }}</td>
+                <td>{{ connectionLog.IPConnection }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

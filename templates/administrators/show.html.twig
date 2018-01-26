@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ 'administrator'|trans }} - {{ administrator.username }}
+{% endblock %}
+
+{% block main %}
+    {% if connectionLogs is not empty %}
+        <h2>{{ 'connectionLogs'|trans }}</h2>
+        <table class="table-alternate-rows">
+            <tr>
+                <th>{{ 'date'|trans }}</th>
+                <th>{{ 'connectionAddress'|trans }}</th>
+            </tr>
+            {% for connectionLog in connectionLogs %}
+                <tr>
+                    <td>{{ connectionLog.connectionDate|localizeddate('long', 'long', app.request.locale) }}</td>
+                    <td>{{ connectionLog.IPConnection }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    {% if sentCampaigns is not empty %}
+        <h2>{{ 'sentCampaigns'|trans }}</h2>
+        <table class="table-alternate-rows">
+            <tr>
+                <th>{{ 'name'|trans }}</th>
+                <th>{{ 'date'|trans }}</th>
+            </tr>
+            {% for sentCampaign in sentCampaigns %}
+                <tr>
+                    <td>{{ sentCampaign.name }}</td>
+                    <td>{{ sentCampaign.sendingDate|localizeddate('long', 'long', app.request.locale) }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

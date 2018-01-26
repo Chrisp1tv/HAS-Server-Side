@@ -8,6 +8,14 @@
                 <source>and</source>
                 <target>et</target>
             </trans-unit>
+            <trans-unit id="date">
+                <source>date</source>
+                <target>date</target>
+            </trans-unit>
+            <trans-unit id="connectionAddress">
+                <source>connectionAddress</source>
+                <target>Adresse de connexion</target>
+            </trans-unit>
             <trans-unit id="alertSystem">
                 <source>alertSystem</source>
                 <target>Système d'alertes</target>
@@ -16,9 +24,25 @@
                 <source>homepage</source>
                 <target>Accueil</target>
             </trans-unit>
+            <trans-unit id="name">
+                <source>name</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="administrator">
+                <source>administrator</source>
+                <target>Administrateur</target>
+            </trans-unit>
             <trans-unit id="administrators">
                 <source>administrators</source>
                 <target>Administrateurs</target>
+            </trans-unit>
+            <trans-unit id="newAdministrator">
+                <source>newAdministrator</source>
+                <target>Nouvel administrateur</target>
+            </trans-unit>
+            <trans-unit id="sentCampaigns">
+                <source>sentCampaigns</source>
+                <target>Campagnes de messages envoyées</target>
             </trans-unit>
             <trans-unit id="campaigns">
                 <source>campaigns</source>
@@ -38,7 +62,7 @@
             </trans-unit>
             <trans-unit id="duplicateCampaign">
                 <source>duplicateCampaign</source>
-                <target>Dupliquer une campagne</target>
+                <target>Dupliquer la campagne %campaignName%</target>
             </trans-unit>
             <trans-unit id="newRecipientGroup">
                 <source>newRecipientGroup</source>
@@ -59,6 +83,22 @@
             <trans-unit id="password">
                 <source>password</source>
                 <target>Mot de passe</target>
+            </trans-unit>
+            <trans-unit id="connectionLogs">
+                <source>connectionLogs</source>
+                <target>Logs des connexions</target>
+            </trans-unit>
+            <trans-unit id="actions">
+                <source>actions</source>
+                <target>Actions</target>
+            </trans-unit>
+            <trans-unit id="show">
+                <source>show</source>
+                <target>Voir</target>
+            </trans-unit>
+            <trans-unit id="remove">
+                <source>remove</source>
+                <target>Supprimer</target>
             </trans-unit>
             <!-- Sentences -->
             <trans-unit id="sentence.numberOfCampaigns">
@@ -96,10 +136,6 @@
             <trans-unit id="form.label.save">
                 <source>form.label.save</source>
                 <target>Sauvegarder</target>
-            </trans-unit>
-            <trans-unit id="form.label.name">
-                <source>form.label.name</source>
-                <target>Nom</target>
             </trans-unit>
             <trans-unit id="form.label.content">
                 <source>form.label.content</source>

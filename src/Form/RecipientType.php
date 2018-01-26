@@ -19,7 +19,7 @@ class RecipientType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, array(
-                'label'    => 'form.label.name',
+                'label'    => 'name',
                 'required' => true,
             ))
             ->add('linkingIdentifier', TextType::class, array(

@@ -24,7 +24,7 @@ class CampaignType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, array(
-                'label'    => 'form.label.name',
+                'label'    => 'name',
                 'required' => true,
             ))
             ->add('message', MessageType::class, array(
