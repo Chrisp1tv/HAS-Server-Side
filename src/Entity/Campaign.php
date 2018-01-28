@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -69,7 +70,8 @@ class Campaign
         return $this->getName();
     }
 
-    public function __clone() {
+    public function __clone()
+    {
         $this->id = null;
         $this->message = clone $this->message;
     }
@@ -77,7 +79,7 @@ class Campaign
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -85,7 +87,7 @@ class Campaign
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
@@ -95,7 +97,7 @@ class Campaign
      *
      * @return Campaign
      */
-    public function setName(string $name): Campaign
+    public function setName($name)
     {
         $this->name = $name;
 
@@ -105,7 +107,7 @@ class Campaign
     /**
      * @return Administrator
      */
-    public function getSender(): Administrator
+    public function getSender()
     {
         return $this->sender;
     }
@@ -115,7 +117,7 @@ class Campaign
      *
      * @return Campaign
      */
-    public function setSender(Administrator $sender): Campaign
+    public function setSender(Administrator $sender)
     {
         $this->sender = $sender;
 
@@ -125,7 +127,7 @@ class Campaign
     /**
      * @return Message
      */
-    public function getMessage(): Message
+    public function getMessage()
     {
         return $this->message;
     }
@@ -135,7 +137,7 @@ class Campaign
      *
      * @return Campaign
      */
-    public function setMessage(Message $message): Campaign
+    public function setMessage(Message $message)
     {
         $this->message = $message;
 
@@ -145,7 +147,7 @@ class Campaign
     /**
      * @return \DateTime
      */
-    public function getSendingDate(): \DateTime
+    public function getSendingDate()
     {
         return $this->sendingDate;
     }
@@ -155,7 +157,7 @@ class Campaign
      *
      * @return Campaign
      */
-    public function setSendingDate(\DateTime $sendingDate): Campaign
+    public function setSendingDate(\DateTime $sendingDate)
     {
         $this->sendingDate = $sendingDate;
 
@@ -165,7 +167,7 @@ class Campaign
     /**
      * @return \DateTime
      */
-    public function getEndDate(): \DateTime
+    public function getEndDate()
     {
         return $this->endDate;
     }
@@ -175,7 +177,7 @@ class Campaign
      *
      * @return Campaign
      */
-    public function setEndDate(\DateTime $endDate): Campaign
+    public function setEndDate(\DateTime $endDate)
     {
         $this->endDate = $endDate;
 
@@ -185,7 +187,7 @@ class Campaign
     /**
      * @return int
      */
-    public function getRepetitionFrequency(): int
+    public function getRepetitionFrequency()
     {
         return $this->repetitionFrequency;
     }
@@ -195,7 +197,7 @@ class Campaign
      *
      * @return Campaign
      */
-    public function setRepetitionFrequency(int $repetitionFrequency): Campaign
+    public function setRepetitionFrequency(int $repetitionFrequency)
     {
         $this->repetitionFrequency = $repetitionFrequency;
 
@@ -205,7 +207,7 @@ class Campaign
     /**
      * @return ArrayCollection
      */
-    public function getRecipients(): ArrayCollection
+    public function getRecipients()
     {
         return $this->recipients;
     }
@@ -215,7 +217,8 @@ class Campaign
      *
      * @return Campaign
      */
-    public function addRecipient(Recipient $recipient): Campaign {
+    public function addRecipient(Recipient $recipient)
+    {
         $this->recipients->add($recipient);
 
         return $this;
@@ -226,7 +229,8 @@ class Campaign
      *
      * @return Campaign
      */
-    public function removeRecipient(Recipient $recipient): Campaign {
+    public function removeRecipient(Recipient $recipient)
+    {
         $this->recipients->removeElement($recipient);
 
         return $this;
@@ -235,7 +239,7 @@ class Campaign
     /**
      * @return ArrayCollection
      */
-    public function getRecipientGroups(): ArrayCollection
+    public function getRecipientGroups()
     {
         return $this->recipientGroups;
     }
@@ -245,7 +249,8 @@ class Campaign
      *
      * @return Campaign
      */
-    public function addRecipientGroup(RecipientGroup $recipientGroup): Campaign {
+    public function addRecipientGroup(RecipientGroup $recipientGroup)
+    {
         $this->recipientGroups->add($recipientGroup);
 
         return $this;
@@ -256,7 +261,8 @@ class Campaign
      *
      * @return Campaign
      */
-    public function removeRecipientGroup(RecipientGroup $recipientGroup): Campaign {
+    public function removeRecipientGroup(RecipientGroup $recipientGroup)
+    {
         $this->recipientGroups->removeElement($recipientGroup);
 
         return $this;

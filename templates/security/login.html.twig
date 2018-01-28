@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block main %}
+    {# TODO: handle errors #}
     <form action="{{ path("login_check") }}" method="POST">
         <label for="username">{{ 'username'|trans }}</label>
         <input type="text" required="required" value="{{ last_username }}" name="_username" id="username">

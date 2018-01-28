@@ -33,7 +33,7 @@ class AdministratorsController extends Controller
         $form = $this->createForm(AdministratorType::class, $administrator);
 
         $form->handleRequest($request);
-        if ($form->isValid()) {
+        if ($form->isSubmitted() and $form->isValid()) {
             $password = $passwordEncoder->encodePassword($administrator, $administrator->getPassword());
             $administrator->setPassword($password);
             $administrator->addRole('ROLE_USER');

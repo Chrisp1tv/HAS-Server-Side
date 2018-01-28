@@ -41,7 +41,7 @@ class RecipientGroup
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -49,7 +49,7 @@ class RecipientGroup
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
@@ -59,7 +59,7 @@ class RecipientGroup
      *
      * @return RecipientGroup
      */
-    public function setName(string $name): RecipientGroup
+    public function setName($name)
     {
         $this->name = $name;
 
@@ -69,7 +69,7 @@ class RecipientGroup
     /**
      * @return ArrayCollection
      */
-    public function getRecipients(): ArrayCollection
+    public function getRecipients()
     {
         return $this->recipients;
     }
@@ -79,7 +79,7 @@ class RecipientGroup
      *
      * @return RecipientGroup
      */
-    public function addRecipient(Recipient $recipient): RecipientGroup
+    public function addRecipient(Recipient $recipient)
     {
         $this->recipients->add($recipient);
 
@@ -91,7 +91,7 @@ class RecipientGroup
      *
      * @return RecipientGroup
      */
-    public function removeRecipient(Recipient $recipient): RecipientGroup
+    public function removeRecipient(Recipient $recipient)
     {
         $this->recipients->removeElement($recipient);
 

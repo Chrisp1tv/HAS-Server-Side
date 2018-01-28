@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Administrator;
 use App\Entity\Campaign;
+use App\Util\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -24,7 +25,7 @@ class CampaignRepository extends ServiceEntityRepository
      *
      * @return array
      */
-    public function findBySender(Administrator $administrator): array
+    public function findBySender(Administrator $administrator)
     {
         $queryBuilder = $this->createQueryBuilder('campaign')
             ->where('campaign.sender = :sender')
@@ -41,7 +42,7 @@ class CampaignRepository extends ServiceEntityRepository
      *
      * @return Campaign|null
      */
-    public function find($id): ?Campaign
+    public function find($id)
     {
         $queryBuilder = $this->createQueryBuilder('campaign')
             ->join('campaign.sender', 'sender')
@@ -56,9 +57,23 @@ class CampaignRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param $itemsPerPage
+     * @param $page
+     *
+     * @return Paginator
+     */
+    public function findAllPaginated($itemsPerPage, $page)
+    {
+        $queryBuilder = $this->createQueryBuilder('campaign')
+            ->orderBy('campaign.sendingDate', 'DESC');
+
+        return new Paginator($queryBuilder->getQuery(), $itemsPerPage, $page);
+    }
+
+    /**
      * @return int
      */
-    public function countAll(): int
+    public function countAll()
     {
         $queryBuilder = $this->createQueryBuilder('campaign')
             ->select('count(campaign.id)');
@@ -71,7 +86,7 @@ class CampaignRepository extends ServiceEntityRepository
     /**
      * @return int
      */
-    public function countUnsent(): int
+    public function countUnsent()
     {
         $queryBuilder = $this->createQueryBuilder('campaign')
             ->select('count(campaign.id)')

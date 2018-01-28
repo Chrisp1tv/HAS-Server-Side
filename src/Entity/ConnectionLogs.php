@@ -32,7 +32,7 @@ class ConnectionLogs
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -40,7 +40,7 @@ class ConnectionLogs
     /**
      * @return Administrator
      */
-    public function getAdministrator(): Administrator
+    public function getAdministrator()
     {
         return $this->administrator;
     }
@@ -50,7 +50,7 @@ class ConnectionLogs
      *
      * @return ConnectionLogs
      */
-    public function setAdministrator(Administrator $administrator): ConnectionLogs
+    public function setAdministrator(Administrator $administrator)
     {
         $this->administrator = $administrator;
 
@@ -60,7 +60,7 @@ class ConnectionLogs
     /**
      * @return \DateTime
      */
-    public function getConnectionDate(): \DateTime
+    public function getConnectionDate()
     {
         return $this->connectionDate;
     }
@@ -70,7 +70,7 @@ class ConnectionLogs
      *
      * @return ConnectionLogs
      */
-    public function setConnectionDate(\DateTime $connectionDate): ConnectionLogs
+    public function setConnectionDate(\DateTime $connectionDate)
     {
         $this->connectionDate = $connectionDate;
 
@@ -80,7 +80,7 @@ class ConnectionLogs
     /**
      * @return string
      */
-    public function getIPConnection(): string
+    public function getIPConnection()
     {
         return $this->IPConnection;
     }
@@ -90,7 +90,7 @@ class ConnectionLogs
      *
      * @return ConnectionLogs
      */
-    public function setIPConnection(string $IPConnection): ConnectionLogs
+    public function setIPConnection($IPConnection)
     {
         $this->IPConnection = $IPConnection;
 

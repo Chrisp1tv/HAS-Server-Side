@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\RecipientGroup;
+use App\Util\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -28,5 +29,13 @@ class RecipientGroupRepository extends ServiceEntityRepository
         return $queryBuilder
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    public function findAllPaginated($itemsPerPage, $page)
+    {
+        $queryBuilder = $this->createQueryBuilder('recipientGroup')
+            ->orderBy('recipientGroup.id', 'DESC');
+
+        return new Paginator($queryBuilder->getQuery(), $itemsPerPage, $page);
     }
 }

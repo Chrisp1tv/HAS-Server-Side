@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Recipient;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -24,6 +25,7 @@ class RecipientGroupType extends AbstractType
                 'required' => true,
             ))
             ->add('recipients', EntityType::class, array(
+                'class'    => Recipient::class,
                 'label'    => 'form.label.recipients',
                 'multiple' => true,
                 'required' => true,

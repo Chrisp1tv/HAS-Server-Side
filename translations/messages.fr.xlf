@@ -101,6 +101,10 @@
                 <target>Supprimer</target>
             </trans-unit>
             <!-- Sentences -->
+            <trans-unit id="sentence.noImportantInformationToDisplay">
+                <source>sentence.noImportantInformationToDisplay</source>
+                <target>Aucune information importante concernant cet administrateur n'est disponible.</target>
+            </trans-unit>
             <trans-unit id="sentence.numberOfCampaigns">
                 <source>sentence.numberOfCampaigns</source>
                 <target>
@@ -280,9 +284,25 @@
                 <target>Votre groupe doit posséder au moins {{ limit }} destinataires.</target>
             </trans-unit>
             <!-- Flash messages -->
+            <trans-unit id="flash.campaignCreated">
+                <source>flash.campaignCreated</source>
+                <target>La campagne a bien été créée.</target>
+            </trans-unit>
+            <trans-unit id="flash.campaignModified">
+                <source>flash.campaignModified</source>
+                <target>La campagne a bien été modifiée.</target>
+            </trans-unit>
             <trans-unit id="flash.campaignDuplicated">
                 <source>flash.campaignDuplicated</source>
                 <target>La campagne a bien été dupliquée en tenant compte des informations fournies.</target>
+            </trans-unit>
+            <trans-unit id="flash.campaignRemoved">
+                <source>flash.campaignRemoved</source>
+                <target>La campagne a bien été supprimée.</target>
+            </trans-unit>
+            <trans-unit id="flash.unableToRemoveCampaign">
+                <source>flash.unableToRemoveCampaign</source>
+                <target>La campagne n'a pas pu être supprimée car celle-ci a déjà été envoyée.</target>
             </trans-unit>
             <trans-unit id="flash.recipientGroupCreated">
                 <source>flash.recipientGroupCreated</source>
@@ -291,6 +311,10 @@
             <trans-unit id="flash.recipientGroupModified">
                 <source>flash.recipientGroupModified</source>
                 <target>Le groupe de destinataires a bien été modifié.</target>
+            </trans-unit>
+            <trans-unit id="flash.recipientGroupRemoved">
+                <source>flash.recipientGroupRemoved</source>
+                <target>Le groupe de destinataires a bien été supprimé.</target>
             </trans-unit>
             <trans-unit id="flash.administratorCreated">
                 <source>flash.administratorCreated</source>

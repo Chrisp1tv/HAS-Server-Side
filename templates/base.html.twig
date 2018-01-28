@@ -42,11 +42,12 @@
     </nav>
 </header>
 <div class="l-main">
+    <h1>{{ block('title') }}</h1>
     {% block main %}{% endblock %}
 </div>
 <footer class="l-footer">
-    <p>{{ 'realizedBy'|trans }} <a href="{{ christopheranciauxgithublink }}" target="_blank">Christopher
-            Anciaux</a> {{ 'and'|trans }}
+    <p>{{ 'realizedBy'|trans }}
+        <a href="{{ christopheranciauxgithublink }}" target="_blank">Christopher Anciaux</a> {{ 'and'|trans }}
         <a href="{{ alexandreszymuragithublink }}" target="_blank">Alexandre Szymura</a>
     </p>
 </footer>

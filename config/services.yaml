@@ -4,6 +4,8 @@ parameters:
     christopheranciauxgithublink: 'https://github.com/Chrisp1tv'
     alexandreszymuragithublink: 'https://github.com/alexrclens59'
     locale: 'fr'
+    paginator:
+        items_per_page: 25
 
 services:
     # default configuration for services in *this* file

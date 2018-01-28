@@ -45,7 +45,7 @@ class Message
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -53,7 +53,7 @@ class Message
     /**
      * @return string
      */
-    public function getContent(): string
+    public function getContent()
     {
         return $this->content;
     }
@@ -63,7 +63,7 @@ class Message
      *
      * @return Message
      */
-    public function setContent(string $content): Message
+    public function setContent($content)
     {
         $this->content = $content;
 
@@ -73,7 +73,7 @@ class Message
     /**
      * @return string
      */
-    public function getColor(): string
+    public function getColor()
     {
         return $this->color;
     }
@@ -83,7 +83,7 @@ class Message
      *
      * @return Message
      */
-    public function setColor(string $color): Message
+    public function setColor($color)
     {
         $this->color = $color;
 
@@ -93,7 +93,7 @@ class Message
     /**
      * @return boolean
      */
-    public function isBold(): bool
+    public function isBold()
     {
         return $this->bold;
     }
@@ -103,7 +103,7 @@ class Message
      *
      * @return Message
      */
-    public function setBold(bool $bold): Message
+    public function setBold($bold)
     {
         $this->bold = $bold;
 

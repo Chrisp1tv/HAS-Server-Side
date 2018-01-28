@@ -4,7 +4,7 @@ administrators_index:
 
 administrators_new:
     path: /new
-    controller: App\Conroller\AdministratorsController::newAction
+    controller: App\Controller\AdministratorsController::newAction
 
 administrators_remove:
     path: /remove/{id}
@@ -14,10 +14,10 @@ administrators_remove:
 
 administrators_show:
     path: /show/{id}
-    controller: App\Conroller\AdministratorsController::showAction
+    controller: App\Controller\AdministratorsController::showAction
     requirements:
         id: '\d+'
 
 administrators_show_logs:
     path: /logs
-    controller: App\Conroller\AdministratorsController::showConnectionLogsAction
+    controller: App\Controller\AdministratorsController::showConnectionLogsAction

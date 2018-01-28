@@ -35,7 +35,7 @@ class Administrator implements UserInterface, EquatableInterface
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -53,7 +53,7 @@ class Administrator implements UserInterface, EquatableInterface
      *
      * @return bool
      */
-    public function hasRole(string $role): bool
+    public function hasRole($role)
     {
         return in_array($role, $this->roles);
     }
@@ -63,7 +63,7 @@ class Administrator implements UserInterface, EquatableInterface
      *
      * @return Administrator
      */
-    public function setRoles(array $roles): Administrator
+    public function setRoles($roles)
     {
         $this->roles = $roles;
 
@@ -75,7 +75,7 @@ class Administrator implements UserInterface, EquatableInterface
      *
      * @return Administrator
      */
-    public function addRole(string $role): Administrator
+    public function addRole($role)
     {
         $this->roles[] = $role;
 
@@ -95,7 +95,7 @@ class Administrator implements UserInterface, EquatableInterface
      *
      * @return Administrator
      */
-    public function setPassword(string $password): Administrator
+    public function setPassword($password)
     {
         $this->password = $password;
 
@@ -123,7 +123,7 @@ class Administrator implements UserInterface, EquatableInterface
      *
      * @return Administrator
      */
-    public function setUsername(string $username): Administrator
+    public function setUsername($username)
     {
         $this->username = $username;
 

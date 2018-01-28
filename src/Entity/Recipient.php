@@ -35,7 +35,7 @@ class Recipient
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -43,7 +43,7 @@ class Recipient
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
@@ -53,7 +53,7 @@ class Recipient
      *
      * @return Recipient
      */
-    public function setName(string $name): Recipient
+    public function setName($name)
     {
         $this->name = $name;
 
@@ -63,7 +63,7 @@ class Recipient
     /**
      * @return string
      */
-    public function getLinkingIdentifier(): string
+    public function getLinkingIdentifier()
     {
         return $this->linkingIdentifier;
     }
@@ -73,7 +73,7 @@ class Recipient
      *
      * @return Recipient
      */
-    public function setLinkingIdentifier(string $linkingIdentifier): Recipient
+    public function setLinkingIdentifier($linkingIdentifier)
     {
         $this->linkingIdentifier = $linkingIdentifier;
 
