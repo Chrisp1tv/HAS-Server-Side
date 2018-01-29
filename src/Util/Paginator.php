@@ -81,6 +81,14 @@ class Paginator
     }
 
     /**
+     * @return \ArrayIterator|\Traversable
+     */
+    public function getResults()
+    {
+        return $this->doctrinePaginator->getIterator();
+    }
+
+    /**
      * @param Query $query
      */
     private function setUpDoctrinePaginator(Query $query)

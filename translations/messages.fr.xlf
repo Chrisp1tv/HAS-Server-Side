@@ -28,6 +28,14 @@
                 <source>name</source>
                 <target>Nom</target>
             </trans-unit>
+            <trans-unit id="linkingIdentifier">
+                <source>linkingIdentifier</source>
+                <target>Identifiant de liaison</target>
+            </trans-unit>
+            <trans-unit id="search">
+                <source>search</source>
+                <target>Recherche</target>
+            </trans-unit>
             <trans-unit id="administrator">
                 <source>administrator</source>
                 <target>Administrateur</target>
@@ -52,6 +60,14 @@
                 <source>recipients</source>
                 <target>Destinataires</target>
             </trans-unit>
+            <trans-unit id="recipientsSearching">
+                <source>recipientsSearching</source>
+                <target>Destinataires - Recherche : « %search% »</target>
+            </trans-unit>
+            <trans-unit id="noRecipientFound">
+                <source>noRecipientFound</source>
+                <target>Aucun destinataire trouvé.</target>
+            </trans-unit>
             <trans-unit id="recipientGroups">
                 <source>recipientGroups</source>
                 <target>Groupes de destinataires</target>
@@ -60,9 +76,25 @@
                 <source>realizedBy</source>
                 <target>Réalisation :</target>
             </trans-unit>
+            <trans-unit id="noCampaignFound">
+                <source>noCampaignFound</source>
+                <target>Aucune campagne n'a été trouvée.</target>
+            </trans-unit>
+            <trans-unit id="newCampaign">
+                <source>newCampaign</source>
+                <target>Nouvelle campagne</target>
+            </trans-unit>
             <trans-unit id="duplicateCampaign">
                 <source>duplicateCampaign</source>
                 <target>Dupliquer la campagne %campaignName%</target>
+            </trans-unit>
+            <trans-unit id="modifyCampaign">
+                <source>modifyCampaign</source>
+                <target>Modifier la campagne %campaignName%</target>
+            </trans-unit>
+            <trans-unit id="noRecipientGroupFound">
+                <source>noRecipientGroupFound</source>
+                <target>Aucun groupe de destinataires n'a été trouvé.</target>
             </trans-unit>
             <trans-unit id="newRecipientGroup">
                 <source>newRecipientGroup</source>
@@ -71,6 +103,10 @@
             <trans-unit id="modifyRecipientGroup">
                 <source>modifyRecipientGroup</source>
                 <target>Modifier le groupe %groupName%</target>
+            </trans-unit>
+            <trans-unit id="recipientGroupInformation">
+                <source>recipientGroupInformation</source>
+                <target>Groupe de destinataires - %recipientGroupName%</target>
             </trans-unit>
             <trans-unit id="login">
                 <source>login</source>
@@ -95,6 +131,14 @@
             <trans-unit id="show">
                 <source>show</source>
                 <target>Voir</target>
+            </trans-unit>
+            <trans-unit id="modify">
+                <source>modify</source>
+                <target>Modifier</target>
+            </trans-unit>
+            <trans-unit id="duplicate">
+                <source>duplicate</source>
+                <target>Dupliquer</target>
             </trans-unit>
             <trans-unit id="remove">
                 <source>remove</source>
@@ -177,9 +221,9 @@
                 <source>form.label.recipientGroups</source>
                 <target>Groupes de destinataires</target>
             </trans-unit>
-            <trans-unit id="form.label.linkingIdentifier">
-                <source>form.label.linkingIdentifier</source>
-                <target>Identifiant de liaison</target>
+            <trans-unit id="form.label.search">
+                <source>form.label.search</source>
+                <target>Recherche</target>
             </trans-unit>
             <!-- Form placeholders -->
             <trans-unit id="form.placeholder.repetitionFrequency">
@@ -303,6 +347,10 @@
             <trans-unit id="flash.unableToRemoveCampaign">
                 <source>flash.unableToRemoveCampaign</source>
                 <target>La campagne n'a pas pu être supprimée car celle-ci a déjà été envoyée.</target>
+            </trans-unit>
+            <trans-unit id="flash.recipientModified">
+                <source>flash.recipientModified</source>
+                <target>Le destinataire a bien été modifié.</target>
             </trans-unit>
             <trans-unit id="flash.recipientGroupCreated">
                 <source>flash.recipientGroupCreated</source>

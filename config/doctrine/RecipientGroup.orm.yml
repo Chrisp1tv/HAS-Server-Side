@@ -11,5 +11,6 @@ App\Entity\RecipientGroup:
     manyToMany:
         recipients:
             targetEntity: App\Entity\Recipient
+            inversedBy: groups
             joinTable:
                 name: recipient_groups_recipients

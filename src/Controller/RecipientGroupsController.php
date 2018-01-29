@@ -91,10 +91,24 @@ class RecipientGroupsController extends Controller
         $this->addFlash('success', $this->get('translator.default')->trans('flash.recipientGroupRemoved'));
     }
 
-    public function showAction(int $id)
+    public function showAction(Request $request, int $id)
     {
-        // TODO @AS @CA Needs discussion
+        $entityManager = $this->getDoctrine()->getManager();
+        $recipientGroup = $entityManager->getRepository('App\Entity\RecipientGroup')->find($id);
 
-        return $this->render("recipient-groups/show.html.twig");
+        if (null == $recipientGroup) {
+            throw new NotFoundHttpException();
+        }
+
+        $recipients = $entityManager->getRepository('App\Entity\Recipient')->findPaginatedByRecipientGroup($recipientGroup, $this->getParameter('paginator.items_per_page'), $request->get('page'));
+
+        if ($recipients->currentPageIsInvalid()) {
+            throw new NotFoundHttpException();
+        }
+
+        return $this->render("recipient-groups/show.html.twig", array(
+            'recipientGroup' => $recipientGroup,
+            'recipients'     => $recipients,
+        ));
     }
 }

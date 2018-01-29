@@ -1,1 +1,35 @@
-{# TODO @AS #}
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ 'campaigns'|trans }}
+{% endblock %}
+
+{% block main %}
+    {% if campaigns.isEmpty %}
+        {% include "common/modules/flash-message.html.twig" with {type: "info", content: 'noCampaignFound'|trans} only %}
+    {% else %}
+        <table class="table-alternate-rows">
+            <tr>
+                <th>{{ 'name'|trans }}</th>
+                <th>{{ 'actions'|trans }}</th>
+            </tr>
+            {% for campaign in campaigns.results %}
+                <tr>
+                    <td>{{ campaign.name }}</td>
+                    <td>
+                        <a class="link-button"
+                           href="{{ path('campaigns_show', {id: campaign.id}) }}">{{ 'show'|trans }}</a>
+                        <a class="link-button"
+                           href="{{ path('campaigns_duplicate', {id: campaign.id}) }}">{{ 'duplicate'|trans }}</a>
+                        {% if campaign.isModifiable %}
+                            <a class="link-button"
+                               href="{{ path('campaigns_modify', {id: campaign.id}) }}">{{ 'modify'|trans }}</a>
+                            <a class="link-button"
+                               href="{{ path('campaigns_remove', {id: campaign.id}) }}">{{ 'remove'|trans }}</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

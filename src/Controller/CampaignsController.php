@@ -54,7 +54,7 @@ class CampaignsController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
         $campaign = $entityManager->getRepository('App\Entity\Campaign')->find($id);
 
-        if (null == $campaign) {
+        if (null == $campaign or !$campaign->isModifiable()) {
             throw new NotFoundHttpException();
         }
 
@@ -83,7 +83,7 @@ class CampaignsController extends Controller
         }
 
         // TODO: Change condition once we'll be using a new method to differentiate unsent/sent campaigns
-        if ($campaign->getSendingDate() < new \DateTime()) {
+        if ($campaign->isModifiable()) {
             $entityManager->remove($campaign);
             $entityManager->flush();
 

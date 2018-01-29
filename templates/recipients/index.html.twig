@@ -1,1 +1,31 @@
-{# TODO @AS #}
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ search is null ? 'recipients'|trans : 'recipientsSearching'|trans({'%search%': search}) }}
+{% endblock %}
+
+{% block main %}
+    {% if recipients.isEmpty %}
+        {% include "common/modules/flash-message.html.twig" with {type: "info", content: 'noRecipientFound'|trans} only %}
+    {% else %}
+        <table class="table-alternate-rows">
+            <tr>
+                <th>{{ 'name'|trans }}</th>
+                <th>{{ 'linkingIdentififer'|trans }}</th>
+                <th>{{ 'actions'|trans }}</th>
+            </tr>
+            {% for recipient in recipients.results %}
+                <tr>
+                    <td>{{ recipient.name|default('-') }}</td>
+                    <td>{{ recipient.linkingIdentifier }}</td>
+                    <td>
+                        <a href="{{ path('recipients_show', {id: recipient.id}) }}"
+                           class="link-button">{{ 'show'|trans }}</a>
+                        <a href="{{ path('recipients_modify', {id: recipient.id}) }}"
+                           class="link-button">{{ 'modify'|trans }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

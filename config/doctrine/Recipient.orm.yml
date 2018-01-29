@@ -11,3 +11,7 @@ App\Entity\Recipient:
         linkingIdentifier:
             type: string
             column: linking_identifier
+    manyToMany:
+        groups:
+            targetEntity: App\Entity\RecipientGroup
+            mappedBy: recipients

@@ -6,6 +6,12 @@ recipients_index:
     requirements:
         search: '[a-zA-Z0-9]+'
 
+recipients_modify:
+    path: /modify/{id}
+    controller: App\Controller\RecipientsController::modifyAction
+    requirements:
+        id: '\d+'
+
 recipients_show:
     path: /show/{id}
     controller: App\Controller\RecipientsController::showAction

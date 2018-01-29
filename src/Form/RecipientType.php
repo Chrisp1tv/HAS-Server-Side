@@ -23,7 +23,7 @@ class RecipientType extends AbstractType
                 'required' => true,
             ))
             ->add('linkingIdentifier', TextType::class, array(
-                'label'    => 'form.label.linkingIdentifier',
+                'label'    => 'linkingIdentifier',
                 'disabled' => true,
             ))
             ->add('save', SubmitType::class, array(

@@ -82,6 +82,7 @@ class RecipientGroup
     public function addRecipient(Recipient $recipient)
     {
         $this->recipients->add($recipient);
+        $recipient->addGroup($this);
 
         return $this;
     }
@@ -94,6 +95,7 @@ class RecipientGroup
     public function removeRecipient(Recipient $recipient)
     {
         $this->recipients->removeElement($recipient);
+        $recipient->removeGroup($this);
 
         return $this;
     }

@@ -1,1 +1,31 @@
-{# TODO @AS #}
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ 'recipientGroups'|trans }}
+{% endblock %}
+
+{% block main %}
+    {% if recipientGroups.isEmpty %}
+        {% include "common/modules/flash-message.html.twig" with {type: "info", content: 'noRecipientGroupFound'|trans} only %}
+    {% else %}
+        <table class="table-alternate-rows">
+            <tr>
+                <th>{{ 'name'|trans }}</th>
+                <th>{{ 'actions'|trans }}</th>
+            </tr>
+            {% for recipientGroup in recipientGroups.results %}
+                <tr>
+                    <td>{{ recipientGroup.name }}</td>
+                    <td>
+                        <a class="link-button"
+                           href="{{ path('recipient_groups_show', {id: recipientGroup.id}) }}">{{ 'show'|trans }}</a>
+                        <a class="link-button"
+                           href="{{ path('recipient_groups_modify', {id: recipientGroup.id}) }}">{{ 'modify'|trans }}</a>
+                        <a class="link-button"
+                           href="{{ path('recipient_groups_remove', {id: recipientGroup.id}) }}">{{ 'remove'|trans }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

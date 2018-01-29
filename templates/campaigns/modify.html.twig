@@ -1,1 +1,5 @@
-{# TODO @AS #}
+{% extends "form-page.html.twig" %}
+
+{% block title %}
+    {{ 'modifyCampaign'|trans({'%campaignName%': campaign.name}) }}
+{% endblock %}

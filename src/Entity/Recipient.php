@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Recipient
  *
@@ -23,6 +25,16 @@ class Recipient
      * @var string
      */
     private $linkingIdentifier;
+
+    /**
+     * @var ArrayCollection
+     */
+    private $groups;
+
+    public function __construct()
+    {
+        $this->groups = new ArrayCollection();
+    }
 
     /**
      * @return string
@@ -76,6 +88,38 @@ class Recipient
     public function setLinkingIdentifier($linkingIdentifier)
     {
         $this->linkingIdentifier = $linkingIdentifier;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getGroups(): ArrayCollection
+    {
+        return $this->groups;
+    }
+
+    /**
+     * @param RecipientGroup $recipientGroup
+     *
+     * @return Recipient
+     */
+    public function addGroup(RecipientGroup $recipientGroup)
+    {
+        $this->groups->add($recipientGroup);
+
+        return $this;
+    }
+
+    /**
+     * @param RecipientGroup $recipientGroup
+     *
+     * @return Recipient
+     */
+    public function removeGroup(RecipientGroup $recipientGroup)
+    {
+        $this->groups->removeElement($recipientGroup);
 
         return $this;
     }

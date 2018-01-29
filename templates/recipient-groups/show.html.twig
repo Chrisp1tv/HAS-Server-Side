@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ 'recipientGroupInformation'|trans({'%recipientGroupName%': recipientGroup.name}) }}
+{% endblock %}
+
+{% block main %}
+    <table class="table-alternate-rows">
+        <tr>
+            <th>{{ 'name'|trans }}</th>
+            <th>{{ 'actions'|trans }}</th>
+        </tr>
+        {% for recipient in recipients.results %}
+            <tr>
+                <td>{{ recipient.name }}</td>
+                <td>
+                    <a href="{{ path('recipients_show', {id: recipient.id}) }}"
+                       class="link-button">{{ 'show'|trans }}</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {# todo: display graphics ? #}
+{% endblock %}

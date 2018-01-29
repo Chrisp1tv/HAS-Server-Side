@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Campaign
@@ -266,5 +267,10 @@ class Campaign
         $this->recipientGroups->removeElement($recipientGroup);
 
         return $this;
+    }
+
+    public function isModifiable()
+    {
+        return $this->sendingDate > new DateTime();
     }
 }
