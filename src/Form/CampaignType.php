@@ -40,9 +40,11 @@ class CampaignType extends AbstractType
                 'required' => false,
             ))
             ->add('repetitionFrequency', IntegerType::class, array(
-                'label'       => 'form.label.repetitionFrequency',
-                'placeholder' => 'form.placeholder.repetitionFrequency',
-                'required'    => false,
+                'label'    => 'form.label.repetitionFrequency',
+                'attr'     => array(
+                    'placeholder' => 'form.placeholder.repetitionFrequency',
+                ),
+                'required' => false,
             ))
             ->add('recipients', EntityType::class, array(
                 'class'    => Recipient::class,

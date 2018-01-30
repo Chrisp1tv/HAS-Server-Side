@@ -70,6 +70,7 @@ class AdministratorsController extends Controller
         $sentCampaigns = $doctrine->getRepository('App\Entity\Campaign')->findBySender($administrator);
 
         return $this->render("administrators/show.html.twig", array(
+            'administrator'  => $administrator,
             'connectionLogs' => $connectionLogs,
             'sentCampaigns'  => $sentCampaigns,
         ));

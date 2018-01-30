@@ -10,7 +10,7 @@
             </trans-unit>
             <trans-unit id="date">
                 <source>date</source>
-                <target>date</target>
+                <target>Date</target>
             </trans-unit>
             <trans-unit id="connectionAddress">
                 <source>connectionAddress</source>
