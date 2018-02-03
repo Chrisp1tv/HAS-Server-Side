@@ -8,7 +8,7 @@ administrators_new:
 
 administrators_remove:
     path: /remove/{id}
-    controller: App\Conroller\AdministratorsController::removeAction
+    controller: App\Controller\AdministratorsController::removeAction
     requirements:
         id: '\d+'
 

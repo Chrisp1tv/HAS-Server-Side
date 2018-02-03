@@ -1,3 +1,13 @@
-.l-header {
+/* Header */
 
+.l-header {
+  padding: 5px 0 3px;
+  background: #fff;
+}
+
+.l-header > .logo {
+  margin: auto;
+  text-align: center;
+  font-size: 160%;
+  color: #b91533;
 }

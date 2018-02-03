@@ -20,6 +20,14 @@
                 <source>alertSystem</source>
                 <target>Système d'alertes</target>
             </trans-unit>
+            <trans-unit id="loggedInAs">
+                <source>loggedInAs</source>
+                <target>Connecté en tant que %username%</target>
+            </trans-unit>
+            <trans-unit id="logout">
+                <source>logout</source>
+                <target>Déconnexion</target>
+            </trans-unit>
             <trans-unit id="homepage">
                 <source>homepage</source>
                 <target>Accueil</target>
@@ -66,7 +74,7 @@
             </trans-unit>
             <trans-unit id="noRecipientFound">
                 <source>noRecipientFound</source>
-                <target>Aucun destinataire trouvé.</target>
+                <target>Aucun destinataire n'a été trouvé.</target>
             </trans-unit>
             <trans-unit id="recipientGroups">
                 <source>recipientGroups</source>

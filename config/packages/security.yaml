@@ -18,6 +18,9 @@ security:
                 login_path: /login
                 check_path: /login_check
                 default_target_path: homepage
+            logout:
+                path: /logout
+                target: /login
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, role: ROLE_USER }

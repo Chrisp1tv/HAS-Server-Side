@@ -1,3 +1,37 @@
-.l-header-horizontal-menu {
+/* Header horizontal menu */
 
+.l-header-horizontal-menu {
+  width: 100%;
+}
+
+.l-header-horizontal-menu > ul {
+  display: flex;
+  margin: 5px 0 0 0;
+  list-style: none;
+  text-align: center;
+  background-color: #b91533;
+  color: #000;
+}
+
+.l-header-horizontal-menu > ul a {
+  color: #fff;
+}
+
+.l-header-horizontal-menu > ul > li:nth-last-child(2) {
+  margin-left: auto;
+}
+
+.l-header-horizontal-menu > ul > li {
+  height: 35px;
+  line-height: 35px;
+  padding: 0 20px;
+  transition: all 0.2s ease-out;
+}
+
+.l-header-horizontal-menu > ul > li:not(.no-link):hover {
+  background-color: #fff;
+}
+
+.l-header-horizontal-menu > ul > li:hover a {
+  color: #b91533;
 }
