@@ -7,13 +7,16 @@
 .l-header-horizontal-menu > ul {
   display: flex;
   margin: 5px 0 0 0;
+}
+
+.l-header-horizontal-menu ul {
   list-style: none;
   text-align: center;
   background-color: #b91533;
   color: #000;
 }
 
-.l-header-horizontal-menu > ul a {
+.l-header-horizontal-menu ul a {
   color: #fff;
 }
 
@@ -21,17 +24,45 @@
   margin-left: auto;
 }
 
-.l-header-horizontal-menu > ul > li {
+.l-header-horizontal-menu ul li {
   height: 35px;
   line-height: 35px;
   padding: 0 20px;
   transition: all 0.2s ease-out;
 }
 
-.l-header-horizontal-menu > ul > li:not(.no-link):hover {
+.l-header-horizontal-menu > ul > li {
+  position: relative;
+}
+
+.l-header-horizontal-menu ul li:not(.no-link):hover {
   background-color: #fff;
 }
 
-.l-header-horizontal-menu > ul > li:hover a {
+.l-header-horizontal-menu ul li:hover > a {
   color: #b91533;
+}
+
+/* Submenu styles */
+
+.l-header-horizontal-menu > ul > li > ul {
+  position: absolute;
+  display: none;
+  left: 0;
+  right: 0;
+  top: 28px;
+  opacity: 0;
+  transition: all 0.2s ease-out;
+}
+
+.l-header-horizontal-menu > ul > li:hover > ul {
+  display: block;
+  opacity: 1;
+}
+
+.l-header-horizontal-menu > ul > li > ul > li {
+  display: block;
+  height: auto;
+  padding: 5px 20px;
+  line-height: initial;
 }

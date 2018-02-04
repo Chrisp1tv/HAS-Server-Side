@@ -1,0 +1,14 @@
+/* Link button */
+
+.link-button {
+  display: inline-block;
+  padding: 5px;
+  background: #F8F8F8;
+  border: 1px solid #D3D3D3;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.link-button:hover {
+  background-color: #b91533;
+  color: #fff;
+}

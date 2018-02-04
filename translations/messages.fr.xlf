@@ -12,6 +12,18 @@
                 <source>date</source>
                 <target>Date</target>
             </trans-unit>
+            <trans-unit id="day">
+                <source>day</source>
+                <target>Jour</target>
+            </trans-unit>
+            <trans-unit id="month">
+                <source>month</source>
+                <target>Mois</target>
+            </trans-unit>
+            <trans-unit id="year">
+                <source>year</source>
+                <target>Année</target>
+            </trans-unit>
             <trans-unit id="connectionAddress">
                 <source>connectionAddress</source>
                 <target>Adresse de connexion</target>
@@ -176,7 +188,7 @@
             <trans-unit id="sentence.lastConnectionDate">
                 <source>sentence.lastConnectionDate</source>
                 <target>La dernière connexion à votre compte administrateur a eu lieu le %connectionDate%, via l'IP
-                    %IPConnection%
+                    %IPConnection%.
                 </target>
             </trans-unit>
             <trans-unit id="sentence.numberOfLinkedRecipients">
@@ -215,7 +227,7 @@
             </trans-unit>
             <trans-unit id="form.label.endDate">
                 <source>form.label.endDate</source>
-                <target>Date d'expiration</target>
+                <target>Date et heure d'expiration (optionnelle)</target>
             </trans-unit>
             <trans-unit id="form.label.repetitionFrequency">
                 <source>form.label.repetitionFrequency</source>

@@ -39,17 +39,41 @@
         <nav role="navigation" class="l-header-horizontal-menu">
             <ul>
                 <li><a href="{{ path('homepage') }}">{{ 'homepage'|trans }}</a></li>
-                <li><a href="{{ path('administrators_index') }}">{{ 'administrators'|trans }}</a></li>
-                <li><a href="{{ path('campaings_index') }}">{{ 'campaigns'|trans }}</a></li>
+                <li>
+                    <a href="{{ path('administrators_index') }}">{{ 'administrators'|trans }}</a>
+                    <ul>
+                        <li>
+                            <a href="{{ path('administrators_new') }}">{{ 'newAdministrator'|trans }}</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{ path('campaings_index') }}">{{ 'campaigns'|trans }}</a>
+                    <ul>
+                        <li><a href="{{ path('campaigns_new') }}">{{ 'newCampaign'|trans }}</a></li>
+                    </ul>
+                </li>
                 <li><a href="{{ path('recipients_index') }}">{{ 'recipients'|trans }}</a></li>
-                <li><a href="{{ path('recipient_groups_index') }}">{{ 'recipientGroups'|trans }}</a></li>
-                <li class="no-link">{{ 'loggedInAs'|trans({'%username%': app.user.username}) }}</li>
+                <li>
+                    <a href="{{ path('recipient_groups_index') }}">{{ 'recipientGroups'|trans }}</a>
+                    <ul>
+                        <li><a href="{{ path('recipient_groups_new') }}">{{ 'newRecipientGroup'|trans }}</a></li>
+                    </ul>
+                </li>
+                <li class="no-link">
+                    {{ 'loggedInAs'|trans({'%username%': app.user.username}) }}
+                    <ul>
+                        <li>
+                            <a href="{{ path('administrators_show_logs') }}">{{ 'connectionLogs'|trans }}</a>
+                        </li>
+                    </ul>
+                </li>
                 <li><a href="{{ path('logout') }}">{{ 'logout'|trans }}</a></li>
             </ul>
         </nav>
     {% endif %}
 </header>
-<div class="l-main">
+<div class="l-main {%- if block('additionalMainElementClasses') is defined %} {{ block('additionalMainElementClasses') }} {%- endif %}">
     <h1>{{ block('title') }}</h1>
     {% block main %}{% endblock %}
 </div>

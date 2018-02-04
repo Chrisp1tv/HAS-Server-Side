@@ -32,12 +32,32 @@ class CampaignType extends AbstractType
                 'required' => true,
             ))
             ->add('sendingDate', DateTimeType::class, array(
-                'label'    => 'form.label.sendingDate',
-                'required' => true,
+                'label'       => 'form.label.sendingDate',
+                'widget'      => 'choice',
+                'years'       => range(date('Y') - 1, date('Y') + 1),
+                'placeholder' => array(
+                    'day'   => 'day',
+                    'month' => 'month',
+                    'year'  => 'year',
+                ),
+                'attr'        => array(
+                    'class' => 'container-inline-fields',
+                ),
+                'required'    => true,
             ))
             ->add('endDate', DateTimeType::class, array(
-                'label'    => 'form.label.endDate',
-                'required' => false,
+                'label'       => 'form.label.endDate',
+                'widget'      => 'choice',
+                'years'       => range(date('Y') - 1, date('Y') + 1),
+                'placeholder' => array(
+                    'day'   => 'day',
+                    'month' => 'month',
+                    'year'  => 'year',
+                ),
+                'attr'        => array(
+                    'class' => 'container-inline-fields',
+                ),
+                'required'    => false,
             ))
             ->add('repetitionFrequency', IntegerType::class, array(
                 'label'    => 'form.label.repetitionFrequency',

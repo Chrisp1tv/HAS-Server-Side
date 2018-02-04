@@ -1,0 +1,19 @@
+/* Table alternate rows */
+
+.table-alternate-rows {
+  width: 100%;
+  border: 1px solid #e1e1e1;
+  border-collapse: collapse;
+  border-radius: 2px;
+}
+
+.table-alternate-rows tbody tr td, .table-alternate-rows tbody tr th, .table-alternate-rows thead tr th {
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #e1e1e1;
+  background-color: #f2f2f3;
+}
+
+.table-alternate-rows tbody tr:nth-child(even) td, .table-alternate-rows tbody tr:nth-child(even) th {
+  background-color: #ecedee;
+}

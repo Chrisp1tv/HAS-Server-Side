@@ -1,0 +1,7 @@
+/* Container of inline fields */
+
+.container-inline-fields select, .container-inline-fields input {
+  width: auto;
+  display: inline;
+  vertical-align: middle;
+}
