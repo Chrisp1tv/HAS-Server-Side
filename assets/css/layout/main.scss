@@ -1,7 +1,7 @@
 /* Main */
 
 .l-main {
-  margin: 0 auto 50px;
+  margin: 0 auto;
   width: 1200px;
   max-width: 100%;
   padding: 10px;
@@ -12,6 +12,7 @@
 .l-main.login {
   margin-top: 50px;
   width: 600px;
+  max-width: 95%;
   background-color: #fff;
   box-shadow: rgba(185, 21, 51, 0.6) 0 1px 3px;
 }

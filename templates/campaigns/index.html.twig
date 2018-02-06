@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block main %}
+    <div class="spaced-link-buttons-group device-mobile">
+        <a href="{{ path('campaigns_new') }}" class="link-button">{{ 'newCampaign'|trans }}</a>
+    </div>
+
     {% if campaigns.isEmpty %}
         {% include "common/modules/flash-message.html.twig" with {type: "info", content: 'noCampaignFound'|trans} only %}
     {% else %}

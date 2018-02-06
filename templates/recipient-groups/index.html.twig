@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block main %}
+    <div class="spaced-link-buttons-group device-mobile">
+        <a href="{{ path('recipient_groups_new') }}" class="link-button">{{ 'newRecipientGroup'|trans }}</a>
+    </div>
+
     {% if recipientGroups.isEmpty %}
         {% include "common/modules/flash-message.html.twig" with {type: "info", content: 'noRecipientGroupFound'|trans} only %}
     {% else %}

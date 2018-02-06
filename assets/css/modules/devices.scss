@@ -1,0 +1,11 @@
+/* Devices - Responsive classes */
+
+.device-mobile {
+  display: none;
+}
+
+@media (max-width: 1150px) {
+  .device-mobile {
+    display: block;
+  }
+}

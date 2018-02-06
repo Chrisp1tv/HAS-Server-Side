@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block main %}
+    <div class="spaced-link-buttons-group device-mobile">
+        <a href="{{ path('administrators_new') }}" class="link-button">{{ 'newAdministrator'|trans }}</a>
+    </div>
+
     <table class="table-alternate-rows">
         <tr>
             <th>{{ 'name'|trans }}</th>

@@ -51,13 +51,11 @@
   left: 0;
   right: 0;
   top: 28px;
-  opacity: 0;
   transition: all 0.2s ease-out;
 }
 
 .l-header-horizontal-menu > ul > li:hover > ul {
   display: block;
-  opacity: 1;
 }
 
 .l-header-horizontal-menu > ul > li > ul > li {
@@ -65,4 +63,20 @@
   height: auto;
   padding: 5px 20px;
   line-height: initial;
+}
+
+@media (max-width: 1150px) {
+  .l-header-horizontal-menu > ul {
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+
+  .l-header-horizontal-menu > ul > li:nth-last-child(2) {
+    margin-left: 0;
+  }
+
+  .l-header-horizontal-menu > ul > li:hover > ul {
+    display: none;
+  }
 }
