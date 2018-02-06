@@ -41,7 +41,7 @@ class Paginator
     {
         $this->setUpDoctrinePaginator($query);
         $this->itemsPerPage = $itemsPerPage;
-        $this->page = $page;
+        $this->page = $page ?? 1;
     }
 
     /**
@@ -49,7 +49,7 @@ class Paginator
      */
     public function currentPageIsInvalid()
     {
-        return !$this->isEmpty() and (!ctype_digit(strval($this->getPage())) or $this->countPages() < $this->getPage() or $this->getPage() < 1);
+        return !$this->isEmpty() and (!ctype_digit(strval($this->getPage())) or $this->getNumberOfPages() < $this->getPage() or $this->getPage() < 1);
     }
 
     /**
@@ -63,29 +63,9 @@ class Paginator
     /**
      * @return int
      */
-    public function countPages()
-    {
-        if (null == $this->numberOfPages) {
-            $this->numberOfPages = ceil($this->countResults() / $this->itemsPerPage);
-        }
-
-        return $this->numberOfPages;
-    }
-
-    /**
-     * @return int
-     */
     public function countResults()
     {
         return $this->doctrinePaginator->count();
-    }
-
-    /**
-     * @return \ArrayIterator|\Traversable
-     */
-    public function getResults()
-    {
-        return $this->doctrinePaginator->getIterator();
     }
 
     /**
@@ -121,6 +101,18 @@ class Paginator
      */
     public function getNumberOfPages()
     {
-        return $this->numberOfPages;
+        if (null == $this->numberOfPages) {
+            $this->numberOfPages = ceil($this->countResults() / $this->itemsPerPage);
+        }
+
+        return (int)$this->numberOfPages;
+    }
+
+    /**
+     * @return \ArrayIterator|\Traversable
+     */
+    public function getResults()
+    {
+        return $this->doctrinePaginator->getIterator();
     }
 }

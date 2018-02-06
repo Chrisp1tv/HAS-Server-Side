@@ -16,9 +16,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class AdministratorsController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $administrators = $this->getDoctrine()->getRepository('App\Entity\Administrator')->findAll();
+        $administrators = $this->getDoctrine()->getRepository('App\Entity\Administrator')->findAllPaginated($this->getParameter('paginator.items_per_page'), $request->get('page'));
+
+        if ($administrators->currentPageIsInvalid()) {
+            throw new NotFoundHttpException();
+        }
 
         return $this->render("administrators/index.html.twig", array(
             'administrators' => $administrators,

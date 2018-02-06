@@ -14,7 +14,7 @@
             <th>{{ 'name'|trans }}</th>
             <th>{{ 'actions'|trans }}</th>
         </tr>
-        {% for administrator in administrators %}
+        {% for administrator in administrators.results %}
             <tr>
                 <td>{{ administrator.username }}</td>
                 <td>
@@ -26,4 +26,6 @@
             </tr>
         {% endfor %}
     </table>
+
+    {{ pagination(administrators) }}
 {% endblock %}

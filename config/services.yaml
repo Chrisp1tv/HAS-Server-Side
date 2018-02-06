@@ -20,3 +20,6 @@ services:
             - "@doctrine.orm.entity_manager"
         tags:
             - { name: kernel.event_listener, event: security.interactive_login }
+    App\Twig\Extension\PaginatorExtension:
+        tags:
+            - { name: twig.extension }
