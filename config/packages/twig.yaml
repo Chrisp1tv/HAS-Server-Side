@@ -1,4 +1,6 @@
 twig:
+    form_themes:
+        - 'common/form/fields.html.twig'
     globals:
         christopheranciauxgithublink: '%christopheranciauxgithublink%'
         alexandreszymuragithublink: '%alexandreszymuragithublink%'
