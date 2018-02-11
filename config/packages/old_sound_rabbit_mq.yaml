@@ -2,8 +2,18 @@ old_sound_rabbit_mq:
     connections:
         default:
             url: '%env(RABBITMQ_URL)%'
+            lazy: true
     producers:
-        # use 'old_sound_rabbit_mq.campaign_producer' service to send data.
-        campaign:
+        direct_campaigns:
             connection: default
-            exchange_options: { name: 'campaign', type: direct }
+            exchange_options: { name: '%rabbitmq_manager.direct_campaigns_exchange_name%', type: direct, durable: true, auto_delete: false }
+        group_campaigns:
+            connection: default
+            exchange_options: { name: '%rabbitmq_manager.group_campaigns_exchange_name%', type: direct, durable: true, auto_delete: false }
+    rpc_servers:
+        registration:
+            connection: default
+            callback: App\EventListener\NewRecipientListener
+            exchange_options: { name: '%rabbitmq_manager.recipient_registration_exchange_name%', type: direct }
+            queue_options: { name: '%rabbitmq_manager.recipient_registration_queue_name%', durable: true, auto_delete: false }
+            serializer: json_encode

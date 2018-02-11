@@ -23,6 +23,7 @@ class Recipient
 
     /**
      * @var string
+     * TODO: Remove ?
      */
     private $linkingIdentifier;
 
