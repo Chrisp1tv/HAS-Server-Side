@@ -3,6 +3,7 @@
 namespace App\Util;
 
 use App\Entity\Campaign;
+use App\Entity\Message;
 use App\Entity\Recipient;
 use App\Entity\RecipientGroup;
 use OldSound\RabbitMqBundle\RabbitMq\Producer;
@@ -14,24 +15,35 @@ use OldSound\RabbitMqBundle\RabbitMq\Producer;
  */
 abstract class RabbitMQManager
 {
-    static public function createRecipientQueue(Producer $directCampaignsProducer, string $clientQueuesPrefix, Recipient $recipient)
+    static public function createRecipientQueue(Producer $directCampaignsProducer, string $clientQueuesPrefix, string $directCampaignsExchangeName, Recipient $recipient)
     {
         $newQueueName = self::getRecipientQueueName($clientQueuesPrefix, $recipient);
         $directCampaignsProducer->getChannel()->queue_declare($newQueueName, false, true, false, false);
-
-        // TODO: bind queue to the direct campaign exchange
+        $directCampaignsProducer->getChannel()->queue_bind($newQueueName, $directCampaignsExchangeName, $newQueueName);
 
         return $newQueueName;
     }
 
-    static public function sendCampaign(Campaign $campaign, Producer $directCampaignsProducer, Producer $groupCampaignsProducer)
+    static public function sendCampaign(Producer $directCampaignsProducer, Producer $groupCampaignsProducer, string $clientQueuesPrefix, string $groupExchangeBindsPrefix, Campaign $campaign)
     {
-        // We can't really send a message to multiple groups at the same time without risking to send same message multiple times to some recipients,
-        // so let's find a workaround
-        // TODO
-        if ($campaign->getRecipientGroups()->count() > 1) {
+        $recipients = $campaign->getRecipients()->toArray();
+        $recipientGroups = $campaign->getRecipientGroups();
+        $encodedMessage = self::encodeMessage($campaign->getMessage());
 
-        } else {
+        if (1 < $recipientGroups->count()) {
+            /** @var RecipientGroup $recipientGroup */
+            foreach ($recipientGroups->getIterator() as $recipientGroup) {
+                $recipients = array_merge($recipients, $recipientGroup->getRecipients()->toArray());
+            }
+
+            $recipients = array_unique($recipients, SORT_REGULAR);
+        } elseif (1 === $recipientGroups->count()) {
+            $groupCampaignsProducer->publish($encodedMessage, self::getGroupBindKey($groupExchangeBindsPrefix, $recipientGroups->first()));
+            $recipients = array_diff($recipients, $recipientGroups->first()->toArray());
+        }
+
+        foreach ($recipients as $recipient) {
+            $directCampaignsProducer->publish($encodedMessage, self::getRecipientQueueName($clientQueuesPrefix, $recipient));
         }
     }
 
@@ -58,5 +70,10 @@ abstract class RabbitMQManager
     static private function getGroupBindKey(string $groupExchangeBindsPrefix, RecipientGroup $recipientGroup)
     {
         return $groupExchangeBindsPrefix . $recipientGroup->getId();
+    }
+
+    static private function encodeMessage(Message $message)
+    {
+        return json_encode($message);
     }
 }

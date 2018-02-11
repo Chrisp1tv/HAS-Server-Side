@@ -31,11 +31,17 @@ class NewRecipientListener implements ConsumerInterface
      */
     private $clientQueuesPrefix;
 
-    public function __construct(EntityManager $entityManager, Producer $directCampaignsProducer, string $clientQueuesPrefix)
+    /**
+     * @var string
+     */
+    private $directCampaignsExchangeName;
+
+    public function __construct(EntityManager $entityManager, Producer $directCampaignsProducer, string $clientQueuesPrefix, string $directCampaignsExchangeName)
     {
         $this->entityManager = $entityManager;
         $this->directCampaignsProducer = $directCampaignsProducer;
         $this->clientQueuesPrefix = $clientQueuesPrefix;
+        $this->directCampaignsExchangeName = $directCampaignsExchangeName;
     }
 
     public function execute(AMQPMessage $AMQPMessage)
@@ -52,6 +58,6 @@ class NewRecipientListener implements ConsumerInterface
         $this->entityManager->persist($newRecipient);
         $this->entityManager->flush();
 
-        return RabbitMQManager::createRecipientQueue($this->directCampaignsProducer, $this->clientQueuesPrefix, $newRecipient);
+        return RabbitMQManager::createRecipientQueue($this->directCampaignsProducer, $this->clientQueuesPrefix, $this->directCampaignsExchangeName, $newRecipient);
     }
 }
