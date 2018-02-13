@@ -39,6 +39,14 @@ class Campaign
 
     /**
      * @var \DateTime
+     *
+     * The date the campaign was sent.
+     * If the campaign has a repetition frequency, this value takes the date of last sending from the system.
+     */
+    private $effectiveSendingDate;
+
+    /**
+     * @var \DateTime
      */
     private $endDate;
 
@@ -74,6 +82,9 @@ class Campaign
     public function __clone()
     {
         $this->id = null;
+        $this->sendingDate = null;
+        $this->endDate = null;
+        $this->effectiveSendingDate = null;
         $this->message = clone $this->message;
     }
 
@@ -161,6 +172,24 @@ class Campaign
     public function setSendingDate(\DateTime $sendingDate)
     {
         $this->sendingDate = $sendingDate;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEffectiveSendingDate()
+    {
+        return $this->effectiveSendingDate;
+    }
+
+    /**
+     * @return $this
+     */
+    public function makeSent()
+    {
+        $this->effectiveSendingDate = new \DateTime();
 
         return $this;
     }

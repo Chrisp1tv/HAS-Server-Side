@@ -1,4 +1,8 @@
 App\Entity\Administrator:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: username
+            message: "validation.administrator.uniqueness"
     properties:
         username:
             - NotBlank:

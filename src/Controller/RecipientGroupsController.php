@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\RecipientGroup;
 use App\Form\RecipientGroupType;
+use App\Util\RabbitMQManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -39,6 +40,13 @@ class RecipientGroupsController extends Controller
         if ($form->isSubmitted() and $form->isValid()) {
             $entityManager->persist($recipientGroup);
             $entityManager->flush();
+            RabbitMQManager::updateRecipientGroupBindings($this->get('old_sound_rabbit_mq.group_campaigns_producer'),
+                $this->getParameter('rabbitmq_manager.client_queues_prefix'),
+                $this->getParameter('rabbitmq_manager.group_campaigns_exchange_name'),
+                $this->getParameter('rabbitmq_manager.group_exchange_binds_prefix'),
+                $recipientGroup,
+                array(),
+                $recipientGroup->getRecipients()->toArray());
 
             $this->addFlash('success', $this->get('translator.default')->trans('flash.recipientGroupCreated'));
             $this->redirectToRoute('recipient_groups_modify', array(
@@ -61,11 +69,19 @@ class RecipientGroupsController extends Controller
             throw new NotFoundHttpException();
         }
 
+        $oldRecipients = $recipientGroup->getRecipients()->toArray();
         $form = $this->createForm(RecipientGroupType::class, $recipientGroup);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() and $form->isValid()) {
             $entityManager->flush();
+            RabbitMQManager::updateRecipientGroupBindings($this->get('old_sound_rabbit_mq.group_campaigns_producer'),
+                $this->getParameter('rabbitmq_manager.client_queues_prefix'),
+                $this->getParameter('rabbitmq_manager.group_campaigns_exchange_name'),
+                $this->getParameter('rabbitmq_manager.group_exchange_binds_prefix'),
+                $recipientGroup,
+                $oldRecipients,
+                $recipientGroup->getRecipients()->toArray());
 
             $this->addFlash('success', $this->get('translator.default')->trans('flash.recipientGroupModified'));
         }

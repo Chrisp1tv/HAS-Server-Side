@@ -12,15 +12,23 @@ App\Entity\Campaign:
         sendingDate:
             type: datetime
             column: sending_date
+        effectiveSendingDate:
+            type: datetime
+            column: effective_sending_date
+            nullable: true
         endDate:
             type: datetime
             column: end_date
+            nullable: true
         repetitionFrequency:
             type: integer
             column: repetition_frequency
+            nullable: true
     oneToOne:
         message:
             targetEntity: App\Entity\Message
+            joinColumn:
+                nullable: false
     manyToOne:
         sender:
             targetEntity: App\Entity\Administrator

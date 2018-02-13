@@ -39,8 +39,10 @@ class AdministratorsController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() and $form->isValid()) {
             $password = $passwordEncoder->encodePassword($administrator, $administrator->getPassword());
-            $administrator->setPassword($password);
-            $administrator->addRole('ROLE_USER');
+
+            $administrator
+                ->setPassword($password)
+                ->addRole('ROLE_USER');
 
             $entityManager->persist($administrator);
             $entityManager->flush();

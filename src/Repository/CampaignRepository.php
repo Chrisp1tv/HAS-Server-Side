@@ -6,6 +6,7 @@ use App\Entity\Administrator;
 use App\Entity\Campaign;
 use App\Util\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -89,12 +90,39 @@ class CampaignRepository extends ServiceEntityRepository
     public function countUnsent()
     {
         $queryBuilder = $this->createQueryBuilder('campaign')
-            ->select('count(campaign.id)')
-            ->where('campaign.sendingDate > :now')
-            ->setParameter('now', new \DateTime());
+            ->select('count(campaign.id)');
+
+        $this->whereUnsent($queryBuilder);
 
         return $queryBuilder
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function findUnsent()
+    {
+        $queryBuilder = $this->createQueryBuilder('campaign')
+            ->join('campaign.message', 'message')
+            ->leftJoin('campaign.recipientGroups', 'recipientGroups')
+            ->leftJoin('campaign.recipients', 'recipients');
+
+        $this->whereUnsent($queryBuilder);
+
+        return $queryBuilder
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @param QueryBuilder $queryBuilder
+     */
+    protected function whereUnsent(QueryBuilder $queryBuilder)
+    {
+        $queryBuilder
+            ->andWhere('(campaign.sendingDate <= :now AND campaign.effectiveSendingDate IS NULL) OR (campaign.repetitionFrequency IS NOT NULL AND DATE_ADD(campaign.effectiveSendingDate, campaign.repetitionFrequency, \'MINUTE\') <= campaign.endDate AND DATE_ADD(campaign.effectiveSendingDate, campaign.repetitionFrequency, \'MINUTE\') <= :now)')
+            ->setParameter('now', new \DateTime());
     }
 }

@@ -252,6 +252,10 @@
             </trans-unit>
             <!-- Validation -->
             <!-- Administrator validation -->
+            <trans-unit id="validation.administrator.uniqueness">
+                <source>validation.administrator.uniqueness</source>
+                <target>Le nom d'utilisateur est déjà utilisé.</target>
+            </trans-unit>
             <trans-unit id="validation.administrator.username.notBlank">
                 <source>validation.administrator.username.notBlank</source>
                 <target>Veuillez renseigner le nom d'utilisateur de la campagne.</target>
