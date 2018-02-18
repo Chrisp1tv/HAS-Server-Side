@@ -58,7 +58,8 @@ class RecipientsController extends Controller
         }
 
         return $this->render('recipients/modify.html.twig', array(
-            'form' => $form->createView(),
+            'recipient' => $recipient,
+            'form'      => $form->createView(),
         ));
     }
 

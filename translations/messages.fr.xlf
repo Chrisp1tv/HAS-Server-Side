@@ -48,10 +48,6 @@
                 <source>name</source>
                 <target>Nom</target>
             </trans-unit>
-            <trans-unit id="linkingIdentifier">
-                <source>linkingIdentifier</source>
-                <target>Identifiant de liaison</target>
-            </trans-unit>
             <trans-unit id="search">
                 <source>search</source>
                 <target>Recherche</target>
@@ -111,6 +107,10 @@
             <trans-unit id="modifyCampaign">
                 <source>modifyCampaign</source>
                 <target>Modifier la campagne %campaignName%</target>
+            </trans-unit>
+            <trans-unit id="modifyRecipient">
+                <source>modifyRecipient</source>
+                <target>Modifier le destinataire %recipient%</target>
             </trans-unit>
             <trans-unit id="noRecipientGroupFound">
                 <source>noRecipientGroupFound</source>

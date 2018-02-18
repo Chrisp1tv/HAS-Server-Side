@@ -22,12 +22,6 @@ class Recipient
     private $name;
 
     /**
-     * @var string
-     * TODO: Remove ?
-     */
-    private $linkingIdentifier;
-
-    /**
      * @var ArrayCollection
      */
     private $groups;
@@ -42,7 +36,7 @@ class Recipient
      */
     public function __toString()
     {
-        return $this->getName() ?? $this->getLinkingIdentifier();
+        return $this->getName() ?? $this->getId();
     }
 
     /**
@@ -69,26 +63,6 @@ class Recipient
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLinkingIdentifier()
-    {
-        return $this->linkingIdentifier;
-    }
-
-    /**
-     * @param string $linkingIdentifier
-     *
-     * @return Recipient
-     */
-    public function setLinkingIdentifier($linkingIdentifier)
-    {
-        $this->linkingIdentifier = $linkingIdentifier;
 
         return $this;
     }

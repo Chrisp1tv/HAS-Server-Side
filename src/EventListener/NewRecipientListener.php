@@ -46,7 +46,7 @@ class NewRecipientListener implements ConsumerInterface
 
     public function execute(AMQPMessage $AMQPMessage)
     {
-        $newRecipientInformation = json_decode($AMQPMessage);
+        $newRecipientInformation = json_decode($AMQPMessage->getBody());
 
         if (!property_exists($newRecipientInformation, 'name')) {
             return null;
@@ -58,6 +58,10 @@ class NewRecipientListener implements ConsumerInterface
         $this->entityManager->persist($newRecipient);
         $this->entityManager->flush();
 
-        return RabbitMQManager::createRecipientQueue($this->directCampaignsProducer, $this->clientQueuesPrefix, $this->directCampaignsExchangeName, $newRecipient);
+        $queueName = RabbitMQManager::createRecipientQueue($this->directCampaignsProducer, $this->clientQueuesPrefix, $this->directCampaignsExchangeName, $newRecipient);
+
+        return array(
+            'queueName' => $queueName,
+        );
     }
 }

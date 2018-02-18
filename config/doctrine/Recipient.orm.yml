@@ -8,9 +8,6 @@ App\Entity\Recipient:
     fields:
         name:
             type: string
-        linkingIdentifier:
-            type: string
-            column: linking_identifier
     manyToMany:
         groups:
             targetEntity: App\Entity\RecipientGroup
