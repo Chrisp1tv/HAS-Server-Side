@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+        <body>
+            <!-- Validation -->
+            <!-- Administrator validation -->
+            <trans-unit id="administrator.uniqueness">
+                <source>administrator.uniqueness</source>
+                <target>Le nom d'utilisateur est déjà utilisé.</target>
+            </trans-unit>
+            <trans-unit id="administrator.username.notBlank">
+                <source>administrator.username.notBlank</source>
+                <target>Veuillez renseigner le nom d'utilisateur de la campagne.</target>
+            </trans-unit>
+            <trans-unit id="administrator.username.length.min">
+                <source>administrator.username.length.min</source>
+                <target>Le nom d'utilisateur doit posséder au moins {{ limit }} caractères.</target>
+            </trans-unit>
+            <trans-unit id="administrator.username.length.max">
+                <source>administrator.username.length.max</source>
+                <target>Le nom d'utilisateur ne peut posséder plus de {{ limit }} caractères.</target>
+            </trans-unit>
+            <trans-unit id="administrator.password.notBlank">
+                <source>administrator.password.notBlank</source>
+                <target>Veuillez renseigner le mot de passe de l'administrateur.</target>
+            </trans-unit>
+            <trans-unit id="administrator.password.length.min">
+                <source>administrator.password.length.min</source>
+                <target>Le mot de passe doit posséder au moins {{ limit }} caractères.</target>
+            </trans-unit>
+            <trans-unit id="administrator.password.length.max">
+                <source>administrator.password.length.max</source>
+                <target>Le mot de passe ne peut posséder plus de {{ limit }} caractères.</target>
+            </trans-unit>
+            <!-- Campaign validation -->
+            <trans-unit id="campaign.expression">
+                <source>campaign.expression</source>
+                <target>La campagne doit obligatoirement posséder des destinataires (individuels ou groupés).</target>
+            </trans-unit>
+            <trans-unit id="campaign.name.notBlank">
+                <source>campaign.name.notBlank</source>
+                <target>La campagne doit obligatoirement posséder un nom.</target>
+            </trans-unit>
+            <trans-unit id="campaign.name.length.min">
+                <source>campaign.name.length.min</source>
+                <target>Le nom de la campagne doit posséder au moins {{ limit }} caractères.</target>
+            </trans-unit>
+            <trans-unit id="campaign.name.length.max">
+                <source>campaign.name.length.max</source>
+                <target>Le nom de la campagne ne peut posséder plus de {{ limit }} caractères.</target>
+            </trans-unit>
+            <trans-unit id="campaign.message.notNull">
+                <source>campaign.message.notNull</source>
+                <target>La campagne doit posséder un message.</target>
+            </trans-unit>
+            <trans-unit id="campaign.sendingDate.date">
+                <source>campaign.sendingDate.date</source>
+                <target>La date d'envoi saisie n'est pas valide.</target>
+            </trans-unit>
+            <trans-unit id="campaign.sendingDate.greaterThan">
+                <source>campaign.sendingDate.greaterThan</source>
+                <target>Il n'est pas possible d'envoyer une campagne dans le passé.</target>
+            </trans-unit>
+            <trans-unit id="campaign.endDate.date">
+                <source>campaign.endDate.date</source>
+                <target>La date de fin saisie n'est pas valide.</target>
+            </trans-unit>
+            <trans-unit id="campaign.endDate.expression">
+                <source>campaign.endDate.expression</source>
+                <target>La campagne ne peut se terminer avant d'avoir commencé.</target>
+            </trans-unit>
+            <trans-unit id="campaign.repetitionFrequency.range.min">
+                <source>campaign.repetitionFrequency.range.min</source>
+                <target>La fréquence minimale de répétition ne peut être inférieure à {{ limit }} minutes.</target>
+            </trans-unit>
+            <!-- Message validation -->
+            <trans-unit id="message.content.notBlank">
+                <source>message.content.notBlank</source>
+                <target>Votre message doit impérativement posséder un contenu.</target>
+            </trans-unit>
+            <trans-unit id="message.color.regex">
+                <source>message.color.regex</source>
+                <target>La couleur saisie n'a pas été reconnue.</target>
+            </trans-unit>
+            <!-- RecipientGroup validation -->
+            <trans-unit id="recipientGroup.name.notBlank">
+                <source>recipientGroup.name.notBlank</source>
+                <target>Votre groupe doit impérativement posséder un nom.</target>
+            </trans-unit>
+            <trans-unit id="recipientGroup.name.length.min">
+                <source>recipientGroup.name.length.min</source>
+                <target>Le nom de votre groupe doit posséder au moins {{ limit }} caractères.</target>
+            </trans-unit>
+            <trans-unit id="recipientGroup.name.length.max">
+                <source>recipientGroup.name.length.max</source>
+                <target>Le nom de votre groupe ne peut posséder plus de {{ limit }} caractères.</target>
+            </trans-unit>
+            <trans-unit id="recipientGroup.recipients.min">
+                <source>recipientGroup.recipients.min</source>
+                <target>Votre groupe doit posséder au moins {{ limit }} destinataires.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

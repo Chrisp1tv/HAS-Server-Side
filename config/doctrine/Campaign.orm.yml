@@ -27,6 +27,8 @@ App\Entity\Campaign:
     oneToOne:
         message:
             targetEntity: App\Entity\Message
+            cascade:
+                - "persist"
             joinColumn:
                 nullable: false
     manyToOne:

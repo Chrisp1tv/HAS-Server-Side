@@ -37,11 +37,13 @@ class CampaignsController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() and $form->isValid()) {
+            $campaign->setSender($this->getUser());
             $entityManager->persist($campaign);
             $entityManager->flush();
 
-            $this->addFlash('success', $this->get('translator.default')->trans('flash.campaignCreated'));
-            $this->redirectToRoute('campaigns_modify', array('id' => $campaign->getId()));
+            $this->addFlash('success', $this->get('translator')->trans('flash.campaignCreated'));
+
+            return $this->redirectToRoute('campaigns_modify', array('id' => $campaign->getId()));
         }
 
         return $this->render("campaigns/new.html.twig", array(
@@ -64,7 +66,7 @@ class CampaignsController extends Controller
         if ($form->isSubmitted() and $form->isValid()) {
             $entityManager->flush();
 
-            $this->addFlash('success', $this->get('translator.default')->trans('flash.campaignModified'));
+            $this->addFlash('success', $this->get('translator')->trans('flash.campaignModified'));
         }
 
         return $this->render("campaigns/modify.html.twig", array(
@@ -82,14 +84,13 @@ class CampaignsController extends Controller
             throw new NotFoundHttpException();
         }
 
-        // TODO: Change condition once we'll be using a new method to differentiate unsent/sent campaigns
         if ($campaign->isModifiable()) {
             $entityManager->remove($campaign);
             $entityManager->flush();
 
-            $this->addFlash('success', $this->get('translator.default')->trans('flash.campaignRemoved'));
+            $this->addFlash('success', $this->get('translator')->trans('flash.campaignRemoved'));
         } else {
-            $this->addFlash('error', $this->get('translator.default')->trans('flash.unableToRemoveCampaign'));
+            $this->addFlash('error', $this->get('translator')->trans('flash.unableToRemoveCampaign'));
         }
 
         return $this->redirect($request->headers->get('referer'));
@@ -115,11 +116,13 @@ class CampaignsController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() and $form->isValid()) {
+            $campaign->setSender($this->getUser());
             $entityManager->persist($campaign);
             $entityManager->flush();
 
-            $this->addFlash('success', $this->get('translator.default')->trans('flash.campaignDuplicated'));
-            $this->redirectToRoute('campaigns_modify', array('id' => $campaign->getId()));
+            $this->addFlash('success', $this->get('translator')->trans('flash.campaignDuplicated'));
+
+            return $this->redirectToRoute('campaigns_modify', array('id' => $campaign->getId()));
         }
 
         return $this->render("campaigns/duplicate.html.twig", array(

@@ -29,7 +29,7 @@ class RecipientGroupsController extends Controller
         ));
     }
 
-    public function newAction(Request $request)
+    public function newAction(Request $request, RabbitMQManager $RabbitMQManager)
     {
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -40,16 +40,11 @@ class RecipientGroupsController extends Controller
         if ($form->isSubmitted() and $form->isValid()) {
             $entityManager->persist($recipientGroup);
             $entityManager->flush();
-            RabbitMQManager::updateRecipientGroupBindings($this->get('old_sound_rabbit_mq.group_campaigns_producer'),
-                $this->getParameter('rabbitmq_manager.client_queues_prefix'),
-                $this->getParameter('rabbitmq_manager.group_campaigns_exchange_name'),
-                $this->getParameter('rabbitmq_manager.group_exchange_binds_prefix'),
-                $recipientGroup,
-                array(),
-                $recipientGroup->getRecipients()->toArray());
+            $RabbitMQManager->updateRecipientGroupBindings($recipientGroup, array(), $recipientGroup->getRecipients()->toArray());
 
-            $this->addFlash('success', $this->get('translator.default')->trans('flash.recipientGroupCreated'));
-            $this->redirectToRoute('recipient_groups_modify', array(
+            $this->addFlash('success', $this->get('translator')->trans('flash.recipientGroupCreated'));
+
+            return $this->redirectToRoute('recipient_groups_modify', array(
                 'id' => $recipientGroup->getId(),
             ));
         }
@@ -60,7 +55,7 @@ class RecipientGroupsController extends Controller
         ));
     }
 
-    public function modifyAction(Request $request, int $id)
+    public function modifyAction(Request $request, RabbitMQManager $RabbitMQManager, int $id)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $recipientGroup = $this->getDoctrine()->getRepository('App\Entity\RecipientGroup')->find($id);
@@ -75,15 +70,9 @@ class RecipientGroupsController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() and $form->isValid()) {
             $entityManager->flush();
-            RabbitMQManager::updateRecipientGroupBindings($this->get('old_sound_rabbit_mq.group_campaigns_producer'),
-                $this->getParameter('rabbitmq_manager.client_queues_prefix'),
-                $this->getParameter('rabbitmq_manager.group_campaigns_exchange_name'),
-                $this->getParameter('rabbitmq_manager.group_exchange_binds_prefix'),
-                $recipientGroup,
-                $oldRecipients,
-                $recipientGroup->getRecipients()->toArray());
+            $RabbitMQManager->updateRecipientGroupBindings($recipientGroup, $oldRecipients, $recipientGroup->getRecipients()->toArray());
 
-            $this->addFlash('success', $this->get('translator.default')->trans('flash.recipientGroupModified'));
+            $this->addFlash('success', $this->get('translator')->trans('flash.recipientGroupModified'));
         }
 
         return $this->render("recipient-groups/modify.html.twig", array(
@@ -104,7 +93,7 @@ class RecipientGroupsController extends Controller
         $entityManager->remove($recipientGroup);
         $entityManager->flush();
 
-        $this->addFlash('success', $this->get('translator.default')->trans('flash.recipientGroupRemoved'));
+        $this->addFlash('success', $this->get('translator')->trans('flash.recipientGroupRemoved'));
     }
 
     public function showAction(Request $request, int $id)

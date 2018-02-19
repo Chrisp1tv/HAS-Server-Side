@@ -4,9 +4,7 @@ namespace App\EventListener;
 
 use App\Entity\Recipient;
 use App\Util\RabbitMQManager;
-use Doctrine\ORM\EntityManager;
-use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
-use OldSound\RabbitMqBundle\RabbitMq\Producer;
+use Doctrine\ORM\EntityManagerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
 
 /**
@@ -14,34 +12,22 @@ use PhpAmqpLib\Message\AMQPMessage;
  *
  * @author Christopher Anciaux <christopher.anciaux@gmail.com>
  */
-class NewRecipientListener implements ConsumerInterface
+class NewRecipientListener
 {
     /**
-     * @var EntityManager
+     * @var EntityManagerInterface
      */
     private $entityManager;
 
     /**
-     * @var Producer
+     * @var RabbitMQManager
      */
-    private $directCampaignsProducer;
+    private $RabbitMQManager;
 
-    /**
-     * @var string
-     */
-    private $clientQueuesPrefix;
-
-    /**
-     * @var string
-     */
-    private $directCampaignsExchangeName;
-
-    public function __construct(EntityManager $entityManager, Producer $directCampaignsProducer, string $clientQueuesPrefix, string $directCampaignsExchangeName)
+    public function __construct(EntityManagerInterface $entityManager, RabbitMQManager $RabbitMQManager)
     {
         $this->entityManager = $entityManager;
-        $this->directCampaignsProducer = $directCampaignsProducer;
-        $this->clientQueuesPrefix = $clientQueuesPrefix;
-        $this->directCampaignsExchangeName = $directCampaignsExchangeName;
+        $this->RabbitMQManager = $RabbitMQManager;
     }
 
     public function execute(AMQPMessage $AMQPMessage)
@@ -57,11 +43,6 @@ class NewRecipientListener implements ConsumerInterface
 
         $this->entityManager->persist($newRecipient);
         $this->entityManager->flush();
-
-        $queueName = RabbitMQManager::createRecipientQueue($this->directCampaignsProducer, $this->clientQueuesPrefix, $this->directCampaignsExchangeName, $newRecipient);
-
-        return array(
-            'queueName' => $queueName,
-        );
+        $this->RabbitMQManager->sendRegistrationResponse($AMQPMessage, $this->RabbitMQManager->createRecipientQueue($newRecipient));
     }
 }

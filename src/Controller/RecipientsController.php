@@ -54,7 +54,7 @@ class RecipientsController extends Controller
         if ($form->isSubmitted() and $form->isValid()) {
             $entityManager->flush();
 
-            $this->addFlash('success', $this->get('translator.default')->trans('flash.recipientModified'));
+            $this->addFlash('success', $this->get('translator')->trans('flash.recipientModified'));
         }
 
         return $this->render('recipients/modify.html.twig', array(

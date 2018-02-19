@@ -5,7 +5,6 @@ namespace App\Command;
 use App\Entity\Campaign;
 use App\Util\RabbitMQManager;
 use Doctrine\ORM\EntityManagerInterface;
-use OldSound\RabbitMqBundle\RabbitMq\Producer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -27,32 +26,14 @@ class SendPendingCampaigns extends Command
     protected $entityManager;
 
     /**
-     * @var Producer
+     * @var RabbitMQManager
      */
-    protected $directCampaignsProducer;
+    protected $RabbitMQManager;
 
-    /**
-     * @var Producer
-     */
-    protected $groupCampaignsProducer;
-
-    /**
-     * @var string
-     */
-    protected $clientQueuesPrefix;
-
-    /**
-     * @var string
-     */
-    protected $groupExchangeBindsPrefix;
-
-    public function __construct(EntityManagerInterface $entityManager, Producer $directCampaignsProducer, Producer $groupCampaignsProducer, string $clientQueuesPrefix, string $groupExchangeBindsPrefix)
+    public function __construct(EntityManagerInterface $entityManager, RabbitMQManager $RabbitMQManager)
     {
         $this->entityManager = $entityManager;
-        $this->directCampaignsProducer = $directCampaignsProducer;
-        $this->groupCampaignsProducer = $groupCampaignsProducer;
-        $this->clientQueuesPrefix = $clientQueuesPrefix;
-        $this->groupExchangeBindsPrefix = $groupExchangeBindsPrefix;
+        $this->RabbitMQManager = $RabbitMQManager;
 
         parent::__construct();
     }
@@ -81,7 +62,7 @@ class SendPendingCampaigns extends Command
             if ($unsentCampaigns = $this->entityManager->getRepository('App\Entity\Campaign')->findUnsent()) {
                 /** @var Campaign $campaign */
                 foreach ($unsentCampaigns as $campaign) {
-                    RabbitMQManager::sendCampaign($this->directCampaignsProducer, $this->groupCampaignsProducer, $this->clientQueuesPrefix, $this->groupExchangeBindsPrefix, $campaign);
+                    $this->RabbitMQManager->sendCampaign($campaign);
                     $campaign->makeSent();
                 }
 

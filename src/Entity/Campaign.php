@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Campaign
@@ -207,7 +206,7 @@ class Campaign
      *
      * @return Campaign
      */
-    public function setEndDate(\DateTime $endDate)
+    public function setEndDate(?\DateTime $endDate)
     {
         $this->endDate = $endDate;
 
@@ -300,6 +299,6 @@ class Campaign
 
     public function isModifiable()
     {
-        return $this->sendingDate > new DateTime();
+        return $this->sendingDate > new \DateTime();
     }
 }

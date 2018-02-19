@@ -47,8 +47,9 @@ class AdministratorsController extends Controller
             $entityManager->persist($administrator);
             $entityManager->flush();
 
-            $this->addFlash('success', $this->get('translator.default')->trans('flash.administratorCreated'));
-            $this->redirectToRoute('administrators_show', array(
+            $this->addFlash('success', $this->get('translator')->trans('flash.administratorCreated'));
+
+            return $this->redirectToRoute('administrators_show', array(
                 'id' => $administrator->getId(),
             ));
         }
