@@ -43,6 +43,12 @@ class NewRecipientListener
 
         $this->entityManager->persist($newRecipient);
         $this->entityManager->flush();
-        $this->RabbitMQManager->sendRegistrationResponse($AMQPMessage, $this->RabbitMQManager->createRecipientQueue($newRecipient));
+
+        $newRecipientInformation = array(
+            'queueName' => $this->RabbitMQManager->createRecipientQueue($newRecipient),
+            'id'        => $newRecipient->getId(),
+        );
+
+        $this->RabbitMQManager->sendRegistrationResponse($AMQPMessage, $newRecipientInformation);
     }
 }

@@ -16,6 +16,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class AdministratorsController extends Controller
 {
+    private static $MAX_RESULTS_CONNECTION_LOGS = 5;
+
     public function indexAction(Request $request)
     {
         $administrators = $this->getDoctrine()->getRepository('App\Entity\Administrator')->findAllPaginated($this->getParameter('paginator.items_per_page'), $request->get('page'));
@@ -64,7 +66,7 @@ class AdministratorsController extends Controller
         // TODO @CA
     }
 
-    public function showAction(int $id)
+    public function showAction(int $id, Request $request)
     {
         $administrator = $this->getDoctrine()->getRepository('App\Entity\Administrator')->find($id);
 
@@ -73,19 +75,37 @@ class AdministratorsController extends Controller
         }
 
         $doctrine = $this->getDoctrine();
-        $connectionLogs = $doctrine->getRepository('App\Entity\ConnectionLogs')->findConnectionLogsByAdministrator($administrator);
-        $sentCampaigns = $doctrine->getRepository('App\Entity\Campaign')->findBySender($administrator);
+        $lastConnectionLogs = $doctrine->getRepository('App\Entity\ConnectionLogs')->findConnectionLogsByAdministrator($administrator, self::$MAX_RESULTS_CONNECTION_LOGS);
+        $sentCampaigns = $doctrine->getRepository('App\Entity\Campaign')->findPaginatedByAdministrator($administrator, $this->getParameter('paginator.items_per_page'), $request->get('page'));
+
+        if ($sentCampaigns->currentPageIsInvalid()) {
+            throw new NotFoundHttpException();
+        }
 
         return $this->render("administrators/show.html.twig", array(
             'administrator'  => $administrator,
-            'connectionLogs' => $connectionLogs,
+            'connectionLogs' => $lastConnectionLogs,
             'sentCampaigns'  => $sentCampaigns,
         ));
     }
 
-    public function showConnectionLogsAction()
+    public function showConnectionLogsAction($administratorId, Request $request)
     {
-        $connectionLogs = $this->getDoctrine()->getRepository('App\Entity\ConnectionLogs')->findConnectionLogsByAdministrator($this->getUser());
+        $connectionLogsRepository = $this->getDoctrine()->getRepository('App\Entity\ConnectionLogs');
+        $itemsPerPage = $this->getParameter('paginator.items_per_page');
+        $page = $request->get('page');
+
+        if (null === $administratorId) {
+            $connectionLogs = $connectionLogsRepository->findPaginatedConnectionLogsByAdministrator($this->getUser(), $itemsPerPage, $page);
+        } elseif (null === $user = $this->getDoctrine()->getRepository('App\Entity\Administrator')->find($administratorId)) {
+            throw new NotFoundHttpException();
+        } else {
+            $connectionLogs = $connectionLogsRepository->findPaginatedConnectionLogsByAdministrator($user, $itemsPerPage, $page);
+        }
+
+        if ($connectionLogs->currentPageIsInvalid()) {
+            throw new NotFoundHttpException();
+        }
 
         return $this->render("administrators/show-connection-logs.html.twig", array(
             'connectionLogs' => $connectionLogs,

@@ -22,6 +22,11 @@
                     <td>{{ connectionLog.IPConnection }}</td>
                 </tr>
             {% endfor %}
+            <tr>
+                <td colspan="2">
+                    <a href="{{ path('administrators_show_logs', {'administratorId': administrator.id}) }}">{{ 'sentence.seeAllConnectionLogs'|trans }}</a>
+                </td>
+            </tr>
         </table>
     {% endif %}
 
@@ -32,7 +37,7 @@
                 <th>{{ 'name'|trans }}</th>
                 <th>{{ 'date'|trans }}</th>
             </tr>
-            {% for sentCampaign in sentCampaigns %}
+            {% for sentCampaign in sentCampaigns.results %}
                 <tr>
                     <td>{{ sentCampaign.name }}</td>
                     <td>{{ sentCampaign.sendingDate|localizeddate('long', 'long', app.request.locale) }}</td>
@@ -40,4 +45,6 @@
             {% endfor %}
         </table>
     {% endif %}
+
+    {{ pagination(sentCampaigns) }}
 {% endblock %}

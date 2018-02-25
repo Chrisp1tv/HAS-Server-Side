@@ -199,6 +199,10 @@
                     |]1, Inf[%count% ordinateurs sont liés au système d'alertes.
                 </target>
             </trans-unit>
+            <trans-unit id="sentence.seeAllConnectionLogs">
+                <source>sentence.seeAllConnectionLogs</source>
+                <target>Voir les logs de connexion complets</target>
+            </trans-unit>
             <!-- Forms -->
             <!-- Forms labels -->
             <trans-unit id="form.label.save">

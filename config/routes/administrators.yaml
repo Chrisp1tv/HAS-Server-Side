@@ -19,5 +19,10 @@ administrators_show:
         id: '\d+'
 
 administrators_show_logs:
-    path: /logs
+    path: /logs/{administratorId}
     controller: App\Controller\AdministratorsController::showConnectionLogsAction
+    requirements:
+        userId: '\d+'
+
+    defaults:
+        administratorId: null

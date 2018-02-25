@@ -10,11 +10,13 @@
             <th>{{ 'date'|trans }}</th>
             <th>{{ 'connectionAddress'|trans }}</th>
         </tr>
-        {% for connectionLog in connectionLogs %}
+        {% for connectionLog in connectionLogs.results %}
             <tr>
                 <td>{{ connectionLog.connectionDate|localizeddate('long', 'long', app.request.locale) }}</td>
                 <td>{{ connectionLog.IPConnection }}</td>
             </tr>
         {% endfor %}
     </table>
+
+    {{ pagination(connectionLogs) }}
 {% endblock %}

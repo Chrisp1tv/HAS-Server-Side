@@ -43,3 +43,11 @@ App\Entity\Campaign:
             targetEntity: App\Entity\RecipientGroup
             joinTable:
                 name: campaigns_recipient_groups
+        receivedBy:
+            targetEntity: App\Entity\Recipient
+            joinTable:
+                name: campaigns_received_by
+        seenBy:
+            targetEntity: App\Entity\Recipient
+            joinTable:
+                name: campaings_seen_by

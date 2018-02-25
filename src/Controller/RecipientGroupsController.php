@@ -39,8 +39,8 @@ class RecipientGroupsController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() and $form->isValid()) {
             $entityManager->persist($recipientGroup);
-            $entityManager->flush();
             $RabbitMQManager->updateRecipientGroupBindings($recipientGroup, array(), $recipientGroup->getRecipients()->toArray());
+            $entityManager->flush();
 
             $this->addFlash('success', $this->get('translator')->trans('flash.recipientGroupCreated'));
 

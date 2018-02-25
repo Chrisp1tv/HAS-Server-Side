@@ -64,10 +64,22 @@ class Campaign
      */
     private $recipientGroups;
 
+    /**
+     * @var ArrayCollection
+     */
+    private $receivedBy;
+
+    /**
+     * @var ArrayCollection
+     */
+    private $seenBy;
+
     public function __construct()
     {
         $this->recipients = new ArrayCollection();
         $this->recipientGroups = new ArrayCollection();
+        $this->receivedBy = new ArrayCollection();
+        $this->seenBy = new ArrayCollection();
     }
 
     /**
@@ -300,5 +312,65 @@ class Campaign
     public function isModifiable()
     {
         return $this->sendingDate > new \DateTime();
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getReceivedBy()
+    {
+        return $this->receivedBy;
+    }
+
+    /**
+     * @param Recipient $recipient
+     *
+     * @return Campaign
+     */
+    public function hasReceived(Recipient $recipient)
+    {
+        $this->receivedBy->add($recipient);
+
+        return $this;
+    }
+
+    /**
+     * @param Recipient $recipient
+     *
+     * @return bool
+     */
+    public function hasBeenReceivedBy(Recipient $recipient)
+    {
+        return $this->receivedBy->contains($recipient);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getSeenBy()
+    {
+        return $this->seenBy;
+    }
+
+    /**
+     * @param Recipient $recipient
+     *
+     * @return Campaign
+     */
+    public function hasSeen(Recipient $recipient)
+    {
+        $this->seenBy->add($recipient);
+
+        return $this;
+    }
+
+    /**
+     * @param Recipient $recipient
+     *
+     * @return bool
+     */
+    public function hasBeenSeenBy(Recipient $recipient)
+    {
+        return $this->seenBy->contains($recipient);
     }
 }

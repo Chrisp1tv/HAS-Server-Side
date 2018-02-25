@@ -43,7 +43,7 @@ class CampaignsController extends Controller
 
             $this->addFlash('success', $this->get('translator')->trans('flash.campaignCreated'));
 
-            return $this->redirectToRoute('campaigns_modify', array('id' => $campaign->getId()));
+            return $this->redirectToRoute('campaigns_show', array('id' => $campaign->getId()));
         }
 
         return $this->render("campaigns/new.html.twig", array(

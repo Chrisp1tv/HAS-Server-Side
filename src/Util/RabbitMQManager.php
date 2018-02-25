@@ -57,14 +57,20 @@ class RabbitMQManager
     private $groupCampaignsExchangeName;
 
     /**
-     * @param string $url
-     * @param string $clientQueuesPrefix
-     * @param string $groupExchangeBindsPrefix
-     * @param string $recipientRegistrationQueueName
-     * @param string $directCampaignsExchangeName
-     * @param string $groupCampaignsExchangeName
+     * @var string
      */
-    public function __construct($url, $clientQueuesPrefix, $groupExchangeBindsPrefix, $recipientRegistrationQueueName, $directCampaignsExchangeName, $groupCampaignsExchangeName)
+    private $campaignsStatusQueueName;
+
+    /**
+     * @param $url
+     * @param $clientQueuesPrefix
+     * @param $groupExchangeBindsPrefix
+     * @param $recipientRegistrationQueueName
+     * @param $directCampaignsExchangeName
+     * @param $groupCampaignsExchangeName
+     * @param $campaignsStatusQueueName
+     */
+    public function __construct($url, $clientQueuesPrefix, $groupExchangeBindsPrefix, $recipientRegistrationQueueName, $directCampaignsExchangeName, $groupCampaignsExchangeName, $campaignsStatusQueueName)
     {
         if (!$parsedUrl = parse_url($url)) {
             throw new Exception("Unable to parse the url.");
@@ -77,6 +83,7 @@ class RabbitMQManager
         $this->recipientRegistrationQueueName = $recipientRegistrationQueueName;
         $this->directCampaignsExchangeName = $directCampaignsExchangeName;
         $this->groupCampaignsExchangeName = $groupCampaignsExchangeName;
+        $this->campaignsStatusQueueName = $campaignsStatusQueueName;
     }
 
 
@@ -93,15 +100,12 @@ class RabbitMQManager
     {
         $this->channel->basic_qos(null, 1, null);
         $this->channel->basic_consume($this->recipientRegistrationQueueName, '', false, false, false, false, $onRequestAction);
-
-        while (count($this->channel->callbacks)) {
-            $this->channel->wait();
-        }
+        $this->wait();
     }
 
-    public function sendRegistrationResponse(AMQPMessage $request, $queueName)
+    public function sendRegistrationResponse(AMQPMessage $request, $recipientInformation)
     {
-        $response = new AMQPMessage($this->encodeResponseWithQueueName($queueName), array('correlation_id' => $request->get('correlation_id')));
+        $response = new AMQPMessage($this->encodeRegistrationResponse($recipientInformation), array('correlation_id' => $request->get('correlation_id')));
 
         $request->delivery_info['channel']->basic_publish($response, '', $request->get('reply_to'));
         $request->delivery_info['channel']->basic_ack($request->delivery_info['delivery_tag']);
@@ -122,12 +126,24 @@ class RabbitMQManager
             $recipients = array_unique($recipients, SORT_REGULAR);
         } elseif (1 === $recipientGroups->count()) {
             $this->channel->basic_publish($AMQPMessage, $this->groupCampaignsExchangeName, $this->getGroupBindKey($recipientGroups->first()));
-            $recipients = array_diff($recipients, $recipientGroups->first()->toArray());
+            $recipients = array_diff($recipients, $recipientGroups->first()->getRecipients()->toArray());
         }
 
         foreach ($recipients as $recipient) {
             $this->channel->basic_publish($AMQPMessage, $this->directCampaignsExchangeName, $this->getRecipientQueueName($recipient));
         }
+    }
+
+    public function listenCampaignsStatus(callable $onRequestAction)
+    {
+        $this->channel->basic_qos(null, 1, null);
+        $this->channel->basic_consume($this->campaignsStatusQueueName, '', false, false, false, false, $onRequestAction);
+        $this->wait();
+    }
+
+    public function confirmMessageStatusProcessing(AMQPMessage $AMQPMessage)
+    {
+        $AMQPMessage->delivery_info['channel']->basic_ack($AMQPMessage->delivery_info['delivery_tag']);
     }
 
     public function updateRecipientGroupBindings(RecipientGroup $recipientGroup, array $oldGroupRecipients, array $newGroupRecipients)
@@ -144,6 +160,13 @@ class RabbitMQManager
         }
     }
 
+    private function wait()
+    {
+        while (count($this->channel->callbacks)) {
+            $this->channel->wait();
+        }
+    }
+
     private function getRecipientQueueName(Recipient $recipient)
     {
         return $this->clientQueuesPrefix . $recipient->getId();
@@ -154,11 +177,9 @@ class RabbitMQManager
         return $this->groupExchangeBindsPrefix . $recipientGroup->getId();
     }
 
-    private function encodeResponseWithQueueName($queueName)
+    private function encodeRegistrationResponse(array $recipientInformation)
     {
-        return json_encode(array(
-            'queueName' => $queueName,
-        ));
+        return json_encode($recipientInformation);
     }
 
     private function encodeMessage(Message $message)

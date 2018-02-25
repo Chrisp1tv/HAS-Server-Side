@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Administrator;
 use App\Entity\ConnectionLogs;
+use App\Util\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -19,13 +20,26 @@ class ConnectionLogsRepository extends ServiceEntityRepository
         parent::__construct($registry, ConnectionLogs::class);
     }
 
-    public function findConnectionLogsByAdministrator(Administrator $administrator)
+    public function findConnectionLogsByAdministrator(Administrator $administrator, $maxResults = null)
+    {
+        $query = $this
+            ->findByAdministrator($administrator)
+            ->getQuery();
+
+        if (null != $maxResults) {
+            $query
+                ->setMaxResults($maxResults);
+        }
+
+        return $query
+            ->getArrayResult();
+    }
+
+    public function findPaginatedConnectionLogsByAdministrator(Administrator $administrator, $itemsPerPage, $page)
     {
         $queryBuilder = $this->findByAdministrator($administrator);
 
-        return $queryBuilder
-            ->getQuery()
-            ->getArrayResult();
+        return new Paginator($queryBuilder->getQuery(), $itemsPerPage, $page);
     }
 
     /**

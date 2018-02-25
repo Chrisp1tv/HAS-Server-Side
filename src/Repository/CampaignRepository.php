@@ -23,19 +23,19 @@ class CampaignRepository extends ServiceEntityRepository
 
     /**
      * @param Administrator $administrator
+     * @param               $itemsPerPage
+     * @param               $page
      *
-     * @return array
+     * @return Paginator
      */
-    public function findBySender(Administrator $administrator)
+    public function findPaginatedByAdministrator(Administrator $administrator, $itemsPerPage, $page)
     {
         $queryBuilder = $this->createQueryBuilder('campaign')
             ->where('campaign.sender = :sender')
             ->setParameter('sender', $administrator)
             ->orderBy('campaign.sendingDate', 'DESC');
 
-        return $queryBuilder
-            ->getQuery()
-            ->getArrayResult();
+        return new Paginator($queryBuilder->getQuery(), $itemsPerPage, $page);
     }
 
     /**

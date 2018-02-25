@@ -39,9 +39,9 @@ class Paginator
      */
     public function __construct(Query $query, $itemsPerPage, $page)
     {
-        $this->setUpDoctrinePaginator($query);
         $this->itemsPerPage = $itemsPerPage;
         $this->page = $page ?? 1;
+        $this->setUpDoctrinePaginator($query);
     }
 
     /**
