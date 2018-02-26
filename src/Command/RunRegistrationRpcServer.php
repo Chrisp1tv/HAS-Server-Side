@@ -3,7 +3,7 @@
 namespace App\Command;
 
 use App\EventListener\NewRecipientListener;
-use App\Util\RabbitMQManager;
+use App\Util\RabbitMQ\RecipientsManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -25,14 +25,14 @@ class RunRegistrationRpcServer extends Command
     protected $newRecipientListener;
 
     /**
-     * @var RabbitMQManager
+     * @var RecipientsManager
      */
-    protected $RabbitMQManager;
+    protected $recipientManagers;
 
-    public function __construct(NewRecipientListener $newRecipientListener, RabbitMQManager $RabbitMQManager)
+    public function __construct(NewRecipientListener $newRecipientListener, RecipientsManager $recipientsManager)
     {
         $this->newRecipientListener = $newRecipientListener;
-        $this->RabbitMQManager = $RabbitMQManager;
+        $this->recipientManagers = $recipientsManager;
 
         parent::__construct();
     }
@@ -58,7 +58,7 @@ class RunRegistrationRpcServer extends Command
         }
 
         try {
-            $this->RabbitMQManager->startRegistrationRpcServer(array($this->newRecipientListener, 'execute'));
+            $this->recipientManagers->startRegistrationRpcServer(array($this->newRecipientListener, 'execute'));
         } finally {
             $lock->release();
         }

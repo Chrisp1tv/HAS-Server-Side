@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Util\RabbitMQManager;
+use App\Util\RabbitMQ\CampaignsManager;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
 use Symfony\Component\Console\Command\Command;
@@ -22,14 +22,14 @@ class ListenCampaignsStatus extends Command
     protected $entityManager;
 
     /**
-     * @var RabbitMQManager
+     * @var CampaignsManager
      */
-    protected $RabbitMQManager;
+    protected $campaignsManager;
 
-    public function __construct(EntityManagerInterface $entityManager, RabbitMQManager $RabbitMQManager)
+    public function __construct(EntityManagerInterface $entityManager, CampaignsManager $campaignsManager)
     {
         $this->entityManager = $entityManager;
-        $this->RabbitMQManager = $RabbitMQManager;
+        $this->campaignsManager = $campaignsManager;
 
         parent::__construct();
     }
@@ -44,7 +44,7 @@ class ListenCampaignsStatus extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->RabbitMQManager->listenCampaignsStatus(array($this, 'onStatusUpdate'));
+        $this->campaignsManager->listenCampaignsStatus(array($this, 'onStatusUpdate'));
     }
 
     public function onStatusUpdate(AMQPMessage $AMQPMessage)
@@ -57,6 +57,8 @@ class ListenCampaignsStatus extends Command
             or !$campaign = $this->entityManager->getRepository('App\Entity\Campaign')->find($campaignStatus->campaignId)
             or !$recipient = $this->entityManager->getRepository('App\Entity\Recipient')->find($campaignStatus->recipientId)
         ) {
+            $this->campaignsManager->rabbitMQ->sendAck($AMQPMessage);
+
             return;
         }
 
@@ -68,11 +70,12 @@ class ListenCampaignsStatus extends Command
                 $campaign->hasSeen($recipient);
                 break;
             default:
+                $this->campaignsManager->rabbitMQ->sendAck($AMQPMessage);
+
                 return;
         }
 
         $this->entityManager->flush();
-        // TODO: Send ack in all cases
-        $this->RabbitMQManager->confirmMessageStatusProcessing($AMQPMessage);
+        $this->campaignsManager->rabbitMQ->sendAck($AMQPMessage);
     }
 }

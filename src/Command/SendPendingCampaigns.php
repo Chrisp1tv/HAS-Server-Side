@@ -3,7 +3,7 @@
 namespace App\Command;
 
 use App\Entity\Campaign;
-use App\Util\RabbitMQManager;
+use App\Util\RabbitMQ\CampaignsManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -26,14 +26,14 @@ class SendPendingCampaigns extends Command
     protected $entityManager;
 
     /**
-     * @var RabbitMQManager
+     * @var CampaignsManager
      */
-    protected $RabbitMQManager;
+    protected $campaignsManager;
 
-    public function __construct(EntityManagerInterface $entityManager, RabbitMQManager $RabbitMQManager)
+    public function __construct(EntityManagerInterface $entityManager, CampaignsManager $campaignsManager)
     {
         $this->entityManager = $entityManager;
-        $this->RabbitMQManager = $RabbitMQManager;
+        $this->campaignsManager = $campaignsManager;
 
         parent::__construct();
     }
@@ -62,7 +62,7 @@ class SendPendingCampaigns extends Command
             if ($unsentCampaigns = $this->entityManager->getRepository('App\Entity\Campaign')->findUnsent()) {
                 /** @var Campaign $campaign */
                 foreach ($unsentCampaigns as $campaign) {
-                    $this->RabbitMQManager->sendCampaign($campaign);
+                    $this->campaignsManager->sendCampaign($campaign);
                     $campaign->makeSent();
                 }
 

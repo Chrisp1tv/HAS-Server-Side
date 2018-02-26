@@ -3,7 +3,7 @@
 namespace App\EventListener;
 
 use App\Entity\Recipient;
-use App\Util\RabbitMQManager;
+use App\Util\RabbitMQ\RecipientsManager;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
 
@@ -20,14 +20,14 @@ class NewRecipientListener
     private $entityManager;
 
     /**
-     * @var RabbitMQManager
+     * @var RecipientsManager
      */
-    private $RabbitMQManager;
+    private $recipientsManager;
 
-    public function __construct(EntityManagerInterface $entityManager, RabbitMQManager $RabbitMQManager)
+    public function __construct(EntityManagerInterface $entityManager, RecipientsManager $recipientsManager)
     {
         $this->entityManager = $entityManager;
-        $this->RabbitMQManager = $RabbitMQManager;
+        $this->recipientsManager = $recipientsManager;
     }
 
     public function execute(AMQPMessage $AMQPMessage)
@@ -45,10 +45,10 @@ class NewRecipientListener
         $this->entityManager->flush();
 
         $newRecipientInformation = array(
-            'queueName' => $this->RabbitMQManager->createRecipientQueue($newRecipient),
+            'queueName' => $this->recipientsManager->createRecipientQueue($newRecipient),
             'id'        => $newRecipient->getId(),
         );
 
-        $this->RabbitMQManager->sendRegistrationResponse($AMQPMessage, $newRecipientInformation);
+        $this->recipientsManager->sendRegistrationResponse($AMQPMessage, $newRecipientInformation);
     }
 }

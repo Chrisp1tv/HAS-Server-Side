@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\RecipientGroup;
 use App\Form\RecipientGroupType;
-use App\Util\RabbitMQManager;
+use App\Util\RabbitMQ\RecipientGroupsManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -29,7 +29,7 @@ class RecipientGroupsController extends Controller
         ));
     }
 
-    public function newAction(Request $request, RabbitMQManager $RabbitMQManager)
+    public function newAction(Request $request, RecipientGroupsManager $recipientGroupsManager)
     {
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -39,7 +39,7 @@ class RecipientGroupsController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() and $form->isValid()) {
             $entityManager->persist($recipientGroup);
-            $RabbitMQManager->updateRecipientGroupBindings($recipientGroup, array(), $recipientGroup->getRecipients()->toArray());
+            $recipientGroupsManager->updateRecipientGroupBindings($recipientGroup, array(), $recipientGroup->getRecipients()->toArray());
             $entityManager->flush();
 
             $this->addFlash('success', $this->get('translator')->trans('flash.recipientGroupCreated'));
@@ -55,7 +55,7 @@ class RecipientGroupsController extends Controller
         ));
     }
 
-    public function modifyAction(Request $request, RabbitMQManager $RabbitMQManager, int $id)
+    public function modifyAction(Request $request, RecipientGroupsManager $recipientGroupsManager, int $id)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $recipientGroup = $this->getDoctrine()->getRepository('App\Entity\RecipientGroup')->find($id);
@@ -70,7 +70,7 @@ class RecipientGroupsController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() and $form->isValid()) {
             $entityManager->flush();
-            $RabbitMQManager->updateRecipientGroupBindings($recipientGroup, $oldRecipients, $recipientGroup->getRecipients()->toArray());
+            $recipientGroupsManager->updateRecipientGroupBindings($recipientGroup, $oldRecipients, $recipientGroup->getRecipients()->toArray());
 
             $this->addFlash('success', $this->get('translator')->trans('flash.recipientGroupModified'));
         }
