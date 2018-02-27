@@ -39,18 +39,26 @@ class CampaignRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param int $id
+     * @param mixed     $id
+     * @param null|bool $withStatistics
      *
      * @return Campaign|null
      */
-    public function find($id)
+    public function find($id, $withStatistics = false)
     {
         $queryBuilder = $this->createQueryBuilder('campaign')
             ->join('campaign.sender', 'sender')
-            ->leftJoin('campaign.recipients', 'recipients')
-            ->leftJoin('campaign.recipientGroups', 'recipientGroups')
+            ->leftJoin('campaign.recipients', 'recipients')->addSelect('recipients')
+            ->leftJoin('campaign.recipientGroups', 'recipientGroups')->addSelect('recipientGroups')
+            ->leftJoin('recipientGroups.recipients', 'recipientsOfRecipientGroups')->addSelect('recipientsOfRecipientGroups')
             ->where('campaign.id = :id')
             ->setParameter('id', $id);
+
+        if ($withStatistics) {
+            $queryBuilder
+                ->leftJoin('campaign.receivedBy', 'receivedBy')->addSelect('receivedBy')
+                ->leftJoin('campaign.seenBy', 'seenBy')->addSelect('seenBy');
+        }
 
         return $queryBuilder
             ->getQuery()

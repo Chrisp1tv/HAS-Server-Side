@@ -4,6 +4,14 @@
         <body>
             <!-- General -->
             <!-- Words and simple expressions -->
+            <trans-unit id="yes">
+                <source>yes</source>
+                <target>Oui</target>
+            </trans-unit>
+            <trans-unit id="no">
+                <source>no</source>
+                <target>Non</target>
+            </trans-unit>
             <trans-unit id="and">
                 <source>and</source>
                 <target>et</target>
@@ -108,6 +116,58 @@
                 <source>modifyCampaign</source>
                 <target>Modifier la campagne %campaignName%</target>
             </trans-unit>
+            <trans-unit id="campaignState">
+                <source>campaignState</source>
+                <target>État de la campagne %campaignName%</target>
+            </trans-unit>
+            <trans-unit id="globalCampaignStatistics">
+                <source>globalCampaignStatistics</source>
+                <target>Statistiques globables de la campagne</target>
+            </trans-unit>
+            <trans-unit id="globalRepartitionStatistics">
+                <source>globalRepartitionStatistics</source>
+                <target>Répartition des statistiques de réception et d'acquittement</target>
+            </trans-unit>
+            <trans-unit id="globalGroupedRepartitionStatistics">
+                <source>globalGroupedRepartitionStatistics</source>
+                <target>Répartition des statistiques de réception et d'acquittement par groupe de destinataires</target>
+            </trans-unit>
+            <trans-unit id="notReceived">
+                <source>notReceived</source>
+                <target>Non reçu</target>
+            </trans-unit>
+            <trans-unit id="receivedOnly">
+                <source>receivedOnly</source>
+                <target>Reçu uniquement</target>
+            </trans-unit>
+            <trans-unit id="receivedAndSeen">
+                <source>receivedAndSeen</source>
+                <target>Reçu et vu</target>
+            </trans-unit>
+            <trans-unit id="directRecipients">
+                <source>directRecipients</source>
+                <target>Destinataires directs (non groupés)</target>
+            </trans-unit>
+            <trans-unit id="detailedCampaignStatistics">
+                <source>detailedCampaignStatistics</source>
+                <target>Statistiques détaillées de la campagne</target>
+            </trans-unit>
+            <trans-unit id="groupStatistics">
+                <source>groupStatistics</source>
+                <target>Statistiques du groupe %groupName%</target>
+            </trans-unit>
+            <trans-unit id="nonGroupedStatistics">
+                <source>nonGroupedStatistics</source>
+                <target>Statistiques des destinataires directs (non groupés)</target>
+            </trans-unit>
+            <trans-unit id="received?">
+                <source>received?</source>
+                <target>A reçu la campagne ?</target>
+            </trans-unit>
+            <trans-unit id="seen?">
+                <source>seen?</source>
+                <target>A vu la campagne ?</target>
+            </trans-unit>
             <trans-unit id="modifyRecipient">
                 <source>modifyRecipient</source>
                 <target>Modifier le destinataire %recipient%</target>
@@ -202,6 +262,22 @@
             <trans-unit id="sentence.seeAllConnectionLogs">
                 <source>sentence.seeAllConnectionLogs</source>
                 <target>Voir les logs de connexion complets</target>
+            </trans-unit>
+            <trans-unit id="sentence.campaignSentAtBy">
+                <source>sentence.campaignSentAtBy</source>
+                <target>La campagne créée par %senderName% et prévue pour un envoi le %plannedSendingDate%, a été
+                    envoyée le %effectiveSendingDate% par le système.
+                </target>
+            </trans-unit>
+            <trans-unit id="sentence.campaignWaitingToBeSentAtBy">
+                <source>sentence.campaignWaitingToBeSentAtBy</source>
+                <target>La campagne créée par %senderName% et prévue pour un envoi le %plannedSendingDate%, est en
+                    attente d'envoi par le système.
+                </target>
+            </trans-unit>
+            <trans-unit id="sentence.campaignPlannedToBeSentAtBy">
+                <source>sentence.campaignPlannedToBeSentAtBy</source>
+                <target>La campagne créée par %senderName% est prévue pour un envoi le %plannedSendingDate%.</target>
             </trans-unit>
             <!-- Forms -->
             <!-- Forms labels -->

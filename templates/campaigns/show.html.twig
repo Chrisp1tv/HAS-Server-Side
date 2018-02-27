@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ 'campaignState'|trans({"%campaignName%": campaign.name}) }}
+{% endblock %}
+
+{% block main %}
+    {% if campaign.isSent %}
+        <p>
+            {{ 'sentence.campaignSentAtBy'|trans({'%senderName%': campaign.sender.username, '%plannedSendingDate%': campaign.sendingDate|localizeddate('long', 'long', app.request.locale), '%effectiveSendingDate%': campaign.effectiveSendingDate|localizeddate('long', 'long', app.request.locale)}) }}
+        </p>
+
+        <h2>{{ 'globalCampaignStatistics'|trans }}</h2>
+
+        <div id="pieChart"></div>
+
+        {% if barChart is not null %}
+            <div id="barChart"></div>
+        {% endif %}
+
+        <h2>{{ 'detailedCampaignStatistics'|trans }}</h2>
+        {% for group in campaign.recipientGroups %}
+            <h3>{{ 'groupStatistics'|trans({'%groupName%': group.name}) }}</h3>
+            {% include "campaigns/statistics-table.html.twig" with {recipients: group.recipients, campaign: campaign} only %}
+        {% endfor %}
+
+        <h3>{{ 'nonGroupedStatistics'|trans }}</h3>
+        {% include "campaigns/statistics-table.html.twig" with {recipients: campaign.recipients, campaign: campaign} only %}
+    {% elseif campaign.shouldBeSent %}
+        <p>
+            {{ 'sentence.campaignWaitingToBeSentAtBy'|trans({'%senderName%': campaign.sender.username, '%plannedSendingDate%': campaign.sendingDate|localizeddate('long', 'long', app.request.locale)}) }}
+        </p>
+    {% else %}
+        <p>
+            {{ 'sentence.campaignPlannedToBeSentAtBy'|trans({'%senderName%': campaign.sender.username, '%plannedSendingDate%': campaign.sendingDate|localizeddate('long', 'long', app.request.locale)}) }}
+        </p>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {% if pieChart is not null or barChart is not null %}
+        <script type="text/javascript">
+            {% if pieChart is not null %}
+            {{ chart(pieChart) }}
+            {% endif %}
+
+            {% if barChart is not null %}
+            {{ chart(barChart) }}
+            {% endif %}
+        </script>
+    {% endif %}
+{% endblock %}

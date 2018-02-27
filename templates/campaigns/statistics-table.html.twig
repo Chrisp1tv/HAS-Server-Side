@@ -1,0 +1,15 @@
+<table class="table-alternate-rows">
+    <tr>
+        <th>{{ 'name'|trans }}</th>
+        <th>{{ 'received?'|trans }}</th>
+        <th>{{ 'seen?'|trans }}</th>
+    </tr>
+    {% for recipient in recipients %}
+        {% set recipientHasReceived, recipientHasSeen = campaign.hasBeenReceivedBy(recipient), campaign.hasBeenSeenBy(recipient) %}
+        <tr>
+            <td>{{ recipient.name }}</td>
+            <td class="{{ recipientHasReceived ? 'positive' : 'negative' }}">{{ (recipientHasReceived ? 'yes' : 'no')|trans }}</td>
+            <td class="{{ recipientHasSeen ? 'positive' : 'negative' }}">{{ (recipientHasSeen ? 'yes' : 'no')|trans }}</td>
+        </tr>
+    {% endfor %}
+</table>

@@ -18,3 +18,11 @@
 .table-alternate-rows tbody tr:nth-child(even) td, .table-alternate-rows tbody tr:nth-child(even) th {
   background-color: #ecedee;
 }
+
+.table-alternate-rows tbody tr td.positive {
+  background-color: #3c763d;
+}
+
+.table-alternate-rows tbody tr td.negative {
+  background-color: #a94442;
+}

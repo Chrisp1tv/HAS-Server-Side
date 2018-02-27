@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Campaign;
 use App\Form\CampaignType;
+use App\Util\Charts\CampaignCharts;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -132,20 +133,26 @@ class CampaignsController extends Controller
     }
 
     /**
-     * @param int $id
+     * @param int            $id
+     * @param CampaignCharts $campaignCharts
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAction(int $id)
+    public function showAction(int $id, CampaignCharts $campaignCharts)
     {
-        $campaign = $this->getDoctrine()->getRepository('App\Entity\Campaign')->find($id);
+        $campaign = $this->getDoctrine()->getRepository('App\Entity\Campaign')->find($id, true);
 
-        if (null == $campaign) {
+        if (null === $campaign) {
             throw new NotFoundHttpException();
         }
 
+        $pieChart = $campaignCharts->getGeneralStatisticsPieChart($campaign);
+        $barChart = $campaignCharts->getGroupedStatisticsBarChart($campaign);
+
         return $this->render("campaigns/show.html.twig", array(
             'campaign' => $campaign,
+            'pieChart' => $pieChart,
+            'barChart' => $barChart,
         ));
     }
 }

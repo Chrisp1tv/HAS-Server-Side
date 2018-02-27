@@ -41,6 +41,7 @@ class Campaign
      *
      * The date the campaign was sent.
      * If the campaign has a repetition frequency, this value takes the date of last sending from the system.
+     * TODO: Change logic -> It should be the client job to repeat the message
      */
     private $effectiveSendingDate;
 
@@ -73,6 +74,16 @@ class Campaign
      * @var ArrayCollection
      */
     private $seenBy;
+
+    /**
+     * @var Recipient[]
+     */
+    private $allRecipients;
+
+    /**
+     * @var Recipient[]
+     */
+    private $allUniqueRecipients;
 
     public function __construct()
     {
@@ -203,6 +214,19 @@ class Campaign
         $this->effectiveSendingDate = new \DateTime();
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSent()
+    {
+        return null != $this->effectiveSendingDate;
+    }
+
+    public function shouldBeSent()
+    {
+        return null === $this->effectiveSendingDate and new \DateTime() > $this->sendingDate;
     }
 
     /**
@@ -372,5 +396,89 @@ class Campaign
     public function hasBeenSeenBy(Recipient $recipient)
     {
         return $this->seenBy->contains($recipient);
+    }
+
+    /**
+     * @param bool $unique
+     *
+     * @return Recipient[]
+     */
+    public function getAllRecipients($unique = false)
+    {
+        if (null === $this->allRecipients or null === $this->allUniqueRecipients) {
+            $allRecipients = $this->getRecipients()->toArray();
+
+            /** @var $recipientGroup RecipientGroup */
+            foreach ($this->getRecipientGroups()->toArray() as $recipientGroup) {
+                $allRecipients = array_merge($allRecipients, $recipientGroup->getRecipients()->toArray());
+            }
+
+            $this->allRecipients = $allRecipients;
+            $this->allUniqueRecipients = array_unique($allRecipients, SORT_REGULAR);
+        }
+
+        return $unique ? $this->allUniqueRecipients : $this->allRecipients;
+    }
+
+    public function getGlobalConsultationStatistics()
+    {
+        $notReceived = 0;
+        $receivedOnly = 0;
+        $receivedAndRead = 0;
+
+        foreach ($this->getAllRecipients(true) as $recipient) {
+            $received = $this->hasBeenReceivedBy($recipient);
+            $seen = $received and $this->hasBeenSeenBy($recipient);
+
+            if (!$received) {
+                $notReceived++;
+                continue;
+            } else if (!$seen) {
+                $receivedOnly++;
+                continue;
+            } else {
+                $receivedAndRead++;
+            }
+        }
+
+        return array(
+            'notReceived'     => $notReceived,
+            'receivedOnly'    => $receivedOnly,
+            'receivedAndSeen' => $receivedAndRead,
+        );
+    }
+
+    public function getConsultationStatisticsForGroup(RecipientGroup $recipientGroup = null)
+    {
+        $notReceived = 0;
+        $receivedOnly = 0;
+        $receivedAndRead = 0;
+
+        if (null === $recipientGroup) {
+            $recipients = $this->getRecipients()->toArray();
+        } else {
+            $recipients = $recipientGroup->getRecipients()->toArray();
+        }
+
+        foreach ($recipients as $recipient) {
+            $received = $this->hasBeenReceivedBy($recipient);
+            $seen = $received and $this->hasBeenSeenBy($recipient);
+
+            if (!$received) {
+                $notReceived++;
+                continue;
+            } else if (!$seen) {
+                $receivedOnly++;
+                continue;
+            } else {
+                $receivedAndRead++;
+            }
+        }
+
+        return array(
+            'notReceived'     => $notReceived,
+            'receivedOnly'    => $receivedOnly,
+            'receivedAndSeen' => $receivedAndRead,
+        );
     }
 }
