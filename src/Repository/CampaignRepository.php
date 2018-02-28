@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Administrator;
 use App\Entity\Campaign;
+use App\Entity\Recipient;
 use App\Util\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -19,6 +20,57 @@ class CampaignRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Campaign::class);
+    }
+
+    public function countByRecipient(Recipient $recipient)
+    {
+        $queryBuilder = $this->countCampaigns()
+            ->join('campaign.recipients', 'recipients', 'WITH', 'recipients.id = :recipientId')
+            ->setParameter('recipientId', $recipient->getId());
+
+        return $queryBuilder
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function countReceivedByRecipient(Recipient $recipient)
+    {
+        $queryBuilder = $this->countCampaigns()
+            ->join('campaign.receivedBy', 'receivers', 'WITH', 'receivers.id = :recipientId')
+            ->setParameter('recipientId', $recipient->getId());
+
+        return $queryBuilder
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function countReadByRecipient(Recipient $recipient)
+    {
+        $queryBuilder = $this->countCampaigns()
+            ->join('campaign.seenBy', 'witnesses', 'WITH', 'witnesses.id = :recipientId')
+            ->setParameter('recipientId', $recipient->getId());
+
+        return $queryBuilder
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * @param Recipient $recipient
+     *
+     * @return mixed
+     */
+    public function findByRecipient(Recipient $recipient)
+    {
+        $queryBuilder = $this->createQueryBuilder('campaign')
+            ->join('campaign.recipients', 'recipients', 'WITH', 'recipients.id = :recipientId')
+            ->leftJoin('campaign.receivedBy', 'receivers', 'WITH', 'receivers.id = :recipientId')->addSelect('receivers')
+            ->leftJoin('campaign.seenBy', 'witnesses', 'WITH', 'witnesses.id = :recipientId')->addSelect('witnesses')
+            ->setParameter('recipientId', $recipient->getId());
+
+        return $queryBuilder
+            ->getQuery()
+            ->getResult();
     }
 
     /**
@@ -84,8 +136,7 @@ class CampaignRepository extends ServiceEntityRepository
      */
     public function countAll()
     {
-        $queryBuilder = $this->createQueryBuilder('campaign')
-            ->select('count(campaign.id)');
+        $queryBuilder = $this->countCampaigns();
 
         return $queryBuilder
             ->getQuery()
@@ -97,8 +148,7 @@ class CampaignRepository extends ServiceEntityRepository
      */
     public function countUnsent()
     {
-        $queryBuilder = $this->createQueryBuilder('campaign')
-            ->select('count(campaign.id)');
+        $queryBuilder = $this->countCampaigns();
 
         $this->whereUnsent($queryBuilder);
 
@@ -122,6 +172,16 @@ class CampaignRepository extends ServiceEntityRepository
         return $queryBuilder
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    protected function countCampaigns()
+    {
+        return $this
+            ->createQueryBuilder('campaign')
+            ->select('count(campaign.id)');
     }
 
     /**

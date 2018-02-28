@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ 'recipientInformation'|trans({"%recipientName%": recipient.name}) }}
+{% endblock %}
+
+{% block main %}
+    {% if totalCampaigns > 0 %}
+        <p>
+            {{ 'sentence.recipientCampaigns'|transchoice(totalCampaigns, {'%recipientName%': recipient.name}) }}
+        </p>
+
+        <h2>{{ 'globalRecipientStatistics'|trans }}</h2>
+
+        {% include "common/modules/javascript-charts-warning.html.twig" %}
+
+        <div id="pieChart"></div>
+
+        <h2>{{ 'detailedRecipientStatistics'|trans }}</h2>
+        <table class="table-alternate-rows">
+            <tr>
+                <th>{{ 'campaignName'|trans }}</th>
+                <th>{{ 'received?'|trans }}</th>
+                <th>{{ 'seen?'|trans }}</th>
+            </tr>
+            {% for campaign in campaigns %}
+                {% set hasBeenReceived, hasBeenSeen = campaign.hasBeenReceivedBy(recipient), campaign.hasBeenSeenBy(recipient) %}
+
+                <tr>
+                    <td>{{ campaign.name }}</td>
+                    <td class="{{ hasBeenReceived ? 'positive' : 'negative' }}">{{ (hasBeenReceived ? 'yes' : 'no')|trans }}</td>
+                    <td class="{{ hasBeenSeen ? 'positive' : 'negative' }}">{{ (hasBeenSeen ? 'yes' : 'no')|trans }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>
+            {{ 'sentence.noInformationForThisRecipient'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {% if pieChart is not null %}
+        <script type="text/javascript">
+            {{ chart(pieChart) }}
+        </script>
+    {% endif %}
+{% endblock %}

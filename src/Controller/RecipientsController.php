@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\RecipientType;
 use App\Form\SearchType;
+use App\Util\Charts\RecipientCharts;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -63,10 +64,28 @@ class RecipientsController extends Controller
         ));
     }
 
-    public function showAction(int $id)
+    public function showAction(int $id, RecipientCharts $recipientCharts)
     {
-        // TODO @AS @CA Needs discussion
+        $entityManager = $this->getDoctrine()->getManager();
+        $recipient = $entityManager->getRepository('App\Entity\Recipient')->find($id);
 
-        return $this->render("recipients/show.html.twig");
+        if (null === $recipient) {
+            throw new NotFoundHttpException();
+        }
+
+        $campaignRepository = $entityManager->getRepository('App\Entity\Campaign');
+        $totalCampaigns = $campaignRepository->countByRecipient($recipient);
+        $receivedCampaigns = 0 < $totalCampaigns ? $campaignRepository->countReceivedByRecipient($recipient) : 0;
+        $readCampaigns = 0 < $receivedCampaigns ? $campaignRepository->countReadByRecipient($recipient) : 0;
+        $campaigns = 0 < $totalCampaigns ? $campaignRepository->findByRecipient($recipient) : null;
+
+        $pieChart = $recipientCharts->getCampaignsStatisticsPieChart($recipient, $totalCampaigns, $receivedCampaigns, $readCampaigns);
+
+        return $this->render("recipients/show.html.twig", array(
+            'recipient'      => $recipient,
+            'totalCampaigns' => $totalCampaigns,
+            'campaigns'      => $campaigns,
+            'pieChart'       => $pieChart,
+        ));
     }
 }

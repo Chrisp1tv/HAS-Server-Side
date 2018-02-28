@@ -120,6 +120,10 @@
                 <source>campaignState</source>
                 <target>État de la campagne %campaignName%</target>
             </trans-unit>
+            <trans-unit id="campaignName">
+                <source>campaignName</source>
+                <target>Nom de la campagne</target>
+            </trans-unit>
             <trans-unit id="globalCampaignStatistics">
                 <source>globalCampaignStatistics</source>
                 <target>Statistiques globables de la campagne</target>
@@ -127,6 +131,14 @@
             <trans-unit id="globalRepartitionStatistics">
                 <source>globalRepartitionStatistics</source>
                 <target>Répartition des statistiques de réception et d'acquittement</target>
+            </trans-unit>
+            <trans-unit id="globalRepartitionStatisticsOfRecipient">
+                <source>globalRepartitionStatisticsOfRecipient</source>
+                <target>Répartition des statistiques de réception et d'acquittement de %recipientName%</target>
+            </trans-unit>
+            <trans-unit id="detailedRecipientStatistics">
+                <source>detailedRecipientStatistics</source>
+                <target>Statistiques détaillés, campagne par campagne</target>
             </trans-unit>
             <trans-unit id="globalGroupedRepartitionStatistics">
                 <source>globalGroupedRepartitionStatistics</source>
@@ -171,6 +183,14 @@
             <trans-unit id="modifyRecipient">
                 <source>modifyRecipient</source>
                 <target>Modifier le destinataire %recipient%</target>
+            </trans-unit>
+            <trans-unit id="recipientInformation">
+                <source>recipientInformation</source>
+                <target>Informations concernant le destinataire %recipientName%</target>
+            </trans-unit>
+            <trans-unit id="globalRecipientStatistics">
+                <source>globalRecipientStatistics</source>
+                <target>Statistiques globales</target>
             </trans-unit>
             <trans-unit id="noRecipientGroupFound">
                 <source>noRecipientGroupFound</source>
@@ -278,6 +298,26 @@
             <trans-unit id="sentence.campaignPlannedToBeSentAtBy">
                 <source>sentence.campaignPlannedToBeSentAtBy</source>
                 <target>La campagne créée par %senderName% est prévue pour un envoi le %plannedSendingDate%.</target>
+            </trans-unit>
+            <trans-unit id="sentence.recipientCampaigns">
+                <source>sentence.recipientCampaigns</source>
+                <target>{0}Le destinataire %recipientName% n'est le destinataire d'aucune campagne.
+                    |{1}Le destinataire %recipientName% est le destinataire d'une seule campagne.
+                    |]1, Inf[Le destinataire %recipientName% est le destinataire de %count% campagnes (prévues ou déjà
+                    envoyées).
+                </target>
+            </trans-unit>
+            <trans-unit id="sentence.noInformationForThisRecipient">
+                <source>sentence.noInformationForThisRecipient</source>
+                <target>Aucune information importante n'est disponible pour ce destinataire, celui-ci n'étant le
+                    destinataire d'aucune campagne.
+                </target>
+            </trans-unit>
+            <trans-unit id="sentence.javascriptNeededToSeeCharts">
+                <source>sentence.javascriptNeededToSeeCharts</source>
+                <target>Votre navigateur doit prendre en charge Javascript et celui-ci doit être activé pour afficher
+                    les graphiques.
+                </target>
             </trans-unit>
             <!-- Forms -->
             <!-- Forms labels -->

@@ -12,8 +12,9 @@
 
         <h2>{{ 'globalCampaignStatistics'|trans }}</h2>
 
-        <div id="pieChart"></div>
+        {% include "common/modules/javascript-charts-warning.html.twig" %}
 
+        <div id="pieChart"></div>
         {% if barChart is not null %}
             <div id="barChart"></div>
         {% endif %}
