@@ -12,6 +12,7 @@ parameters:
     rabbitmq_manager.campaigns_status_queue_name: 'campaigns_status_queue'
     rabbitmq_manager.client_queues_prefix: 'client-'
     rabbitmq_manager.group_exchange_binds_prefix: 'group-'
+    jms_serializer.camel_case_naming_strategy.class: JMS\Serializer\Naming\IdenticalPropertyNamingStrategy
 
 services:
     _defaults:

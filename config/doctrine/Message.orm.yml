@@ -12,3 +12,15 @@ App\Entity\Message:
             type: string
         bold:
             type: boolean
+        endDate:
+            type: datetime
+            column: end_date
+            nullable: true
+        repetitionFrequency:
+            type: integer
+            column: repetition_frequency
+            nullable: true
+    oneToOne:
+        campaign:
+            targetEntity: App\Entity\Campaign
+            mappedBy: message

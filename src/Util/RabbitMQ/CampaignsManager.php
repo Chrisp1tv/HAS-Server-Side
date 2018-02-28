@@ -4,10 +4,8 @@ namespace App\Util\RabbitMQ;
 
 use App\Entity\Campaign;
 use App\Entity\RecipientGroup;
+use JMS\Serializer\SerializerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 /**
  * CampaignsManager
@@ -26,17 +24,23 @@ class CampaignsManager
      */
     private $names;
 
-    public function __construct(RabbitMQ $rabbitMQ, Names $names)
+    /**
+     * @var SerializerInterface
+     */
+    private $serializer;
+
+    public function __construct(RabbitMQ $rabbitMQ, Names $names, SerializerInterface $serializer)
     {
         $this->rabbitMQ = $rabbitMQ;
+        $this->names = $names;
+        $this->serializer = $serializer;
     }
 
     public function sendCampaign(Campaign $campaign)
     {
-        $serializer = new Serializer(array(new ObjectNormalizer()), array(new JsonEncoder()));
         $recipients = $campaign->getRecipients()->toArray();
         $recipientGroups = $campaign->getRecipientGroups();
-        $AMQPMessage = new AMQPMessage($serializer->serialize($campaign->getMessage(), 'json'));
+        $AMQPMessage = new AMQPMessage($this->serializer->serialize($campaign->getMessage(), 'json'));
 
         if (1 < $recipientGroups->count()) {
             /** @var RecipientGroup $recipientGroup */

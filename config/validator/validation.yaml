@@ -44,16 +44,6 @@ App\Entity\Campaign:
             - GreaterThan:
                 value: "now - 1 minute"
                 message: "campaign.sendingDate.greaterThan"
-        endDate:
-            - Date:
-                message: "campaing.endDate.date"
-            - Expression:
-                expression: "null == this.getEndDate() or this.getEndDate() > this.getSendingDate()"
-                message: "campaign.endDate.expression"
-        repetitionFrequency:
-            - Range:
-                min: 5
-                minMessage: "campaign.repetitionFrequency.range.min"
 
 App\Entity\Message:
     properties:
@@ -64,6 +54,16 @@ App\Entity\Message:
             - Regex:
                 pattern: "^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
                 message: "message.color.regex"
+        endDate:
+            - Date:
+                message: "campaing.endDate.date"
+            - Expression:
+                expression: "null == this.getEndDate() or this.getEndDate() > this.getCampaign().getSendingDate()"
+                message: "message.endDate.expression"
+        repetitionFrequency:
+            - Range:
+                min: 5
+                minMessage: "message.repetitionFrequency.range.min"
 
 App\Entity\RecipientGroup:
     properties:

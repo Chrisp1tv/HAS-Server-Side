@@ -1,0 +1,15 @@
+App\Entity\Message:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+        content:
+            expose: true
+        color:
+            expose: true
+        bold:
+            expose: true
+        endDate:
+            expose: true
+        repetitionFrequency:
+            expose: true

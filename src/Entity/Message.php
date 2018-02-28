@@ -30,6 +30,22 @@ class Message
     private $bold;
 
     /**
+     * @var \DateTime
+     */
+    private $endDate;
+
+    /**
+     * @var int
+     */
+    private $repetitionFrequency;
+
+    /**
+     * @var Campaign
+     *
+     */
+    private $campaign;
+
+    /**
      * @return string
      */
     public function __toString()
@@ -40,6 +56,8 @@ class Message
     public function __clone()
     {
         $this->id = null;
+        $this->endDate = null;
+        $this->repetitionFrequency = null;
     }
 
     /**
@@ -106,6 +124,66 @@ class Message
     public function setBold($bold)
     {
         $this->bold = $bold;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * @param \DateTime|null $endDate
+     *
+     * @return $this
+     */
+    public function setEndDate(?\DateTime $endDate)
+    {
+        $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRepetitionFrequency()
+    {
+        return $this->repetitionFrequency;
+    }
+
+    /**
+     * @param int $repetitionFrequency
+     *
+     * @return $this
+     */
+    public function setRepetitionFrequency(int $repetitionFrequency)
+    {
+        $this->repetitionFrequency = $repetitionFrequency;
+
+        return $this;
+    }
+
+    /**
+     * @return Campaign
+     */
+    public function getCampaign(): Campaign
+    {
+        return $this->campaign;
+    }
+
+    /**
+     * @param Campaign $campaign
+     *
+     * @return $this
+     */
+    public function setCampaign(Campaign $campaign)
+    {
+        $this->campaign = $campaign;
 
         return $this;
     }

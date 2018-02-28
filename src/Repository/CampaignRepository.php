@@ -190,7 +190,7 @@ class CampaignRepository extends ServiceEntityRepository
     protected function whereUnsent(QueryBuilder $queryBuilder)
     {
         $queryBuilder
-            ->andWhere('(campaign.sendingDate <= :now AND campaign.effectiveSendingDate IS NULL) OR (campaign.repetitionFrequency IS NOT NULL AND DATE_ADD(campaign.effectiveSendingDate, campaign.repetitionFrequency, \'MINUTE\') <= campaign.endDate AND DATE_ADD(campaign.effectiveSendingDate, campaign.repetitionFrequency, \'MINUTE\') <= :now)')
+            ->andWhere('campaign.sendingDate <= :now AND campaign.effectiveSendingDate IS NULL')
             ->setParameter('now', new \DateTime());
     }
 }

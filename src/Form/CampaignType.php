@@ -7,7 +7,6 @@ use App\Entity\RecipientGroup;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,10 +26,6 @@ class CampaignType extends AbstractType
                 'label'    => 'name',
                 'required' => true,
             ))
-            ->add('message', MessageType::class, array(
-                'label'    => false,
-                'required' => true,
-            ))
             ->add('sendingDate', DateTimeType::class, array(
                 'label'       => 'form.label.sendingDate',
                 'widget'      => 'choice',
@@ -45,26 +40,9 @@ class CampaignType extends AbstractType
                 ),
                 'required'    => true,
             ))
-            ->add('endDate', DateTimeType::class, array(
-                'label'       => 'form.label.endDate',
-                'widget'      => 'choice',
-                'years'       => range(date('Y') - 1, date('Y') + 1),
-                'placeholder' => array(
-                    'day'   => 'day',
-                    'month' => 'month',
-                    'year'  => 'year',
-                ),
-                'attr'        => array(
-                    'class' => 'container-inline-fields',
-                ),
-                'required'    => false,
-            ))
-            ->add('repetitionFrequency', IntegerType::class, array(
-                'label'    => 'form.label.repetitionFrequency',
-                'attr'     => array(
-                    'placeholder' => 'form.placeholder.repetitionFrequency',
-                ),
-                'required' => false,
+            ->add('message', MessageType::class, array(
+                'label'    => false,
+                'required' => true,
             ))
             ->add('recipients', EntityType::class, array(
                 'class'    => Recipient::class,

@@ -40,20 +40,8 @@ class Campaign
      * @var \DateTime
      *
      * The date the campaign was sent.
-     * If the campaign has a repetition frequency, this value takes the date of last sending from the system.
-     * TODO: Change logic -> It should be the client job to repeat the message
      */
     private $effectiveSendingDate;
-
-    /**
-     * @var \DateTime
-     */
-    private $endDate;
-
-    /**
-     * @var int
-     */
-    private $repetitionFrequency;
 
     /**
      * @var ArrayCollection
@@ -105,7 +93,6 @@ class Campaign
     {
         $this->id = null;
         $this->sendingDate = null;
-        $this->endDate = null;
         $this->effectiveSendingDate = null;
         $this->message = clone $this->message;
     }
@@ -174,6 +161,7 @@ class Campaign
     public function setMessage(Message $message)
     {
         $this->message = $message;
+        $message->setCampaign($this);
 
         return $this;
     }
@@ -227,46 +215,6 @@ class Campaign
     public function shouldBeSent()
     {
         return null === $this->effectiveSendingDate and new \DateTime() > $this->sendingDate;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getEndDate()
-    {
-        return $this->endDate;
-    }
-
-    /**
-     * @param \DateTime $endDate
-     *
-     * @return Campaign
-     */
-    public function setEndDate(?\DateTime $endDate)
-    {
-        $this->endDate = $endDate;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getRepetitionFrequency()
-    {
-        return $this->repetitionFrequency;
-    }
-
-    /**
-     * @param int $repetitionFrequency
-     *
-     * @return Campaign
-     */
-    public function setRepetitionFrequency(int $repetitionFrequency)
-    {
-        $this->repetitionFrequency = $repetitionFrequency;
-
-        return $this;
     }
 
     /**

@@ -61,18 +61,6 @@
                 <source>campaign.sendingDate.greaterThan</source>
                 <target>Il n'est pas possible d'envoyer une campagne dans le passé.</target>
             </trans-unit>
-            <trans-unit id="campaign.endDate.date">
-                <source>campaign.endDate.date</source>
-                <target>La date de fin saisie n'est pas valide.</target>
-            </trans-unit>
-            <trans-unit id="campaign.endDate.expression">
-                <source>campaign.endDate.expression</source>
-                <target>La campagne ne peut se terminer avant d'avoir commencé.</target>
-            </trans-unit>
-            <trans-unit id="campaign.repetitionFrequency.range.min">
-                <source>campaign.repetitionFrequency.range.min</source>
-                <target>La fréquence minimale de répétition ne peut être inférieure à {{ limit }} minutes.</target>
-            </trans-unit>
             <!-- Message validation -->
             <trans-unit id="message.content.notBlank">
                 <source>message.content.notBlank</source>
@@ -81,6 +69,18 @@
             <trans-unit id="message.color.regex">
                 <source>message.color.regex</source>
                 <target>La couleur saisie n'a pas été reconnue.</target>
+            </trans-unit>
+            <trans-unit id="message.endDate.date">
+                <source>campaign.endDate.date</source>
+                <target>La date de fin saisie n'est pas valide.</target>
+            </trans-unit>
+            <trans-unit id="message.endDate.expression">
+                <source>campaign.endDate.expression</source>
+                <target>La campagne ne peut se terminer avant d'avoir commencé.</target>
+            </trans-unit>
+            <trans-unit id="message.repetitionFrequency.range.min">
+                <source>campaign.repetitionFrequency.range.min</source>
+                <target>La fréquence minimale de répétition ne peut être inférieure à {{ limit }} minutes.</target>
             </trans-unit>
             <!-- RecipientGroup validation -->
             <trans-unit id="recipientGroup.name.notBlank">
