@@ -35,7 +35,11 @@
             <!-- Campaign validation -->
             <trans-unit id="campaign.expression">
                 <source>campaign.expression</source>
-                <target>La campagne doit obligatoirement posséder des destinataires (individuels ou groupés).</target>
+                <target>
+                    La campagne doit obligatoirement posséder des destinataires (individuels ou groupés) et il est
+                    impossible d'envoyer votre message à tous les destinataires liés au systèmes et d'en choisir
+                    manuellement à la fois.
+                </target>
             </trans-unit>
             <trans-unit id="campaign.name.notBlank">
                 <source>campaign.name.notBlank</source>

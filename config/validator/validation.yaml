@@ -24,7 +24,7 @@ App\Entity\Administrator:
 App\Entity\Campaign:
     constraints:
         - Expression:
-            expression: "this.getRecipients().count() > 0 or this.getRecipientGroups().count() > 0"
+            expression: "this.isSendToAllRecipients() ^ (this.getRecipients().count() > 0 or this.getRecipientGroups().count() > 0)"
             message: "campaign.expression"
     properties:
         name:

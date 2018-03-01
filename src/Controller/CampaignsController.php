@@ -39,6 +39,11 @@ class CampaignsController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() and $form->isValid()) {
             $campaign->setSender($this->getUser());
+
+            if ($campaign->isSendToAllRecipients()) {
+                $campaign->addAllRecipients($entityManager->getRepository('App\Entity\Recipient')->findAll());
+            }
+
             $entityManager->persist($campaign);
             $entityManager->flush();
 

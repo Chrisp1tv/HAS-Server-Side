@@ -44,6 +44,11 @@ class Campaign
     private $effectiveSendingDate;
 
     /**
+     * @var bool
+     */
+    private $sendToAllRecipients;
+
+    /**
      * @var ArrayCollection
      */
     private $recipients;
@@ -238,6 +243,18 @@ class Campaign
     }
 
     /**
+     * @param array $recipients
+     *
+     * @return Campaign
+     */
+    public function addAllRecipients(array $recipients)
+    {
+        $this->recipients = new ArrayCollection(array_merge($this->recipients->toArray(), $recipients));
+
+        return $this;
+    }
+
+    /**
      * @param Recipient $recipient
      *
      * @return Campaign
@@ -344,6 +361,22 @@ class Campaign
     public function hasBeenSeenBy(Recipient $recipient)
     {
         return $this->seenBy->contains($recipient);
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isSendToAllRecipients()
+    {
+        return $this->sendToAllRecipients;
+    }
+
+    /**
+     * @param boolean $sendToAllRecipients
+     */
+    public function setSendToAllRecipients(bool $sendToAllRecipients)
+    {
+        $this->sendToAllRecipients = $sendToAllRecipients;
     }
 
     /**

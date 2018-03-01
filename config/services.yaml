@@ -31,7 +31,7 @@ services:
     App\Util\RabbitMQ\Names:
         arguments:
             - "%rabbitmq_manager.direct_campaigns_exchange_name%"
-            - "%rabbitmq_manager.group_campaigns_exchange_name"
+            - "%rabbitmq_manager.group_campaigns_exchange_name%"
             - "%rabbitmq_manager.recipient_registration_exchange_name%"
             - "%rabbitmq_manager.recipient_registration_queue_name%"
             - "%rabbitmq_manager.campaigns_status_exchange_name%"

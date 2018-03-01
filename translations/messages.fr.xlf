@@ -353,6 +353,10 @@
                 <source>form.label.repetitionFrequency</source>
                 <target>Fréquence de répétition (en minutes)</target>
             </trans-unit>
+            <trans-unit id="form.label.sendToAllRecipients">
+                <source>form.label.sendToAllRecipients</source>
+                <target>Envoyer à tous les destinataires liés au système</target>
+            </trans-unit>
             <trans-unit id="form.label.recipients">
                 <source>form.label.recipients</source>
                 <target>Destinataires</target>
