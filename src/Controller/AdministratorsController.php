@@ -61,9 +61,21 @@ class AdministratorsController extends Controller
         ));
     }
 
-    public function removeAction(int $id)
+    public function toggleStatusAction(int $id, Request $request)
     {
-        // TODO @CA
+        $entityManager = $this->getDoctrine()->getManager();
+        $administrator = $entityManager->getRepository('App\Entity\Administrator')->find($id);
+
+        if (null == $administrator) {
+            throw new NotFoundHttpException();
+        }
+
+        $administrator->setDisabled(!$administrator->isDisabled());
+        $entityManager->flush();
+
+        $this->addFlash('success', $this->get('translator')->trans($administrator->isDisabled() ? 'flash.administratorDisabled' : 'flash.administratorEnabled'));
+
+        return $this->redirect($request->headers->get('referer'));
     }
 
     public function showAction(int $id, Request $request)

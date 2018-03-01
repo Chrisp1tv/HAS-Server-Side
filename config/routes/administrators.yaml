@@ -6,9 +6,9 @@ administrators_new:
     path: /new
     controller: App\Controller\AdministratorsController::newAction
 
-administrators_remove:
-    path: /remove/{id}
-    controller: App\Controller\AdministratorsController::removeAction
+administrators_toggle_status:
+    path: /toggle/{id}
+    controller: App\Controller\AdministratorsController::toggleStatusAction
     requirements:
         id: '\d+'
 
@@ -23,6 +23,5 @@ administrators_show_logs:
     controller: App\Controller\AdministratorsController::showConnectionLogsAction
     requirements:
         userId: '\d+'
-
     defaults:
         administratorId: null

@@ -21,7 +21,7 @@
                     <a class="link-button"
                        href="{{ path('administrators_show', {id: administrator.id}) }}">{{ 'show'|trans }}</a>
                     <a class="link-button"
-                       href="{{ path('administrators_remove', {id: administrator.id}) }}">{{ 'remove'|trans }}</a>
+                       href="{{ path('administrators_toggle_status', {id: administrator.id}) }}">{{ (administrator.isDisabled ? 'enable' : 'disable')|trans }}</a>
                 </td>
             </tr>
         {% endfor %}

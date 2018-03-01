@@ -220,6 +220,10 @@
                 <source>password</source>
                 <target>Mot de passe</target>
             </trans-unit>
+            <trans-unit id="disabled">
+                <source>disabled</source>
+                <target>Désactivé</target>
+            </trans-unit>
             <trans-unit id="connectionLogs">
                 <source>connectionLogs</source>
                 <target>Logs des connexions</target>
@@ -239,6 +243,14 @@
             <trans-unit id="duplicate">
                 <source>duplicate</source>
                 <target>Dupliquer</target>
+            </trans-unit>
+            <trans-unit id="enable">
+                <source>enable</source>
+                <target>Activer</target>
+            </trans-unit>
+            <trans-unit id="disable">
+                <source>disable</source>
+                <target>Désactiver</target>
             </trans-unit>
             <trans-unit id="remove">
                 <source>remove</source>
@@ -414,6 +426,14 @@
             <trans-unit id="flash.administratorCreated">
                 <source>flash.administratorCreated</source>
                 <target>L'administrateur a bien été créé.</target>
+            </trans-unit>
+            <trans-unit id="flash.administratorEnabled">
+                <source>flash.administratorEnabled</source>
+                <target>L'administrateur a bien été activé.</target>
+            </trans-unit>
+            <trans-unit id="flash.administratorDisabled">
+                <source>flash.administratorDisabled</source>
+                <target>L'administrateur a bien été désactivé.</target>
             </trans-unit>
         </body>
     </file>

@@ -33,6 +33,11 @@ class Administrator implements UserInterface, EquatableInterface
     private $roles;
 
     /**
+     * @var bool
+     */
+    private $disabled;
+
+    /**
      * @return int
      */
     public function getId()
@@ -126,6 +131,26 @@ class Administrator implements UserInterface, EquatableInterface
     public function setUsername($username)
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isDisabled()
+    {
+        return $this->disabled;
+    }
+
+    /**
+     * @param boolean $disabled
+     *
+     * @return Administrator
+     */
+    public function setDisabled(bool $disabled)
+    {
+        $this->disabled = $disabled;
 
         return $this;
     }
