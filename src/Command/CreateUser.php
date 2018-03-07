@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class CreateUser extends Command
 {
+    public static $name = "has:create-user";
+
     /**
      * @var EntityManagerInterface
      */
@@ -46,14 +48,14 @@ class CreateUser extends Command
     protected function configure()
     {
         $this
-            ->setName('has:create-user')
+            ->setName(self::$name)
             ->setDescription('Creates a new user.')
             ->setHidden(true);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $SymfonyFormatter = new SymfonyStyle($input, $output);
+        $io = new SymfonyStyle($input, $output);
         $helper = $this->getHelper('question');
         $usernameQuestion = new Question('Enter the username of the user: ');
         $passwordQuestion = new Question('Enter the password of the user: ');
@@ -69,9 +71,9 @@ class CreateUser extends Command
         $errors = $this->validator->validate($administrator);
         if (0 < count($errors)) {
             // TODO: Improve errors displaying
-            $SymfonyFormatter->error((string)$errors);
+            $io->error((string)$errors);
 
-            return;
+            return 1;
         }
 
         $administrator->setPassword($this->userPasswordEncoder->encodePassword($administrator, $administrator->getPassword()));
@@ -79,6 +81,8 @@ class CreateUser extends Command
         $this->entityManager->persist($administrator);
         $this->entityManager->flush();
 
-        $SymfonyFormatter->success("The user named " . $administrator->getUsername() . " has been created.");
+        $io->success("The user named " . $administrator->getUsername() . " has been created.");
+
+        return 0;
     }
 }

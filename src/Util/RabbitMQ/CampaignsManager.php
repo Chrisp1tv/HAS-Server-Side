@@ -20,19 +20,13 @@ class CampaignsManager
     public $rabbitMQ;
 
     /**
-     * @var Names
-     */
-    private $names;
-
-    /**
      * @var SerializerInterface
      */
     private $serializer;
 
-    public function __construct(RabbitMQ $rabbitMQ, Names $names, SerializerInterface $serializer)
+    public function __construct(RabbitMQ $rabbitMQ, SerializerInterface $serializer)
     {
         $this->rabbitMQ = $rabbitMQ;
-        $this->names = $names;
         $this->serializer = $serializer;
     }
 
@@ -50,18 +44,18 @@ class CampaignsManager
 
             $recipients = array_unique($recipients, SORT_REGULAR);
         } elseif (1 === $recipientGroups->count()) {
-            $this->rabbitMQ->getChannel()->basic_publish($AMQPMessage, $this->names->getGroupCampaignsExchangeName(), $this->names->getGroupBindKeyName($recipientGroups->first()));
+            $this->rabbitMQ->getChannel()->basic_publish($AMQPMessage, $this->rabbitMQ->getNames()->getGroupCampaignsExchangeName(), $this->rabbitMQ->getNames()->getGroupBindKeyName($recipientGroups->first()));
             $recipients = array_diff($recipients, $recipientGroups->first()->getRecipients()->toArray());
         }
 
         foreach ($recipients as $recipient) {
-            $this->rabbitMQ->getChannel()->basic_publish($AMQPMessage, $this->names->getDirectCampaignsExchangeName(), $this->names->getRecipientQueueName($recipient));
+            $this->rabbitMQ->getChannel()->basic_publish($AMQPMessage, $this->rabbitMQ->getNames()->getDirectCampaignsExchangeName(), $this->rabbitMQ->getNames()->getRecipientQueueName($recipient));
         }
     }
 
     public function listenCampaignsStatus(callable $onRequestAction)
     {
-        $this->rabbitMQ->listenQueue($this->names->getCampaignsStatusQueueName(), $onRequestAction);
+        $this->rabbitMQ->listenQueue($this->rabbitMQ->getNames()->getCampaignsStatusQueueName(), $onRequestAction);
         $this->rabbitMQ->wait();
     }
 }

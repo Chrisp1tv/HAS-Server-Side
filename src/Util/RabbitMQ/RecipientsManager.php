@@ -17,29 +17,23 @@ class RecipientsManager
      */
     public $rabbitMQ;
 
-    /**
-     * @var Names
-     */
-    private $names;
-
-    public function __construct(RabbitMQ $rabbitMQ, Names $names)
+    public function __construct(RabbitMQ $rabbitMQ)
     {
         $this->rabbitMQ = $rabbitMQ;
-        $this->names = $names;
     }
 
     public function createRecipientQueue(Recipient $recipient)
     {
-        $newQueueName = $this->names->getRecipientQueueName($recipient);
+        $newQueueName = $this->rabbitMQ->getNames()->getRecipientQueueName($recipient);
         $this->rabbitMQ->getChannel()->queue_declare($newQueueName, false, true, false, false);
-        $this->rabbitMQ->getChannel()->queue_bind($newQueueName, $this->names->getDirectCampaignsExchangeName(), $newQueueName);
+        $this->rabbitMQ->getChannel()->queue_bind($newQueueName, $this->rabbitMQ->getNames()->getDirectCampaignsExchangeName(), $newQueueName);
 
         return $newQueueName;
     }
 
     public function startRegistrationRpcServer(callable $onRequestAction)
     {
-        $this->rabbitMQ->listenQueue($this->names->getRecipientRegistrationQueueName(), $onRequestAction);
+        $this->rabbitMQ->listenQueue($this->rabbitMQ->getNames()->getRecipientRegistrationQueueName(), $onRequestAction);
         $this->rabbitMQ->wait();
     }
 

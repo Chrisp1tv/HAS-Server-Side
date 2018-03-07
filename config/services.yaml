@@ -3,15 +3,16 @@ parameters:
     alexandreszymuragithublink: 'https://github.com/alexrclens59'
     locale: 'fr'
     paginator.items_per_page: 25
+    rabbitmq_manager.names_prefix: 'has_'
     rabbitmq_manager.url: '%env(resolve:RABBITMQ_URL)%'
-    rabbitmq_manager.direct_campaigns_exchange_name: 'direct_campaigns_exchange'
-    rabbitmq_manager.group_campaigns_exchange_name: 'group_campaigns_exchange'
-    rabbitmq_manager.recipient_registration_exchange_name: 'registration_exchange'
-    rabbitmq_manager.recipient_registration_queue_name: 'registration_queue'
-    rabbitmq_manager.campaigns_status_exchange_name: 'campaigns_status_exchange'
-    rabbitmq_manager.campaigns_status_queue_name: 'campaigns_status_queue'
-    rabbitmq_manager.client_queues_prefix: 'client-'
-    rabbitmq_manager.group_exchange_binds_prefix: 'group-'
+    rabbitmq_manager.direct_campaigns_exchange_name: '%rabbitmq_manager.names_prefix%direct_campaigns_exchange'
+    rabbitmq_manager.group_campaigns_exchange_name: '%rabbitmq_manager.names_prefix%group_campaigns_exchange'
+    rabbitmq_manager.recipient_registration_exchange_name: '%rabbitmq_manager.names_prefix%registration_exchange'
+    rabbitmq_manager.recipient_registration_queue_name: '%rabbitmq_manager.names_prefix%registration_queue'
+    rabbitmq_manager.campaigns_status_exchange_name: '%rabbitmq_manager.names_prefix%campaigns_status_exchange'
+    rabbitmq_manager.campaigns_status_queue_name: '%rabbitmq_manager.names_prefix%campaigns_status_queue'
+    rabbitmq_manager.client_queues_prefix: '%rabbitmq_manager.names_prefix%client_'
+    rabbitmq_manager.group_exchange_binds_prefix: '%rabbitmq_manager.names_prefix%group_'
     jms_serializer.camel_case_naming_strategy.class: JMS\Serializer\Naming\IdenticalPropertyNamingStrategy
 
 services:
@@ -25,22 +26,26 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+    App\Command\RunServices:
+        arguments:
+            - "%kernel.project_dir%"
     App\Util\RabbitMQ\RabbitMQ:
         arguments:
-            - "%rabbitmq_manager.url%"
+            - '%rabbitmq_manager.url%'
+            - '@App\Util\RabbitMQ\Names'
     App\Util\RabbitMQ\Names:
         arguments:
-            - "%rabbitmq_manager.direct_campaigns_exchange_name%"
-            - "%rabbitmq_manager.group_campaigns_exchange_name%"
-            - "%rabbitmq_manager.recipient_registration_exchange_name%"
-            - "%rabbitmq_manager.recipient_registration_queue_name%"
-            - "%rabbitmq_manager.campaigns_status_exchange_name%"
-            - "%rabbitmq_manager.campaigns_status_queue_name%"
-            - "%rabbitmq_manager.client_queues_prefix%"
-            - "%rabbitmq_manager.group_exchange_binds_prefix%"
+            - '%rabbitmq_manager.direct_campaigns_exchange_name%'
+            - '%rabbitmq_manager.group_campaigns_exchange_name%'
+            - '%rabbitmq_manager.recipient_registration_exchange_name%'
+            - '%rabbitmq_manager.recipient_registration_queue_name%'
+            - '%rabbitmq_manager.campaigns_status_exchange_name%'
+            - '%rabbitmq_manager.campaigns_status_queue_name%'
+            - '%rabbitmq_manager.client_queues_prefix%'
+            - '%rabbitmq_manager.group_exchange_binds_prefix%'
     App\EventListener\UserListener:
         arguments:
-            - "@doctrine.orm.entity_manager"
+            - '@doctrine.orm.entity_manager'
         tags:
             - { name: kernel.event_listener, event: security.interactive_login }
     App\Twig\Extension\PaginatorExtension:

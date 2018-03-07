@@ -6,6 +6,7 @@ use App\Util\RabbitMQ\CampaignsManager;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -16,6 +17,10 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class ListenCampaignsStatus extends Command
 {
+    public static $name = "has:listen-campaigns-status";
+
+    use LockableTrait;
+
     /**
      * @var EntityManagerInterface
      */
@@ -37,14 +42,24 @@ class ListenCampaignsStatus extends Command
     protected function configure()
     {
         $this
-            ->setName('has:listen-campaigns-status')
+            ->setName(self::$name)
             ->setDescription('Listens the campaigns status, to know which ones have been received, and red.')
             ->setHidden(true);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->campaignsManager->listenCampaignsStatus(array($this, 'onStatusUpdate'));
+        if (!$this->lock()) {
+            $output->writeln('The command listening the campaigns status is already running.');
+
+            return;
+        }
+
+        try {
+            $this->campaignsManager->listenCampaignsStatus(array($this, 'onStatusUpdate'));
+        } finally {
+            $this->release();
+        }
     }
 
     public function onStatusUpdate(AMQPMessage $AMQPMessage)

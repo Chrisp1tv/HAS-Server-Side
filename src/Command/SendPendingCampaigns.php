@@ -6,10 +6,9 @@ use App\Entity\Campaign;
 use App\Util\RabbitMQ\CampaignsManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Lock\Factory;
-use Symfony\Component\Lock\Store\FlockStore;
 
 /**
  * SendPendingCampaigns
@@ -18,7 +17,9 @@ use Symfony\Component\Lock\Store\FlockStore;
  */
 class SendPendingCampaigns extends Command
 {
-    protected static $LOCK_NAME = 'CampaignSenderLock';
+    public static $name = "has:send-pending-campaigns";
+
+    use LockableTrait;
 
     /**
      * @var EntityManagerInterface
@@ -41,18 +42,14 @@ class SendPendingCampaigns extends Command
     protected function configure()
     {
         $this
-            ->setName('has:send-pending-campaigns')
+            ->setName(self::$name)
             ->setDescription('Sends the pending campaigns, that is to say the campaigns that still needs to be sent to recipients.')
             ->setHidden(true);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $store = new FlockStore(sys_get_temp_dir());
-        $factory = new Factory($store);
-        $lock = $factory->createLock(static::$LOCK_NAME);
-
-        if (!$lock->acquire()) {
+        if (!$this->lock()) {
             $output->writeln("The command sending campaigns is already processing.");
 
             return;
@@ -69,7 +66,7 @@ class SendPendingCampaigns extends Command
                 $this->entityManager->flush();
             }
         } finally {
-            $lock->release();
+            $this->release();
         }
     }
 }

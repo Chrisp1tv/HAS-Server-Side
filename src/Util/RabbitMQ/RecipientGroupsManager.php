@@ -16,15 +16,9 @@ class RecipientGroupsManager
      */
     public $rabbitMQ;
 
-    /**
-     * @var Names
-     */
-    private $names;
-
-    public function __construct(RabbitMQ $rabbitMQ, Names $names)
+    public function __construct(RabbitMQ $rabbitMQ)
     {
         $this->rabbitMQ = $rabbitMQ;
-        $this->names = $names;
     }
 
     public function updateRecipientGroupBindings(RecipientGroup $recipientGroup, array $oldGroupRecipients, array $newGroupRecipients)
@@ -33,11 +27,11 @@ class RecipientGroupsManager
         $removedRecipients = array_diff($oldGroupRecipients, $newGroupRecipients);
 
         foreach ($addedRecipients as $addedRecipient) {
-            $this->rabbitMQ->getChannel()->queue_bind($this->names->getRecipientQueueName($addedRecipient), $this->names->getGroupCampaignsExchangeName(), $this->names->getGroupBindKeyName($recipientGroup));
+            $this->rabbitMQ->getChannel()->queue_bind($this->rabbitMQ->getNames()->getRecipientQueueName($addedRecipient), $this->rabbitMQ->getNames()->getGroupCampaignsExchangeName(), $this->rabbitMQ->getNames()->getGroupBindKeyName($recipientGroup));
         }
 
         foreach ($removedRecipients as $removedRecipient) {
-            $this->rabbitMQ->getChannel()->queue_unbind($this->names->getRecipientQueueName($removedRecipient), $this->names->getGroupCampaignsExchangeName(), $this->names->getGroupBindKeyName($recipientGroup));
+            $this->rabbitMQ->getChannel()->queue_unbind($this->rabbitMQ->getNames()->getRecipientQueueName($removedRecipient), $this->rabbitMQ->getNames()->getGroupCampaignsExchangeName(), $this->rabbitMQ->getNames()->getGroupBindKeyName($recipientGroup));
         }
     }
 }

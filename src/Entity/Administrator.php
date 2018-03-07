@@ -35,7 +35,7 @@ class Administrator implements UserInterface, EquatableInterface
     /**
      * @var bool
      */
-    private $disabled;
+    private $disabled = false;
 
     /**
      * @return int
