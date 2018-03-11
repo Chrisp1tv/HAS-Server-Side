@@ -39,8 +39,8 @@ class RecipientGroupsController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() and $form->isValid()) {
             $entityManager->persist($recipientGroup);
-            $recipientGroupsManager->updateRecipientGroupBindings($recipientGroup, array(), $recipientGroup->getRecipients()->toArray());
             $entityManager->flush();
+            $recipientGroupsManager->updateRecipientGroupBindings($recipientGroup, array(), $recipientGroup->getRecipients()->toArray());
 
             $this->addFlash('success', $this->get('translator')->trans('flash.recipientGroupCreated'));
 
