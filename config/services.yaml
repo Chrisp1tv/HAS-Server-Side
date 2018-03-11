@@ -1,9 +1,9 @@
 parameters:
-    christopheranciauxgithublink: 'https://github.com/Chrisp1tv'
-    alexandreszymuragithublink: 'https://github.com/alexrclens59'
-    locale: 'fr'
+    christopheranciauxgithublink: https://github.com/Chrisp1tv
+    alexandreszymuragithublink: https://github.com/alexrclens59
+    locale: fr
     paginator.items_per_page: 25
-    rabbitmq_manager.names_prefix: 'has_'
+    rabbitmq_manager.names_prefix: has_
     rabbitmq_manager.url: '%env(resolve:RABBITMQ_URL)%'
     rabbitmq_manager.direct_campaigns_exchange_name: '%rabbitmq_manager.names_prefix%direct_campaigns_exchange'
     rabbitmq_manager.group_campaigns_exchange_name: '%rabbitmq_manager.names_prefix%group_campaigns_exchange'
@@ -21,14 +21,15 @@ services:
         autoconfigure: true
         public: false
     App\:
-        resource: '../src/*'
-        exclude: '../src/{Entity,Migrations,Tests}'
+        resource: ../src/*
+        exclude: ../src/{Entity,Migrations,Tests}
     App\Controller\:
-        resource: '../src/Controller'
-        tags: ['controller.service_arguments']
+        resource: ../src/Controller
+        tags:
+            - controller.service_arguments
     App\Command\RunServices:
         arguments:
-            - "%kernel.project_dir%"
+            - '%kernel.project_dir%'
     App\Util\RabbitMQ\RabbitMQ:
         arguments:
             - '%rabbitmq_manager.url%'

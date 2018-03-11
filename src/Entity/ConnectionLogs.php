@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 /**
- * ConnectionLogs
+ * ConnectionLogs - Represents a administrator connection to HAS.
  *
  * @author Christopher Anciaux <christopher.anciaux@gmail.com>
  */
@@ -30,27 +30,27 @@ class ConnectionLogs
     private $IPConnection;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * @return Administrator
+     * @return Administrator|null
      */
-    public function getAdministrator()
+    public function getAdministrator(): ?Administrator
     {
         return $this->administrator;
     }
 
     /**
-     * @param Administrator $administrator
+     * @param Administrator|null $administrator
      *
      * @return ConnectionLogs
      */
-    public function setAdministrator(Administrator $administrator)
+    public function setAdministrator(?Administrator $administrator): ConnectionLogs
     {
         $this->administrator = $administrator;
 
@@ -58,19 +58,19 @@ class ConnectionLogs
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getConnectionDate()
+    public function getConnectionDate(): ?\DateTime
     {
         return $this->connectionDate;
     }
 
     /**
-     * @param \DateTime $connectionDate
+     * @param \DateTime|null $connectionDate
      *
      * @return ConnectionLogs
      */
-    public function setConnectionDate(\DateTime $connectionDate)
+    public function setConnectionDate(?\DateTime $connectionDate): ConnectionLogs
     {
         $this->connectionDate = $connectionDate;
 
@@ -78,19 +78,19 @@ class ConnectionLogs
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getIPConnection()
+    public function getIPConnection(): ?string
     {
         return $this->IPConnection;
     }
 
     /**
-     * @param string $IPConnection
+     * @param null|string $IPConnection
      *
-     * @return ConnectionLogs
+     * @return $this
      */
-    public function setIPConnection($IPConnection)
+    public function setIPConnection(?string $IPConnection)
     {
         $this->IPConnection = $IPConnection;
 

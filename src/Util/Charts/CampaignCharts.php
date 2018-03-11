@@ -18,6 +18,9 @@ class CampaignCharts
      */
     private $translator;
 
+    /**
+     * @param TranslatorInterface $translator
+     */
     public function __construct(TranslatorInterface $translator)
     {
         $this->translator = $translator;
@@ -26,7 +29,7 @@ class CampaignCharts
     /**
      * @param Campaign $campaign
      *
-     * @return null|Highchart
+     * @return null|Highchart The pie chart
      */
     public function getGeneralStatisticsPieChart(Campaign $campaign)
     {
@@ -67,7 +70,7 @@ class CampaignCharts
     /**
      * @param Campaign $campaign
      *
-     * @return null|Highchart
+     * @return null|Highchart The bar chart
      */
     public function getGroupedStatisticsBarChart(Campaign $campaign)
     {
@@ -86,7 +89,7 @@ class CampaignCharts
         return $barChart;
     }
 
-    private function getCategoriesNames(Campaign $campaign)
+    protected function getCategoriesNames(Campaign $campaign)
     {
         $categoriesNames = array();
 
@@ -101,7 +104,7 @@ class CampaignCharts
         return $categoriesNames;
     }
 
-    private function getGroupedStatisticsBarChartSeries(Campaign $campaign)
+    protected function getGroupedStatisticsBarChartSeries(Campaign $campaign)
     {
         $dirtySeries = array(
             'notReceived'     => array(),

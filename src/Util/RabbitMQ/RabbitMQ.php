@@ -78,11 +78,18 @@ class RabbitMQ
         }
     }
 
+    /**
+     * @param AMQPMessage $AMQPMessage
+     */
     public function sendAck(AMQPMessage $AMQPMessage)
     {
         $this->getChannel()->basic_ack($AMQPMessage->delivery_info['delivery_tag']);
     }
 
+    /**
+     * @param string   $queue
+     * @param callable $actionOnMessage
+     */
     public function listenQueue(string $queue, callable $actionOnMessage)
     {
         $this->getChannel()->basic_qos(null, 1, null);

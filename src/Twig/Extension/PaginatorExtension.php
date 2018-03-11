@@ -68,7 +68,7 @@ class PaginatorExtension extends \Twig_Extension
      *
      * @return int
      */
-    private function getStartPage()
+    protected function getStartPage()
     {
         $radius = $this->getRadius($this->numberPagesToShow);
         $pageToStart = $this->paginator->getPage() - $radius;
@@ -91,7 +91,7 @@ class PaginatorExtension extends \Twig_Extension
      *
      * @return int
      */
-    private function getRadius($numberPagesToShow)
+    protected function getRadius($numberPagesToShow)
     {
         return floor($numberPagesToShow / 2);
     }
@@ -101,7 +101,7 @@ class PaginatorExtension extends \Twig_Extension
      *
      * @return int
      */
-    private function getEndPage()
+    protected function getEndPage()
     {
         $radius = $this->getRadius($this->numberPagesToShow);
 

@@ -18,11 +18,22 @@ class RecipientCharts
      */
     private $translator;
 
+    /**
+     * @param TranslatorInterface $translator
+     */
     public function __construct(TranslatorInterface $translator)
     {
         $this->translator = $translator;
     }
 
+    /**
+     * @param Recipient $recipient
+     * @param int       $totalCampaigns
+     * @param int       $receivedCampaigns
+     * @param int       $readCampaigns
+     *
+     * @return null|Highchart The pie chart
+     */
     public function getCampaignsStatisticsPieChart(Recipient $recipient, int $totalCampaigns, int $receivedCampaigns, int $readCampaigns)
     {
         if (0 === $totalCampaigns) {

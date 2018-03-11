@@ -6,8 +6,9 @@ use App\Form\RecipientType;
 use App\Form\SearchType;
 use App\Util\Charts\RecipientCharts;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * RecipientsController
@@ -16,6 +17,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class RecipientsController extends Controller
 {
+    /**
+     * @param Request     $request
+     * @param null|string $search The search done by the user, or null if no search has been done
+     *
+     * @return RedirectResponse|Response
+     */
     public function indexAction(Request $request, $search = null)
     {
         $form = $this->createForm(SearchType::class);
@@ -30,7 +37,7 @@ class RecipientsController extends Controller
         $recipients = $this->getDoctrine()->getManager()->getRepository('App\Entity\Recipient')->findPaginated($this->getParameter('paginator.items_per_page'), $request->get('page'), $search);
 
         if ($recipients->currentPageIsInvalid()) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
         return $this->render("recipients/index.html.twig", array(
@@ -40,13 +47,19 @@ class RecipientsController extends Controller
         ));
     }
 
+    /**
+     * @param Request $request
+     * @param int     $id The id of the recipient to modify
+     *
+     * @return Response
+     */
     public function modifyAction(Request $request, int $id)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $recipient = $entityManager->getRepository('App\Entity\Recipient')->find($id);
 
         if (null == $recipient) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
         $form = $this->createForm(RecipientType::class, $recipient);
@@ -64,13 +77,19 @@ class RecipientsController extends Controller
         ));
     }
 
+    /**
+     * @param int             $id The id of the recipient to show
+     * @param RecipientCharts $recipientCharts
+     *
+     * @return Response
+     */
     public function showAction(int $id, RecipientCharts $recipientCharts)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $recipient = $entityManager->getRepository('App\Entity\Recipient')->find($id);
 
         if (null === $recipient) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
         $campaignRepository = $entityManager->getRepository('App\Entity\Campaign');

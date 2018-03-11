@@ -1,21 +1,21 @@
 home:
-    resource: 'routes/home.yaml'
+    resource: routes/home.yaml
 
 security:
-    resource: 'routes/security.yaml'
+    resource: routes/security.yaml
 
 administrators:
-    resource: 'routes/administrators.yaml'
+    resource: routes/administrators.yaml
     prefix: /administrators
 
 campaigns:
-    resource: 'routes/campaigns.yaml'
+    resource: routes/campaigns.yaml
     prefix: /campaigns
 
 recipients:
-    resource: 'routes/recipients.yaml'
+    resource: routes/recipients.yaml
     prefix: /recipients
 
 recipientGroups:
-    resource: 'routes/recipient-groups.yaml'
+    resource: routes/recipient-groups.yaml
     prefix: /recipient-groups

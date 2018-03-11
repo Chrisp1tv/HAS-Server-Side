@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Recipient
+ * Recipient - Represents a recipient, that is to say a computer allowed to receive messages from HAS.
  *
  * @author Christopher Anciaux <christopher.anciaux@gmail.com>
  */
@@ -36,31 +36,31 @@ class Recipient
      */
     public function __toString()
     {
-        return $this->getName() ?? $this->getId();
+        return (string)($this->getName() ?? $this->getId());
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
+     * @param null|string $name
      *
-     * @return Recipient
+     * @return $this
      */
-    public function setName($name)
+    public function setName(?string $name): Recipient
     {
         $this->name = $name;
 
@@ -70,7 +70,7 @@ class Recipient
     /**
      * @return ArrayCollection
      */
-    public function getGroups(): ArrayCollection
+    public function getGroups()
     {
         return $this->groups;
     }
@@ -80,7 +80,7 @@ class Recipient
      *
      * @return Recipient
      */
-    public function addGroup(RecipientGroup $recipientGroup)
+    public function addGroup(RecipientGroup $recipientGroup): Recipient
     {
         $this->groups->add($recipientGroup);
 
@@ -92,7 +92,7 @@ class Recipient
      *
      * @return Recipient
      */
-    public function removeGroup(RecipientGroup $recipientGroup)
+    public function removeGroup(RecipientGroup $recipientGroup): Recipient
     {
         $this->groups->removeElement($recipientGroup);
 

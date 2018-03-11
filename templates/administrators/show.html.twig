@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block main %}
-    {% if connectionLogs is empty and sentCampaigns is empty %}
+    {% if connectionLogs is empty and sentCampaigns.results is empty %}
         {{ 'sentence.noImportantInformationToDisplay'|trans }}
     {% endif %}
 
@@ -30,7 +30,7 @@
         </table>
     {% endif %}
 
-    {% if sentCampaigns is not empty %}
+    {% if sentCampaigns.results is not empty %}
         <h2>{{ 'sentCampaigns'|trans }}</h2>
         <table class="table-alternate-rows">
             <tr>

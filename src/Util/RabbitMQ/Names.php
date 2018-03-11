@@ -74,11 +74,21 @@ class Names
         $this->groupExchangeBindsPrefix = $groupExchangeBindsPrefix;
     }
 
+    /**
+     * @param Recipient $recipient
+     *
+     * @return string
+     */
     public function getRecipientQueueName(Recipient $recipient)
     {
         return $this->getClientQueuesPrefix() . $recipient->getId();
     }
 
+    /**
+     * @param RecipientGroup $recipientGroup
+     *
+     * @return string
+     */
     public function getGroupBindKeyName(RecipientGroup $recipientGroup)
     {
         return $this->getGroupExchangeBindsPrefix() . $recipientGroup->getId();

@@ -13,13 +13,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * CreateUser
+ * CreateUser - This command allows the user to create a new administrator.
  *
  * @author Christopher Anciaux <christopher.anciaux@gmail.com>
  */
 class CreateUser extends Command
 {
-    public static $name = "has:create-user";
+    const name = "has:create-user";
 
     /**
      * @var EntityManagerInterface
@@ -36,6 +36,11 @@ class CreateUser extends Command
      */
     protected $validator;
 
+    /**
+     * @param EntityManagerInterface       $entityManager
+     * @param UserPasswordEncoderInterface $userPasswordEncoder
+     * @param ValidatorInterface           $validator
+     */
     public function __construct(EntityManagerInterface $entityManager, UserPasswordEncoderInterface $userPasswordEncoder, ValidatorInterface $validator)
     {
         $this->entityManager = $entityManager;
@@ -45,14 +50,20 @@ class CreateUser extends Command
         parent::__construct();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
-            ->setName(self::$name)
+            ->setName(self::name)
             ->setDescription('Creates a new user.')
             ->setHidden(true);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);

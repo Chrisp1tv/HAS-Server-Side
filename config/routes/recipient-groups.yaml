@@ -10,16 +10,16 @@ recipient_groups_modify:
     path: /modify/{id}
     controller: App\Controller\RecipientGroupsController::modifyAction
     requirements:
-        id: '\d+'
+        id: \d+
 
 recipient_groups_remove:
     path: /remove/{id}
     controller: App\Controller\RecipientGroupsController::removeAction
     requirements:
-        id: '\d+'
+        id: \d+
 
 recipient_groups_show:
     path: /show/{id}
     controller: App\Controller\RecipientGroupsController::showAction
     requirements:
-        id: '\d+'
+        id: \d+

@@ -17,6 +17,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class RecipientGroupType extends AbstractType
 {
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -36,7 +39,7 @@ class RecipientGroupType extends AbstractType
     }
 
     /**
-     * @param OptionsResolver $resolver
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {

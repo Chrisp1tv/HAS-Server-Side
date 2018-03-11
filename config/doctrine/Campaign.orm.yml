@@ -21,7 +21,7 @@ App\Entity\Campaign:
             targetEntity: App\Entity\Message
             inversedBy: campaign
             cascade:
-                - "persist"
+                - persist
             joinColumn:
                 nullable: false
     manyToOne:

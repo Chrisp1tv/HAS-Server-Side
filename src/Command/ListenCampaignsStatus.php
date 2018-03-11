@@ -11,15 +11,16 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * ListenCampaignsStatus
+ * ListenCampaignsStatus - This command listens the campaigns status (received, read...) and updates the database
+ * to generate statistics.
  *
  * @author Christopher Anciaux <christopher.anciaux@gmail.com>
  */
 class ListenCampaignsStatus extends Command
 {
-    public static $name = "has:listen-campaigns-status";
-
     use LockableTrait;
+
+    const name = "has:listen-campaigns-status";
 
     /**
      * @var EntityManagerInterface
@@ -31,6 +32,10 @@ class ListenCampaignsStatus extends Command
      */
     protected $campaignsManager;
 
+    /**
+     * @param EntityManagerInterface $entityManager
+     * @param CampaignsManager       $campaignsManager
+     */
     public function __construct(EntityManagerInterface $entityManager, CampaignsManager $campaignsManager)
     {
         $this->entityManager = $entityManager;
@@ -39,29 +44,11 @@ class ListenCampaignsStatus extends Command
         parent::__construct();
     }
 
-    protected function configure()
-    {
-        $this
-            ->setName(self::$name)
-            ->setDescription('Listens the campaigns status, to know which ones have been received, and red.')
-            ->setHidden(true);
-    }
-
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        if (!$this->lock()) {
-            $output->writeln('The command listening the campaigns status is already running.');
-
-            return;
-        }
-
-        try {
-            $this->campaignsManager->listenCampaignsStatus(array($this, 'onStatusUpdate'));
-        } finally {
-            $this->release();
-        }
-    }
-
+    /**
+     * Updates the campaigns status to database when needed and after the necessary verifications.
+     *
+     * @param AMQPMessage $AMQPMessage
+     */
     public function onStatusUpdate(AMQPMessage $AMQPMessage)
     {
         $campaignStatus = json_decode($AMQPMessage->getBody());
@@ -92,5 +79,34 @@ class ListenCampaignsStatus extends Command
 
         $this->entityManager->flush();
         $this->campaignsManager->rabbitMQ->sendAck($AMQPMessage);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configure()
+    {
+        $this
+            ->setName(self::name)
+            ->setDescription('Listens the campaigns status, to know which ones have been received, and red.')
+            ->setHidden(true);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        if (!$this->lock()) {
+            $output->writeln('The command listening the campaigns status is already running.');
+
+            return;
+        }
+
+        try {
+            $this->campaignsManager->listenCampaignsStatus(array($this, 'onStatusUpdate'));
+        } finally {
+            $this->release();
+        }
     }
 }

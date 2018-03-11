@@ -16,11 +16,19 @@ class RecipientGroupsManager
      */
     public $rabbitMQ;
 
+    /**
+     * @param RabbitMQ $rabbitMQ
+     */
     public function __construct(RabbitMQ $rabbitMQ)
     {
         $this->rabbitMQ = $rabbitMQ;
     }
 
+    /**
+     * @param RecipientGroup $recipientGroup
+     * @param array          $oldGroupRecipients
+     * @param array          $newGroupRecipients
+     */
     public function updateRecipientGroupBindings(RecipientGroup $recipientGroup, array $oldGroupRecipients, array $newGroupRecipients)
     {
         $addedRecipients = array_diff($newGroupRecipients, $oldGroupRecipients);

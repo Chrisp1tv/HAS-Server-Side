@@ -6,8 +6,9 @@ use App\Entity\Campaign;
 use App\Form\CampaignType;
 use App\Util\Charts\CampaignCharts;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * CampaignsController
@@ -16,12 +17,17 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class CampaignsController extends Controller
 {
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function indexAction(Request $request)
     {
         $campaigns = $this->getDoctrine()->getRepository('App\Entity\Campaign')->findAllPaginated($this->getParameter('paginator.items_per_page'), $request->get('page'));
 
         if ($campaigns->currentPageIsInvalid()) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
         return $this->render("campaigns/index.html.twig", array(
@@ -29,6 +35,11 @@ class CampaignsController extends Controller
         ));
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
+     */
     public function newAction(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -57,13 +68,19 @@ class CampaignsController extends Controller
         ));
     }
 
+    /**
+     * @param int     $id The id of the campaign
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function modifyAction(int $id, Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $campaign = $entityManager->getRepository('App\Entity\Campaign')->find($id);
 
         if (null == $campaign or !$campaign->isModifiable()) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
         $form = $this->createForm(CampaignType::class, $campaign);
@@ -81,13 +98,19 @@ class CampaignsController extends Controller
         ));
     }
 
+    /**
+     * @param int     $id The id of the campaign
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
     public function removeAction(int $id, Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $campaign = $entityManager->getRepository('App\Entity\Campaign')->find($id);
 
         if (null == $campaign) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
         if ($campaign->isModifiable()) {
@@ -106,7 +129,7 @@ class CampaignsController extends Controller
      * @param Request $request
      * @param int     $id
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response|RedirectResponse
      */
     public function duplicateAction(Request $request, int $id)
     {
@@ -114,7 +137,7 @@ class CampaignsController extends Controller
         $campaign = $this->getDoctrine()->getRepository('App\Entity\Campaign')->find($id);
 
         if (null == $campaign) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
         $campaign = clone $campaign;
@@ -141,14 +164,14 @@ class CampaignsController extends Controller
      * @param int            $id
      * @param CampaignCharts $campaignCharts
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showAction(int $id, CampaignCharts $campaignCharts)
     {
         $campaign = $this->getDoctrine()->getRepository('App\Entity\Campaign')->find($id, true);
 
         if (null === $campaign) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
         $pieChart = $campaignCharts->getGeneralStatisticsPieChart($campaign);

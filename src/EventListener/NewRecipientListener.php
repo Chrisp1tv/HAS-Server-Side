@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
 
 /**
- * NewRecipientListener
+ * NewRecipientListener - Listens any recipient registration to save it into the database.
  *
  * @author Christopher Anciaux <christopher.anciaux@gmail.com>
  */
@@ -24,18 +24,25 @@ class NewRecipientListener
      */
     private $recipientsManager;
 
+    /**
+     * @param EntityManagerInterface $entityManager
+     * @param RecipientsManager      $recipientsManager
+     */
     public function __construct(EntityManagerInterface $entityManager, RecipientsManager $recipientsManager)
     {
         $this->entityManager = $entityManager;
         $this->recipientsManager = $recipientsManager;
     }
 
+    /**
+     * @param AMQPMessage $AMQPMessage
+     */
     public function execute(AMQPMessage $AMQPMessage)
     {
         $newRecipientInformation = json_decode($AMQPMessage->getBody());
 
         if (!property_exists($newRecipientInformation, 'name')) {
-            return null;
+            return;
         }
 
         $newRecipient = new Recipient();

@@ -6,7 +6,7 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Administrator
+ * Administrator - Represents a person who can administrate HAS.
  *
  * @author Christopher Anciaux <christopher.anciaux@gmail.com>
  */
@@ -38,17 +38,17 @@ class Administrator implements UserInterface, EquatableInterface
     private $disabled = false;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * @return array
+     * @return array|null
      */
-    public function getRoles()
+    public function getRoles(): ?array
     {
         return $this->roles;
     }
@@ -56,9 +56,9 @@ class Administrator implements UserInterface, EquatableInterface
     /**
      * @param string $role
      *
-     * @return bool
+     * @return bool True if the administrator has the given role, false otherwise
      */
-    public function hasRole($role)
+    public function hasRole($role): bool
     {
         return in_array($role, $this->roles);
     }
@@ -68,7 +68,7 @@ class Administrator implements UserInterface, EquatableInterface
      *
      * @return Administrator
      */
-    public function setRoles($roles)
+    public function setRoles(?array $roles): Administrator
     {
         $this->roles = $roles;
 
@@ -80,7 +80,7 @@ class Administrator implements UserInterface, EquatableInterface
      *
      * @return Administrator
      */
-    public function addRole($role)
+    public function addRole(string $role): Administrator
     {
         $this->roles[] = $role;
 
@@ -88,9 +88,9 @@ class Administrator implements UserInterface, EquatableInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -100,7 +100,7 @@ class Administrator implements UserInterface, EquatableInterface
      *
      * @return Administrator
      */
-    public function setPassword($password)
+    public function setPassword(string $password): Administrator
     {
         $this->password = $password;
 
@@ -108,7 +108,9 @@ class Administrator implements UserInterface, EquatableInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
+     *
+     * @return null
      */
     public function getSalt()
     {
@@ -118,7 +120,7 @@ class Administrator implements UserInterface, EquatableInterface
     /**
      * @return string
      */
-    public function getUsername()
+    public function getUsername(): ?string
     {
         return $this->username;
     }
@@ -128,7 +130,7 @@ class Administrator implements UserInterface, EquatableInterface
      *
      * @return Administrator
      */
-    public function setUsername($username)
+    public function setUsername(?string $username): Administrator
     {
         $this->username = $username;
 
@@ -136,9 +138,9 @@ class Administrator implements UserInterface, EquatableInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
-    public function isDisabled()
+    public function isDisabled(): ?bool
     {
         return $this->disabled;
     }
@@ -148,7 +150,7 @@ class Administrator implements UserInterface, EquatableInterface
      *
      * @return Administrator
      */
-    public function setDisabled(bool $disabled)
+    public function setDisabled(?bool $disabled): Administrator
     {
         $this->disabled = $disabled;
 
@@ -159,6 +161,9 @@ class Administrator implements UserInterface, EquatableInterface
     {
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isEqualTo(UserInterface $user)
     {
         if (!$user instanceof Administrator) {

@@ -14,6 +14,9 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class SearchType extends AbstractType
 {
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

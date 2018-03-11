@@ -17,11 +17,20 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class CampaignRepository extends ServiceEntityRepository
 {
+
+    /**
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Campaign::class);
     }
 
+    /**
+     * @param Recipient $recipient
+     *
+     * @return int The number of campaigns for the given recipient
+     */
     public function countByRecipient(Recipient $recipient)
     {
         $queryBuilder = $this->countCampaigns()
@@ -33,6 +42,11 @@ class CampaignRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
+    /**
+     * @param Recipient $recipient
+     *
+     * @return int The number of received campaigns for the given recipient
+     */
     public function countReceivedByRecipient(Recipient $recipient)
     {
         $queryBuilder = $this->countCampaigns()
@@ -44,6 +58,11 @@ class CampaignRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
+    /**
+     * @param Recipient $recipient
+     *
+     * @return int The number of read campaigns for the given recipient
+     */
     public function countReadByRecipient(Recipient $recipient)
     {
         $queryBuilder = $this->countCampaigns()
@@ -58,7 +77,7 @@ class CampaignRepository extends ServiceEntityRepository
     /**
      * @param Recipient $recipient
      *
-     * @return mixed
+     * @return Campaign[] The campaigns for the given recipient
      */
     public function findByRecipient(Recipient $recipient)
     {
@@ -78,7 +97,7 @@ class CampaignRepository extends ServiceEntityRepository
      * @param               $itemsPerPage
      * @param               $page
      *
-     * @return Paginator
+     * @return Paginator The paginated campaigns, sent by the given administrator
      */
     public function findPaginatedByAdministrator(Administrator $administrator, $itemsPerPage, $page)
     {
@@ -94,7 +113,7 @@ class CampaignRepository extends ServiceEntityRepository
      * @param mixed     $id
      * @param null|bool $withStatistics
      *
-     * @return Campaign|null
+     * @return Campaign|null The campaign for the given id
      */
     public function find($id, $withStatistics = false)
     {
@@ -121,7 +140,7 @@ class CampaignRepository extends ServiceEntityRepository
      * @param $itemsPerPage
      * @param $page
      *
-     * @return Paginator
+     * @return Paginator All the campaigns, paginated
      */
     public function findAllPaginated($itemsPerPage, $page)
     {
@@ -132,7 +151,7 @@ class CampaignRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return int
+     * @return int The number of created campaigns
      */
     public function countAll()
     {
@@ -144,7 +163,7 @@ class CampaignRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return int
+     * @return int The number of unsent campaigns
      */
     public function countUnsent()
     {
@@ -158,7 +177,7 @@ class CampaignRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return mixed
+     * @return Campaign[] The unsent campaigns
      */
     public function findUnsent()
     {

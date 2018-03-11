@@ -24,12 +24,19 @@ class CampaignsManager
      */
     private $serializer;
 
+    /**
+     * @param RabbitMQ            $rabbitMQ
+     * @param SerializerInterface $serializer
+     */
     public function __construct(RabbitMQ $rabbitMQ, SerializerInterface $serializer)
     {
         $this->rabbitMQ = $rabbitMQ;
         $this->serializer = $serializer;
     }
 
+    /**
+     * @param Campaign $campaign The campaign to be sent
+     */
     public function sendCampaign(Campaign $campaign)
     {
         $recipients = $campaign->getRecipients()->toArray();
@@ -53,6 +60,9 @@ class CampaignsManager
         }
     }
 
+    /**
+     * @param callable $onRequestAction
+     */
     public function listenCampaignsStatus(callable $onRequestAction)
     {
         $this->rabbitMQ->listenQueue($this->rabbitMQ->getNames()->getCampaignsStatusQueueName(), $onRequestAction);

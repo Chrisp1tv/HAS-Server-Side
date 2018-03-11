@@ -13,6 +13,9 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class MessageRepository extends ServiceEntityRepository
 {
+    /**
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Message::class);

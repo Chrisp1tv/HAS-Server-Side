@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * HomeController
@@ -11,6 +12,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class HomeController extends Controller
 {
+    /**
+     * @return Response
+     */
     public function indexAction()
     {
         $doctrine = $this->getDoctrine();

@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Entity;
+
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * RecipientGroup
+ * RecipientGroup - Represents a group of recipients, which can be used to send messages to many recipients at a time.
  *
  * @author Christopher Anciaux <christopher.anciaux@gmail.com>
  */
@@ -18,7 +19,7 @@ class RecipientGroup
     /**
      * @var string
      */
-    private  $name;
+    private $name;
 
     /**
      * @var ArrayCollection
@@ -39,27 +40,27 @@ class RecipientGroup
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
+     * @param null|string $name
      *
      * @return RecipientGroup
      */
-    public function setName($name)
+    public function setName(?string $name): RecipientGroup
     {
         $this->name = $name;
 
@@ -79,7 +80,7 @@ class RecipientGroup
      *
      * @return RecipientGroup
      */
-    public function addRecipient(Recipient $recipient)
+    public function addRecipient(Recipient $recipient): RecipientGroup
     {
         $this->recipients->add($recipient);
         $recipient->addGroup($this);
@@ -92,7 +93,7 @@ class RecipientGroup
      *
      * @return RecipientGroup
      */
-    public function removeRecipient(Recipient $recipient)
+    public function removeRecipient(Recipient $recipient): RecipientGroup
     {
         $this->recipients->removeElement($recipient);
         $recipient->removeGroup($this);

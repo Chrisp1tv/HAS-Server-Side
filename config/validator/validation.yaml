@@ -2,80 +2,80 @@ App\Entity\Administrator:
     constraints:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
             fields: username
-            message: "administrator.uniqueness"
+            message: administrator.uniqueness
     properties:
         username:
             - NotBlank:
-                message: "administrator.username.notBlank"
+                message: administrator.username.notBlank
             - Length:
                 min: 4
                 max: 50
-                minMessage: "administrator.username.length.min"
-                maxMessage: "administrator.username.length.max"
+                minMessage: administrator.username.length.min
+                maxMessage: administrator.username.length.max
         password:
             - NotBlank:
-                message: "administrator.password.notBlank"
+                message: administrator.password.notBlank
             - Length:
                 min: 8
                 max: 155
-                minMessage: "administrator.password.length.min"
-                maxMessage: "administrator.password.length.max"
+                minMessage: administrator.password.length.min
+                maxMessage: administrator.password.length.max
 
 App\Entity\Campaign:
     constraints:
         - Expression:
-            expression: "this.isSendToAllRecipients() ^ (this.getRecipients().count() > 0 or this.getRecipientGroups().count() > 0)"
-            message: "campaign.expression"
+            expression: this.isSendToAllRecipients() ^ (this.getRecipients().count() > 0 or this.getRecipientGroups().count() > 0)
+            message: campaign.expression
     properties:
         name:
             - NotBlank:
-                message: "campaign.name.notBlank"
+                message: campaign.name.notBlank
             - Length:
                 min: 4
                 max: 100
-                minMessage: "campaign.name.length.min"
-                maxMessage: "campaign.name.length.max"
+                minMessage: campaign.name.length.min
+                maxMessage: campaign.name.length.max
         message:
             - NotNull:
-                message: "campaign.message.notNull"
+                message: campaign.message.notNull
         sendingDate:
             - Date:
-                message: "campaign.sendingDate.date"
+                message: campaign.sendingDate.date
             - GreaterThan:
-                value: "now - 1 minute"
-                message: "campaign.sendingDate.greaterThan"
+                value: now - 1 minute
+                message: campaign.sendingDate.greaterThan
 
 App\Entity\Message:
     properties:
         content:
             - NotBlank:
-                message: "message.content.notBlank"
+                message: message.content.notBlank
         color:
             - Regex:
-                pattern: "^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
-                message: "message.color.regex"
+                pattern: ^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$
+                message: message.color.regex
         endDate:
             - Date:
-                message: "campaing.endDate.date"
+                message: campaing.endDate.date
             - Expression:
-                expression: "null == this.getEndDate() or this.getEndDate() > this.getCampaign().getSendingDate()"
-                message: "message.endDate.expression"
+                expression: null == this.getEndDate() or this.getEndDate() > this.getCampaign().getSendingDate()
+                message: message.endDate.expression
         repetitionFrequency:
             - Range:
                 min: 5
-                minMessage: "message.repetitionFrequency.range.min"
+                minMessage: message.repetitionFrequency.range.min
 
 App\Entity\RecipientGroup:
     properties:
         name:
             - NotBlank:
-                message: "recipientGroup.name.notBkank"
+                message: recipientGroup.name.notBkank
             - Length:
                 min: 4
                 max: 25
-                minMessage: "recipientGroup.name.length.min"
-                maxMessage: "recipientGroup.name.length.max"
+                minMessage: recipientGroup.name.length.min
+                maxMessage: recipientGroup.name.length.max
         recipients:
             - Count:
                 min: 2
-                minMessage: "recipientGroup.recipients.min"
+                minMessage: recipientGroup.recipients.min

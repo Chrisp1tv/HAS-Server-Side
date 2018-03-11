@@ -10,10 +10,10 @@ recipients_modify:
     path: /modify/{id}
     controller: App\Controller\RecipientsController::modifyAction
     requirements:
-        id: '\d+'
+        id: \d+
 
 recipients_show:
     path: /show/{id}
     controller: App\Controller\RecipientsController::showAction
     requirements:
-        id: '\d+'
+        id: \d+

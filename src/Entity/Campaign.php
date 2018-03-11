@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Campaign
+ * Campaign - Represents a message and its information.
  *
  * @author Christopher Anciaux <christopher.anciaux@gmail.com>
  */
@@ -103,27 +103,27 @@ class Campaign
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
+     * @param null|string $name
      *
      * @return Campaign
      */
-    public function setName($name)
+    public function setName(?string $name): Campaign
     {
         $this->name = $name;
 
@@ -131,19 +131,19 @@ class Campaign
     }
 
     /**
-     * @return Administrator
+     * @return Administrator|null
      */
-    public function getSender()
+    public function getSender(): ?Administrator
     {
         return $this->sender;
     }
 
     /**
-     * @param Administrator $sender
+     * @param Administrator|null $sender
      *
      * @return Campaign
      */
-    public function setSender(Administrator $sender)
+    public function setSender(?Administrator $sender): Campaign
     {
         $this->sender = $sender;
 
@@ -151,19 +151,19 @@ class Campaign
     }
 
     /**
-     * @return Message
+     * @return Message|null
      */
-    public function getMessage()
+    public function getMessage(): ?Message
     {
         return $this->message;
     }
 
     /**
-     * @param Message $message
+     * @param Message|null $message
      *
      * @return Campaign
      */
-    public function setMessage(Message $message)
+    public function setMessage(?Message $message): Campaign
     {
         $this->message = $message;
         $message->setCampaign($this);
@@ -172,19 +172,19 @@ class Campaign
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getSendingDate()
+    public function getSendingDate(): ?\DateTime
     {
         return $this->sendingDate;
     }
 
     /**
-     * @param \DateTime $sendingDate
+     * @param \DateTime|null $sendingDate
      *
      * @return Campaign
      */
-    public function setSendingDate(\DateTime $sendingDate)
+    public function setSendingDate(?\DateTime $sendingDate): Campaign
     {
         $this->sendingDate = $sendingDate;
 
@@ -192,17 +192,17 @@ class Campaign
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getEffectiveSendingDate()
+    public function getEffectiveSendingDate(): ?\DateTime
     {
         return $this->effectiveSendingDate;
     }
 
     /**
-     * @return $this
+     * @return Campaign
      */
-    public function makeSent()
+    public function makeSent(): Campaign
     {
         $this->effectiveSendingDate = new \DateTime();
 
@@ -212,12 +212,15 @@ class Campaign
     /**
      * @return bool
      */
-    public function isSent()
+    public function isSent(): bool
     {
         return null != $this->effectiveSendingDate;
     }
 
-    public function shouldBeSent()
+    /**
+     * @return bool True if the campaign should be sent, false otherwise
+     */
+    public function shouldBeSent(): bool
     {
         return null === $this->effectiveSendingDate and new \DateTime() > $this->sendingDate;
     }
@@ -235,7 +238,7 @@ class Campaign
      *
      * @return Campaign
      */
-    public function addRecipient(Recipient $recipient)
+    public function addRecipient(Recipient $recipient): Campaign
     {
         $this->recipients->add($recipient);
 
@@ -247,7 +250,7 @@ class Campaign
      *
      * @return Campaign
      */
-    public function addAllRecipients(array $recipients)
+    public function addAllRecipients(array $recipients): Campaign
     {
         $this->recipients = new ArrayCollection(array_merge($this->recipients->toArray(), $recipients));
 
@@ -259,7 +262,7 @@ class Campaign
      *
      * @return Campaign
      */
-    public function removeRecipient(Recipient $recipient)
+    public function removeRecipient(Recipient $recipient): Campaign
     {
         $this->recipients->removeElement($recipient);
 
@@ -279,7 +282,7 @@ class Campaign
      *
      * @return Campaign
      */
-    public function addRecipientGroup(RecipientGroup $recipientGroup)
+    public function addRecipientGroup(RecipientGroup $recipientGroup): Campaign
     {
         $this->recipientGroups->add($recipientGroup);
 
@@ -291,14 +294,17 @@ class Campaign
      *
      * @return Campaign
      */
-    public function removeRecipientGroup(RecipientGroup $recipientGroup)
+    public function removeRecipientGroup(RecipientGroup $recipientGroup): Campaign
     {
         $this->recipientGroups->removeElement($recipientGroup);
 
         return $this;
     }
 
-    public function isModifiable()
+    /**
+     * @return bool True if the campaign is allowed to be modified, false otherwise
+     */
+    public function isModifiable(): bool
     {
         return $this->sendingDate > new \DateTime();
     }
@@ -316,7 +322,7 @@ class Campaign
      *
      * @return Campaign
      */
-    public function hasReceived(Recipient $recipient)
+    public function hasReceived(Recipient $recipient): Campaign
     {
         $this->receivedBy->add($recipient);
 
@@ -326,9 +332,9 @@ class Campaign
     /**
      * @param Recipient $recipient
      *
-     * @return bool
+     * @return bool True if the given recipient received the campaign, false otherwise
      */
-    public function hasBeenReceivedBy(Recipient $recipient)
+    public function hasBeenReceivedBy(Recipient $recipient): bool
     {
         return $this->receivedBy->contains($recipient);
     }
@@ -346,7 +352,7 @@ class Campaign
      *
      * @return Campaign
      */
-    public function hasSeen(Recipient $recipient)
+    public function hasSeen(Recipient $recipient): Campaign
     {
         $this->seenBy->add($recipient);
 
@@ -356,7 +362,7 @@ class Campaign
     /**
      * @param Recipient $recipient
      *
-     * @return bool
+     * @return bool True if the given recipient saw the campaign, false otherwise
      */
     public function hasBeenSeenBy(Recipient $recipient)
     {
@@ -364,19 +370,23 @@ class Campaign
     }
 
     /**
-     * @return boolean
+     * @return bool True if the campaign should be sent to all known recipients, false otherwise.
      */
-    public function isSendToAllRecipients()
+    public function isSendToAllRecipients(): ?bool
     {
         return $this->sendToAllRecipients;
     }
 
     /**
-     * @param boolean $sendToAllRecipients
+     * @param bool $sendToAllRecipients
+     *
+     * @return Campaign
      */
-    public function setSendToAllRecipients(bool $sendToAllRecipients)
+    public function setSendToAllRecipients(bool $sendToAllRecipients): Campaign
     {
         $this->sendToAllRecipients = $sendToAllRecipients;
+
+        return $this;
     }
 
     /**
@@ -384,7 +394,7 @@ class Campaign
      *
      * @return Recipient[]
      */
-    public function getAllRecipients($unique = false)
+    public function getAllRecipients(bool $unique = false)
     {
         if (null === $this->allRecipients or null === $this->allUniqueRecipients) {
             $allRecipients = $this->getRecipients()->toArray();
@@ -401,6 +411,9 @@ class Campaign
         return $unique ? $this->allUniqueRecipients : $this->allRecipients;
     }
 
+    /**
+     * @return array The constructed data statistics
+     */
     public function getGlobalConsultationStatistics()
     {
         $notReceived = 0;
@@ -414,7 +427,7 @@ class Campaign
             if (!$received) {
                 $notReceived++;
                 continue;
-            } else if (!$seen) {
+            } elseif (!$seen) {
                 $receivedOnly++;
                 continue;
             } else {
@@ -429,7 +442,12 @@ class Campaign
         );
     }
 
-    public function getConsultationStatisticsForGroup(RecipientGroup $recipientGroup = null)
+    /**
+     * @param RecipientGroup|null $recipientGroup
+     *
+     * @return array The constructed data statistics
+     */
+    public function getConsultationStatisticsForGroup(?RecipientGroup $recipientGroup)
     {
         $notReceived = 0;
         $receivedOnly = 0;
@@ -448,7 +466,7 @@ class Campaign
             if (!$received) {
                 $notReceived++;
                 continue;
-            } else if (!$seen) {
+            } elseif (!$seen) {
                 $receivedOnly++;
                 continue;
             } else {

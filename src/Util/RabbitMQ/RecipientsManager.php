@@ -17,11 +17,19 @@ class RecipientsManager
      */
     public $rabbitMQ;
 
+    /**
+     * @param RabbitMQ $rabbitMQ
+     */
     public function __construct(RabbitMQ $rabbitMQ)
     {
         $this->rabbitMQ = $rabbitMQ;
     }
 
+    /**
+     * @param Recipient $recipient
+     *
+     * @return string
+     */
     public function createRecipientQueue(Recipient $recipient)
     {
         $newQueueName = $this->rabbitMQ->getNames()->getRecipientQueueName($recipient);
@@ -31,12 +39,19 @@ class RecipientsManager
         return $newQueueName;
     }
 
+    /**
+     * @param callable $onRequestAction
+     */
     public function startRegistrationRpcServer(callable $onRequestAction)
     {
         $this->rabbitMQ->listenQueue($this->rabbitMQ->getNames()->getRecipientRegistrationQueueName(), $onRequestAction);
         $this->rabbitMQ->wait();
     }
 
+    /**
+     * @param AMQPMessage $request
+     * @param             $recipientInformation
+     */
     public function sendRegistrationResponse(AMQPMessage $request, $recipientInformation)
     {
         $response = new AMQPMessage(json_encode($recipientInformation), array('correlation_id' => $request->get('correlation_id')));

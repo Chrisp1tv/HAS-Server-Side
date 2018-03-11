@@ -10,18 +10,18 @@ administrators_toggle_status:
     path: /toggle/{id}
     controller: App\Controller\AdministratorsController::toggleStatusAction
     requirements:
-        id: '\d+'
+        id: \d+
 
 administrators_show:
     path: /show/{id}
     controller: App\Controller\AdministratorsController::showAction
     requirements:
-        id: '\d+'
+        id: \d+
 
 administrators_show_logs:
     path: /logs/{administratorId}
     controller: App\Controller\AdministratorsController::showConnectionLogsAction
     requirements:
-        userId: '\d+'
+        userId: \d+
     defaults:
         administratorId: null

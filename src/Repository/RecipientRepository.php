@@ -15,12 +15,22 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class RecipientRepository extends ServiceEntityRepository
 {
+    /**
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Recipient::class);
     }
 
-    public function findPaginated($itemsPerPage, $page, $search = null)
+    /**
+     * @param             $itemsPerPage
+     * @param             $page
+     * @param null|string $search
+     *
+     * @return Paginator All the recipients, paginated, and filtered by search if given
+     */
+    public function findPaginated($itemsPerPage, $page, ?string $search)
     {
         $queryBuilder = $this->createQueryBuilder('recipient')
             ->orderBy('recipient.id', 'DESC');
@@ -35,6 +45,13 @@ class RecipientRepository extends ServiceEntityRepository
         return new Paginator($queryBuilder->getQuery(), $itemsPerPage, $page);
     }
 
+    /**
+     * @param RecipientGroup $recipientGroup
+     * @param                $itemsPerPage
+     * @param                $page
+     *
+     * @return Paginator All the recipients, paginated, and who belong to given recipients group
+     */
     public function findPaginatedByRecipientGroup(RecipientGroup $recipientGroup, $itemsPerPage, $page)
     {
         $queryBuilder = $this->createQueryBuilder('recipient')
@@ -47,7 +64,7 @@ class RecipientRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return int
+     * @return int The number of recipients
      */
     public function countAll()
     {

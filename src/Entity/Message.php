@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 /**
- * Message
+ * Message - Represents a message, as sent to recipients.
  *
  * @author Christopher Anciaux <christopher.anciaux@gmail.com>
  */
@@ -61,27 +61,27 @@ class Message
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getContent()
+    public function getContent(): ?string
     {
         return $this->content;
     }
 
     /**
-     * @param string $content
+     * @param null|string $content
      *
      * @return Message
      */
-    public function setContent($content)
+    public function setContent(?string $content): Message
     {
         $this->content = $content;
 
@@ -89,19 +89,19 @@ class Message
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getColor()
+    public function getColor(): ?string
     {
         return $this->color;
     }
 
     /**
-     * @param string $color
+     * @param null|string $color
      *
      * @return Message
      */
-    public function setColor($color)
+    public function setColor(?string $color): Message
     {
         $this->color = $color;
 
@@ -109,19 +109,19 @@ class Message
     }
 
     /**
-     * @return boolean
+     * @return bool|null
      */
-    public function isBold()
+    public function isBold(): ?bool
     {
         return $this->bold;
     }
 
     /**
-     * @param boolean $bold
+     * @param bool|null $bold
      *
      * @return Message
      */
-    public function setBold($bold)
+    public function setBold(?bool $bold): Message
     {
         $this->bold = $bold;
 
@@ -129,9 +129,9 @@ class Message
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getEndDate()
+    public function getEndDate(): ?\DateTime
     {
         return $this->endDate;
     }
@@ -139,9 +139,9 @@ class Message
     /**
      * @param \DateTime|null $endDate
      *
-     * @return $this
+     * @return Message
      */
-    public function setEndDate(?\DateTime $endDate)
+    public function setEndDate(?\DateTime $endDate): Message
     {
         $this->endDate = $endDate;
 
@@ -149,19 +149,19 @@ class Message
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getRepetitionFrequency()
+    public function getRepetitionFrequency(): ?int
     {
         return $this->repetitionFrequency;
     }
 
     /**
-     * @param int $repetitionFrequency
+     * @param int|null $repetitionFrequency
      *
-     * @return $this
+     * @return Message
      */
-    public function setRepetitionFrequency(int $repetitionFrequency)
+    public function setRepetitionFrequency(?int $repetitionFrequency): Message
     {
         $this->repetitionFrequency = $repetitionFrequency;
 
@@ -169,19 +169,19 @@ class Message
     }
 
     /**
-     * @return Campaign
+     * @return Campaign|null
      */
-    public function getCampaign(): Campaign
+    public function getCampaign(): ?Campaign
     {
         return $this->campaign;
     }
 
     /**
-     * @param Campaign $campaign
+     * @param Campaign|null $campaign
      *
-     * @return $this
+     * @return Message
      */
-    public function setCampaign(Campaign $campaign)
+    public function setCampaign(?Campaign $campaign): Message
     {
         $this->campaign = $campaign;
 

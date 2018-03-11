@@ -9,6 +9,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class AdministratorChecker implements UserCheckerInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function checkPreAuth(UserInterface $user)
     {
         if ($user instanceof Administrator and $user->isDisabled()) {

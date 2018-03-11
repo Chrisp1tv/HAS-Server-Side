@@ -11,15 +11,15 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * SendPendingCampaigns
+ * SendPendingCampaigns - This command sends the campaigns which are ready to be sent.
  *
  * @author Christopher Anciaux <christopher.anciaux@gmail.com>
  */
 class SendPendingCampaigns extends Command
 {
-    public static $name = "has:send-pending-campaigns";
-
     use LockableTrait;
+
+    const name = "has:send-pending-campaigns";
 
     /**
      * @var EntityManagerInterface
@@ -31,6 +31,10 @@ class SendPendingCampaigns extends Command
      */
     protected $campaignsManager;
 
+    /**
+     * @param EntityManagerInterface $entityManager
+     * @param CampaignsManager       $campaignsManager
+     */
     public function __construct(EntityManagerInterface $entityManager, CampaignsManager $campaignsManager)
     {
         $this->entityManager = $entityManager;
@@ -39,14 +43,20 @@ class SendPendingCampaigns extends Command
         parent::__construct();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
-            ->setName(self::$name)
+            ->setName(self::name)
             ->setDescription('Sends the pending campaigns, that is to say the campaigns that still needs to be sent to recipients.')
             ->setHidden(true);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (!$this->lock()) {

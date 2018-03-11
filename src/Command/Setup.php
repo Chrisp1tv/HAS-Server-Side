@@ -12,13 +12,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
- * Setup
+ * Setup - Installs HAS.
  *
  * @author Christopher Anciaux <christopher.anciaux@gmail.com>
  */
 class Setup extends Command
 {
-    public static $name = "has:setup";
+    const name = "has:setup";
 
     /**
      * @var EntityManagerInterface
@@ -30,6 +30,10 @@ class Setup extends Command
      */
     protected $rabbitMQ;
 
+    /**
+     * @param EntityManagerInterface $entityManager
+     * @param RabbitMQ               $rabbitMQ
+     */
     public function __construct(EntityManagerInterface $entityManager, RabbitMQ $rabbitMQ)
     {
         $this->entityManager = $entityManager;
@@ -38,14 +42,20 @@ class Setup extends Command
         parent::__construct();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
-            ->setName(self::$name)
+            ->setName(self::name)
             ->setDescription('Runs the HAS installation.')
             ->setHidden(true);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
@@ -112,7 +122,7 @@ class Setup extends Command
     }
 
     /**
-     * @return bool
+     * @return bool True if the connection to the RabbitMQ server works, false otherwise.
      */
     protected function rabbitMQConnectionWorks()
     {

@@ -10,13 +10,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\PhpExecutableFinder;
 
 /**
- * RunServices
+ * RunServices - This command runs all the others commands that must be started to make HAS work correctly.
  *
  * @author Christopher Anciaux <christopher.anciaux@gmail.com>
  */
 class RunServices extends Command
 {
-    public static $name = "has:run-services";
+    const name = "has:run-services";
 
     /**
      * @var string
@@ -29,7 +29,7 @@ class RunServices extends Command
     private $phpBinaryPath;
 
     /**
-     * @param string $projectDir
+     * @param string $projectDir The project dir
      */
     public function __construct($projectDir)
     {
@@ -39,14 +39,20 @@ class RunServices extends Command
         parent::__construct();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
-            ->setName(self::$name)
+            ->setName(self::name)
             ->setDescription('Runs all the services necessary to HAS.')
             ->setHidden(true);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (!$this->phpBinaryPath) {
@@ -61,12 +67,15 @@ class RunServices extends Command
         }
     }
 
+    /**
+     * @return array The services to run
+     */
     protected function getServicesToRun()
     {
         return array(
-            ListenCampaignsStatus::$name,
-            RunRegistrationRpcServer::$name,
-            SendPendingCampaigns::$name,
+            ListenCampaignsStatus::name,
+            RunRegistrationRpcServer::name,
+            SendPendingCampaigns::name,
         );
     }
 }

@@ -14,11 +14,19 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class RecipientGroupRepository extends ServiceEntityRepository
 {
+    /**
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, RecipientGroup::class);
     }
 
+    /**
+     * @param mixed $id
+     *
+     * @return RecipientGroup|null The recipients group identified by the given id, null otherwise
+     */
     public function find($id)
     {
         $queryBuilder = $this->createQueryBuilder('recipientGroup')
@@ -31,6 +39,12 @@ class RecipientGroupRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+    /**
+     * @param $itemsPerPage
+     * @param $page
+     *
+     * @return Paginator All the recipients groups, paginated
+     */
     public function findAllPaginated($itemsPerPage, $page)
     {
         $queryBuilder = $this->createQueryBuilder('recipientGroup')
