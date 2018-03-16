@@ -1,6 +1,5 @@
 parameters:
     christopheranciauxgithublink: https://github.com/Chrisp1tv
-    alexandreszymuragithublink: https://github.com/alexrclens59
     locale: fr
     paginator.items_per_page: 25
     rabbitmq_manager.names_prefix: has_

@@ -3,4 +3,3 @@ twig:
         - common/form/fields.html.twig
     globals:
         christopheranciauxgithublink: '%christopheranciauxgithublink%'
-        alexandreszymuragithublink: '%alexandreszymuragithublink%'
