@@ -15,7 +15,7 @@ You can install the project with Composer, or by downloading the archive of the 
 
 ### Using Composer (recommended)
 
-Using Composer, just run the following command to download and install the project : `composer require Chrisp1tv/HAS-Server-Side`  
+Using Composer, just run the following command to download and install the project : `composer create-project chrisp1tv/has-server-side`  
   
 Once it's successfully installed, go to the step 4 !
 
