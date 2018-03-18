@@ -15,7 +15,9 @@ You can install the project with Composer, or by downloading the archive of the 
 
 ### Using Composer (recommended)
 
-Using Composer, just run the following command to download and install the project : `composer create-project chrisp1tv/has-server-side`  
+Using Composer, just run the following command to download and install the project : `composer create-project chrisp1tv/has-server-side`.
+  
+Once the project is successfully installed, run the following command to install the NodeJS dependencies : `npm install`. 
   
 Once it's successfully installed, go to the step 4 !
 

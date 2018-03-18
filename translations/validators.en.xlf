@@ -1,107 +1,106 @@
 <?xml version="1.0"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-    <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
         <body>
             <!-- Validation -->
             <!-- Administrator validation -->
             <trans-unit id="administrator.uniqueness">
                 <source>administrator.uniqueness</source>
-                <target>Le nom d'utilisateur est déjà utilisé.</target>
+                <target>The username is already used.</target>
             </trans-unit>
             <trans-unit id="administrator.username.notBlank">
                 <source>administrator.username.notBlank</source>
-                <target>Veuillez renseigner le nom d'utilisateur de l'administrateur.</target>
+                <target>Please give a username to the administrator.</target>
             </trans-unit>
             <trans-unit id="administrator.username.length.min">
                 <source>administrator.username.length.min</source>
-                <target>Le nom d'utilisateur doit posséder au moins {{ limit }} caractères.</target>
+                <target>The username must have {{ limit }} characters minimum.</target>
             </trans-unit>
             <trans-unit id="administrator.username.length.max">
                 <source>administrator.username.length.max</source>
-                <target>Le nom d'utilisateur ne peut posséder plus de {{ limit }} caractères.</target>
+                <target>The username can't have more than {{ limit }} characters.</target>
             </trans-unit>
             <trans-unit id="administrator.password.notBlank">
                 <source>administrator.password.notBlank</source>
-                <target>Veuillez renseigner le mot de passe de l'administrateur.</target>
+                <target>Please give a password to the administrator.</target>
             </trans-unit>
             <trans-unit id="administrator.password.length.min">
                 <source>administrator.password.length.min</source>
-                <target>Le mot de passe doit posséder au moins {{ limit }} caractères.</target>
+                <target>The administrator must have {{ limit }} characters minimum.</target>
             </trans-unit>
             <trans-unit id="administrator.password.length.max">
                 <source>administrator.password.length.max</source>
-                <target>Le mot de passe ne peut posséder plus de {{ limit }} caractères.</target>
+                <target>The password can't have more than {{ limit }} characters.</target>
             </trans-unit>
             <!-- Campaign validation -->
             <trans-unit id="campaign.expression">
                 <source>campaign.expression</source>
                 <target>
-                    La campagne doit obligatoirement posséder des destinataires (individuels ou groupés) et il est
-                    impossible d'envoyer votre message à tous les destinataires liés au systèmes et d'en choisir
-                    manuellement à la fois.
+                    The campaign must have recipients (grouped or individual) and it is impossible to send your message
+                    to all the recipients and choose by hand at a time.
                 </target>
             </trans-unit>
             <trans-unit id="campaign.name.notBlank">
                 <source>campaign.name.notBlank</source>
-                <target>La campagne doit obligatoirement posséder un nom.</target>
+                <target>The campaign must have a name.</target>
             </trans-unit>
             <trans-unit id="campaign.name.length.min">
                 <source>campaign.name.length.min</source>
-                <target>Le nom de la campagne doit posséder au moins {{ limit }} caractères.</target>
+                <target>The campaign name must have {{ limit }} characters.</target>
             </trans-unit>
             <trans-unit id="campaign.name.length.max">
                 <source>campaign.name.length.max</source>
-                <target>Le nom de la campagne ne peut posséder plus de {{ limit }} caractères.</target>
+                <target>The campaign can't have more than {{ limit }} characters.</target>
             </trans-unit>
             <trans-unit id="campaign.message.notNull">
                 <source>campaign.message.notNull</source>
-                <target>La campagne doit posséder un message.</target>
+                <target>The campaign must have a message.</target>
             </trans-unit>
             <trans-unit id="campaign.sendingDate.date">
                 <source>campaign.sendingDate.date</source>
-                <target>La date d'envoi saisie n'est pas valide.</target>
+                <target>The date is invalid.</target>
             </trans-unit>
             <trans-unit id="campaign.sendingDate.greaterThan">
                 <source>campaign.sendingDate.greaterThan</source>
-                <target>Il n'est pas possible d'envoyer une campagne dans le passé.</target>
+                <target>You can't send a campaign in the past.</target>
             </trans-unit>
             <!-- Message validation -->
             <trans-unit id="message.content.notBlank">
                 <source>message.content.notBlank</source>
-                <target>Votre message doit impérativement posséder un contenu.</target>
+                <target>Your message must have a content.</target>
             </trans-unit>
             <trans-unit id="message.color.regex">
                 <source>message.color.regex</source>
-                <target>La couleur saisie n'a pas été reconnue.</target>
+                <target>The given color wasn't recognized.</target>
             </trans-unit>
             <trans-unit id="message.endDate.date">
                 <source>campaign.endDate.date</source>
-                <target>La date de fin saisie n'est pas valide.</target>
+                <target>The given end date isn't valid.</target>
             </trans-unit>
             <trans-unit id="message.endDate.expression">
                 <source>campaign.endDate.expression</source>
-                <target>La campagne ne peut se terminer avant d'avoir commencé.</target>
+                <target>The campaign can't end before it started.</target>
             </trans-unit>
             <trans-unit id="message.repetitionFrequency.range.min">
                 <source>campaign.repetitionFrequency.range.min</source>
-                <target>La fréquence minimale de répétition ne peut être inférieure à {{ limit }} minutes.</target>
+                <target>The minimum repetition frequency can't be smaller than {{ limit }} minutes.</target>
             </trans-unit>
             <!-- RecipientGroup validation -->
             <trans-unit id="recipientGroup.name.notBlank">
                 <source>recipientGroup.name.notBlank</source>
-                <target>Votre groupe doit impérativement posséder un nom.</target>
+                <target>Your group must have a name.</target>
             </trans-unit>
             <trans-unit id="recipientGroup.name.length.min">
                 <source>recipientGroup.name.length.min</source>
-                <target>Le nom de votre groupe doit posséder au moins {{ limit }} caractères.</target>
+                <target>Your group's name must have {{ limit }} characters.</target>
             </trans-unit>
             <trans-unit id="recipientGroup.name.length.max">
                 <source>recipientGroup.name.length.max</source>
-                <target>Le nom de votre groupe ne peut posséder plus de {{ limit }} caractères.</target>
+                <target>Your group's name can't have more than {{ limit }} characters.</target>
             </trans-unit>
             <trans-unit id="recipientGroup.recipients.min">
                 <source>recipientGroup.recipients.min</source>
-                <target>Votre groupe doit posséder au moins {{ limit }} destinataires.</target>
+                <target>Your group must have exactly or more than {{ limit }} recipients.</target>
             </trans-unit>
         </body>
     </file>

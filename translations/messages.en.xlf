@@ -1,0 +1,440 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <!-- General -->
+            <!-- Words and simple expressions -->
+            <trans-unit id="yes">
+                <source>yes</source>
+                <target>yes</target>
+            </trans-unit>
+            <trans-unit id="no">
+                <source>no</source>
+                <target>No</target>
+            </trans-unit>
+            <trans-unit id="and">
+                <source>and</source>
+                <target>and</target>
+            </trans-unit>
+            <trans-unit id="date">
+                <source>date</source>
+                <target>date</target>
+            </trans-unit>
+            <trans-unit id="day">
+                <source>day</source>
+                <target>Day</target>
+            </trans-unit>
+            <trans-unit id="month">
+                <source>month</source>
+                <target>Month</target>
+            </trans-unit>
+            <trans-unit id="year">
+                <source>year</source>
+                <target>Year</target>
+            </trans-unit>
+            <trans-unit id="connectionAddress">
+                <source>connectionAddress</source>
+                <target>Connection address</target>
+            </trans-unit>
+            <trans-unit id="alertSystem">
+                <source>alertSystem</source>
+                <target>Alert system</target>
+            </trans-unit>
+            <trans-unit id="loggedInAs">
+                <source>loggedInAs</source>
+                <target>Logged in as %username%</target>
+            </trans-unit>
+            <trans-unit id="logout">
+                <source>logout</source>
+                <target>Logout</target>
+            </trans-unit>
+            <trans-unit id="homepage">
+                <source>homepage</source>
+                <target>Homepage</target>
+            </trans-unit>
+            <trans-unit id="name">
+                <source>name</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="search">
+                <source>search</source>
+                <target>Find</target>
+            </trans-unit>
+            <trans-unit id="administrator">
+                <source>administrator</source>
+                <target>Administrator</target>
+            </trans-unit>
+            <trans-unit id="administrators">
+                <source>administrators</source>
+                <target>Administrators</target>
+            </trans-unit>
+            <trans-unit id="newAdministrator">
+                <source>newAdministrator</source>
+                <target>New administrator</target>
+            </trans-unit>
+            <trans-unit id="sentCampaigns">
+                <source>sentCampaigns</source>
+                <target>Sent campaigns</target>
+            </trans-unit>
+            <trans-unit id="campaigns">
+                <source>campaigns</source>
+                <target>Campaigns</target>
+            </trans-unit>
+            <trans-unit id="recipients">
+                <source>recipients</source>
+                <target>Recipients</target>
+            </trans-unit>
+            <trans-unit id="recipientsSearching">
+                <source>recipientsSearching</source>
+                <target>Recipients - Finding : "%search%"</target>
+            </trans-unit>
+            <trans-unit id="noRecipientFound">
+                <source>noRecipientFound</source>
+                <target>No recipient found.</target>
+            </trans-unit>
+            <trans-unit id="recipientGroups">
+                <source>recipientGroups</source>
+                <target>Recipient groups</target>
+            </trans-unit>
+            <trans-unit id="realizedBy">
+                <source>realizedBy</source>
+                <target>Realized by :</target>
+            </trans-unit>
+            <trans-unit id="noCampaignFound">
+                <source>noCampaignFound</source>
+                <target>No campaign found.</target>
+            </trans-unit>
+            <trans-unit id="newCampaign">
+                <source>newCampaign</source>
+                <target>New campaign</target>
+            </trans-unit>
+            <trans-unit id="duplicateCampaign">
+                <source>duplicateCampaign</source>
+                <target>Duplicate the campaign : %campaignName%</target>
+            </trans-unit>
+            <trans-unit id="modifyCampaign">
+                <source>modifyCampaign</source>
+                <target>Modify the campaign %campaignName%</target>
+            </trans-unit>
+            <trans-unit id="campaignState">
+                <source>campaignState</source>
+                <target>"%campaignName%" campaign state</target>
+            </trans-unit>
+            <trans-unit id="campaignName">
+                <source>campaignName</source>
+                <target>Campaign name</target>
+            </trans-unit>
+            <trans-unit id="globalCampaignStatistics">
+                <source>globalCampaignStatistics</source>
+                <target>Global statistics of the campaign</target>
+            </trans-unit>
+            <trans-unit id="globalRepartitionStatistics">
+                <source>globalRepartitionStatistics</source>
+                <target>Repartition of reception and acquittal statistics</target>
+            </trans-unit>
+            <trans-unit id="globalRepartitionStatisticsOfRecipient">
+                <source>globalRepartitionStatisticsOfRecipient</source>
+                <target>Repartition of reception and acquittal statistics of %recipientName%</target>
+            </trans-unit>
+            <trans-unit id="detailedRecipientStatistics">
+                <source>detailedRecipientStatistics</source>
+                <target>Detailed statistics, campaign by campaign</target>
+            </trans-unit>
+            <trans-unit id="globalGroupedRepartitionStatistics">
+                <source>globalGroupedRepartitionStatistics</source>
+                <target>Repartition of reception and acquittal statistics by recipient group</target>
+            </trans-unit>
+            <trans-unit id="notReceived">
+                <source>notReceived</source>
+                <target>Not received</target>
+            </trans-unit>
+            <trans-unit id="receivedOnly">
+                <source>receivedOnly</source>
+                <target>Received only</target>
+            </trans-unit>
+            <trans-unit id="receivedAndSeen">
+                <source>receivedAndSeen</source>
+                <target>Received and seen</target>
+            </trans-unit>
+            <trans-unit id="directRecipients">
+                <source>directRecipients</source>
+                <target>Direct recipients (non-grouped)</target>
+            </trans-unit>
+            <trans-unit id="detailedCampaignStatistics">
+                <source>detailedCampaignStatistics</source>
+                <target>Campaign detailed statistics</target>
+            </trans-unit>
+            <trans-unit id="groupStatistics">
+                <source>groupStatistics</source>
+                <target>Statistics of %groupName% group</target>
+            </trans-unit>
+            <trans-unit id="nonGroupedStatistics">
+                <source>nonGroupedStatistics</source>
+                <target>Statistics of direct recipients (non-grouped)</target>
+            </trans-unit>
+            <trans-unit id="received?">
+                <source>received?</source>
+                <target>Received the campaign ?</target>
+            </trans-unit>
+            <trans-unit id="seen?">
+                <source>seen?</source>
+                <target>Saw the campaign ?</target>
+            </trans-unit>
+            <trans-unit id="modifyRecipient">
+                <source>modifyRecipient</source>
+                <target>Modify the %recipient% recipient</target>
+            </trans-unit>
+            <trans-unit id="recipientInformation">
+                <source>recipientInformation</source>
+                <target>Information about %recipientName% recipient</target>
+            </trans-unit>
+            <trans-unit id="globalRecipientStatistics">
+                <source>globalRecipientStatistics</source>
+                <target>Global statistics</target>
+            </trans-unit>
+            <trans-unit id="noRecipientGroupFound">
+                <source>noRecipientGroupFound</source>
+                <target>No recipient group found.</target>
+            </trans-unit>
+            <trans-unit id="newRecipientGroup">
+                <source>newRecipientGroup</source>
+                <target>New recipient group</target>
+            </trans-unit>
+            <trans-unit id="modifyRecipientGroup">
+                <source>modifyRecipientGroup</source>
+                <target>Modify the %groupName% group</target>
+            </trans-unit>
+            <trans-unit id="recipientGroupInformation">
+                <source>recipientGroupInformation</source>
+                <target>Recipient groups - %recipientGroupName%</target>
+            </trans-unit>
+            <trans-unit id="login">
+                <source>login</source>
+                <target>Log in</target>
+            </trans-unit>
+            <trans-unit id="username">
+                <source>username</source>
+                <target>Username</target>
+            </trans-unit>
+            <trans-unit id="password">
+                <source>password</source>
+                <target>Password</target>
+            </trans-unit>
+            <trans-unit id="disabled">
+                <source>disabled</source>
+                <target>Disabled</target>
+            </trans-unit>
+            <trans-unit id="connectionLogs">
+                <source>connectionLogs</source>
+                <target>Connection logs</target>
+            </trans-unit>
+            <trans-unit id="actions">
+                <source>actions</source>
+                <target>Actions</target>
+            </trans-unit>
+            <trans-unit id="show">
+                <source>show</source>
+                <target>Show</target>
+            </trans-unit>
+            <trans-unit id="modify">
+                <source>modify</source>
+                <target>Modify</target>
+            </trans-unit>
+            <trans-unit id="duplicate">
+                <source>duplicate</source>
+                <target>Duplicate</target>
+            </trans-unit>
+            <trans-unit id="enable">
+                <source>enable</source>
+                <target>Enable</target>
+            </trans-unit>
+            <trans-unit id="disable">
+                <source>disable</source>
+                <target>Disable</target>
+            </trans-unit>
+            <trans-unit id="remove">
+                <source>remove</source>
+                <target>Remove</target>
+            </trans-unit>
+            <!-- Sentences -->
+            <trans-unit id="sentence.noImportantInformationToDisplay">
+                <source>sentence.noImportantInformationToDisplay</source>
+                <target>No importante information about this administrator is available.</target>
+            </trans-unit>
+            <trans-unit id="sentence.numberOfCampaigns">
+                <source>sentence.numberOfCampaigns</source>
+                <target>
+                    {0}No campaign is saved.
+                    |{1}One campaign is saved.
+                    |] 1, Inf]%count% campaigns are saved.
+                </target>
+            </trans-unit>
+            <trans-unit id="sentence.numberOfUnsentCampaigns">
+                <source>sentence.numberOfUnsentCampaigns</source>
+                <target>
+                    {0}
+                    |{1}One campaign needs to be sent.
+                    |]1, Inf[%count% campaigns needs to be sent.
+                </target>
+            </trans-unit>
+            <trans-unit id="sentence.lastConnectionDate">
+                <source>sentence.lastConnectionDate</source>
+                <target>The last connection from your account was the %connectionDate%, from %IPConnection% IP.
+                </target>
+            </trans-unit>
+            <trans-unit id="sentence.numberOfLinkedRecipients">
+                <source>sentence.numberOfLinkedRecipients</source>
+                <target>
+                    {0}No computer is linked to the alert system.
+                    |{1}One computer is linked to the alert system.
+                    |]1, Inf[%count% computers are linked to the alert system.
+                </target>
+            </trans-unit>
+            <trans-unit id="sentence.seeAllConnectionLogs">
+                <source>sentence.seeAllConnectionLogs</source>
+                <target>Show complete connection logs</target>
+            </trans-unit>
+            <trans-unit id="sentence.campaignSentAtBy">
+                <source>sentence.campaignSentAtBy</source>
+                <target>The campaign created by %senderName% and planned to be sent the %plannedSendingDate%,
+                    was sent the %effectiveSendingDate% by the system.
+                </target>
+            </trans-unit>
+            <trans-unit id="sentence.campaignWaitingToBeSentAtBy">
+                <source>sentence.campaignWaitingToBeSentAtBy</source>
+                <target>The campaign created by %senderName% and planned to be sent the %plannedSendingDate%, is waiting
+                    to be sent by the system.
+                </target>
+            </trans-unit>
+            <trans-unit id="sentence.campaignPlannedToBeSentAtBy">
+                <source>sentence.campaignPlannedToBeSentAtBy</source>
+                <target>The campaign created by %senderName% is planned to be sent the %plannedSendingDate%.</target>
+            </trans-unit>
+            <trans-unit id="sentence.recipientCampaigns">
+                <source>sentence.recipientCampaigns</source>
+                <target>
+                    {0}%recipientName% isn't the recipient of any campaign.
+                    |{1}%recipientName% is the recipient of one campaign.
+                    |]1, Inf[%recipientName% is the recipent of %count% campaigns (planned or already sent).
+                </target>
+            </trans-unit>
+            <trans-unit id="sentence.noInformationForThisRecipient">
+                <source>sentence.noInformationForThisRecipient</source>
+                <target>
+                    No important information is available about this recipient, because he isn't the recipient of
+                    any campaign.
+                </target>
+            </trans-unit>
+            <trans-unit id="sentence.javascriptNeededToSeeCharts">
+                <source>sentence.javascriptNeededToSeeCharts</source>
+                <target>
+                    Your brower must support Javascript to display graphics.
+                </target>
+            </trans-unit>
+            <!-- Forms -->
+            <!-- Forms labels -->
+            <trans-unit id="form.label.save">
+                <source>form.label.save</source>
+                <target>Save</target>
+            </trans-unit>
+            <trans-unit id="form.label.content">
+                <source>form.label.content</source>
+                <target>Content</target>
+            </trans-unit>
+            <trans-unit id="form.label.color">
+                <source>form.label.color</source>
+                <target>Color (hexadecimal code)</target>
+            </trans-unit>
+            <trans-unit id="form.label.bold">
+                <source>form.label.bold</source>
+                <target>Bold</target>
+            </trans-unit>
+            <trans-unit id="form.label.message">
+                <source>form.label.message</source>
+                <target>Message</target>
+            </trans-unit>
+            <trans-unit id="form.label.sendingDate">
+                <source>form.label.sendingDate</source>
+                <target>Sending date</target>
+            </trans-unit>
+            <trans-unit id="form.label.endDate">
+                <source>form.label.endDate</source>
+                <target>Expiration date (optional)</target>
+            </trans-unit>
+            <trans-unit id="form.label.repetitionFrequency">
+                <source>form.label.repetitionFrequency</source>
+                <target>Repetition frequency (in minutes)</target>
+            </trans-unit>
+            <trans-unit id="form.label.sendToAllRecipients">
+                <source>form.label.sendToAllRecipients</source>
+                <target>Send to all known recipients</target>
+            </trans-unit>
+            <trans-unit id="form.label.recipients">
+                <source>form.label.recipients</source>
+                <target>Recipients</target>
+            </trans-unit>
+            <trans-unit id="form.label.recipientGroups">
+                <source>form.label.recipientGroups</source>
+                <target>Recipients groups</target>
+            </trans-unit>
+            <trans-unit id="form.label.search">
+                <source>form.label.search</source>
+                <target>Find</target>
+            </trans-unit>
+            <!-- Form placeholders -->
+            <trans-unit id="form.placeholder.repetitionFrequency">
+                <source>form.placeholder.repetitionFrequency</source>
+                <target>Keep empty if you don't want to repeat the message</target>
+            </trans-unit>
+            <!-- Flash messages -->
+            <trans-unit id="flash.campaignCreated">
+                <source>flash.campaignCreated</source>
+                <target>The campaign has been created.</target>
+            </trans-unit>
+            <trans-unit id="flash.campaignModified">
+                <source>flash.campaignModified</source>
+                <target>The campaign has been modified.</target>
+            </trans-unit>
+            <trans-unit id="flash.campaignDuplicated">
+                <source>flash.campaignDuplicated</source>
+                <target>The campaign has been duplicated, taking account of the given information.</target>
+            </trans-unit>
+            <trans-unit id="flash.campaignRemoved">
+                <source>flash.campaignRemoved</source>
+                <target>The campaign has been removed.</target>
+            </trans-unit>
+            <trans-unit id="flash.unableToRemoveCampaign">
+                <source>flash.unableToRemoveCampaign</source>
+                <target>The campaign couldn't be deleted because it has already been sent.</target>
+            </trans-unit>
+            <trans-unit id="flash.recipientModified">
+                <source>flash.recipientModified</source>
+                <target>The recipient has been modified.</target>
+            </trans-unit>
+            <trans-unit id="flash.recipientGroupCreated">
+                <source>flash.recipientGroupCreated</source>
+                <target>The recipient group has been created.</target>
+            </trans-unit>
+            <trans-unit id="flash.recipientGroupModified">
+                <source>flash.recipientGroupModified</source>
+                <target>The recipient group has been modified.</target>
+            </trans-unit>
+            <trans-unit id="flash.recipientGroupRemoved">
+                <source>flash.recipientGroupRemoved</source>
+                <target>The recipient group has been deleted.</target>
+            </trans-unit>
+            <trans-unit id="flash.administratorCreated">
+                <source>flash.administratorCreated</source>
+                <target>The administrator has been created.</target>
+            </trans-unit>
+            <trans-unit id="flash.administratorEnabled">
+                <source>flash.administratorEnabled</source>
+                <target>The administrator has been enabled.</target>
+            </trans-unit>
+            <trans-unit id="flash.administratorDisabled">
+                <source>flash.administratorDisabled</source>
+                <target>The administrator has been disabled.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
