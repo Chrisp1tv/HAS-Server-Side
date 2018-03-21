@@ -58,7 +58,7 @@ class Recipient
     /**
      * @param null|string $name
      *
-     * @return $this
+     * @return Recipient
      */
     public function setName(?string $name): Recipient
     {

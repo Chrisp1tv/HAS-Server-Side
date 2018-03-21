@@ -222,7 +222,7 @@ class Campaign
      */
     public function shouldBeSent(): bool
     {
-        return null === $this->effectiveSendingDate and new \DateTime() > $this->sendingDate;
+        return null === $this->effectiveSendingDate and null != $this->sendingDate and new \DateTime() > $this->sendingDate;
     }
 
     /**
@@ -306,7 +306,7 @@ class Campaign
      */
     public function isModifiable(): bool
     {
-        return $this->sendingDate > new \DateTime();
+        return null == $this->sendingDate or $this->sendingDate > new \DateTime();
     }
 
     /**
