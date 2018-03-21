@@ -69,10 +69,6 @@
                 <source>message.content.notBlank</source>
                 <target>Your message must have a content.</target>
             </trans-unit>
-            <trans-unit id="message.color.regex">
-                <source>message.color.regex</source>
-                <target>The given color wasn't recognized.</target>
-            </trans-unit>
             <trans-unit id="message.endDate.date">
                 <source>campaign.endDate.date</source>
                 <target>The given end date isn't valid.</target>

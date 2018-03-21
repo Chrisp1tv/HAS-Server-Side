@@ -20,16 +20,6 @@ class Message
     private $content;
 
     /**
-     * @var string
-     */
-    private $color;
-
-    /**
-     * @var bool
-     */
-    private $bold;
-
-    /**
      * @var \DateTime
      */
     private $endDate;
@@ -84,46 +74,6 @@ class Message
     public function setContent(?string $content): Message
     {
         $this->content = $content;
-
-        return $this;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getColor(): ?string
-    {
-        return $this->color;
-    }
-
-    /**
-     * @param null|string $color
-     *
-     * @return Message
-     */
-    public function setColor(?string $color): Message
-    {
-        $this->color = $color;
-
-        return $this;
-    }
-
-    /**
-     * @return bool|null
-     */
-    public function isBold(): ?bool
-    {
-        return $this->bold;
-    }
-
-    /**
-     * @param bool|null $bold
-     *
-     * @return Message
-     */
-    public function setBold(?bool $bold): Message
-    {
-        $this->bold = $bold;
 
         return $this;
     }

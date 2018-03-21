@@ -1,0 +1,5 @@
+{% extends "form-page.html.twig" %}
+
+{% block javascripts %}
+    {% include "common/modules/ckeditor-import.html.twig" with {fieldName: form.message.content.vars.id} only %}
+{% endblock %}

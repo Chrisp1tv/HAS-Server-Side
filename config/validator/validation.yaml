@@ -50,10 +50,6 @@ App\Entity\Message:
         content:
             - NotBlank:
                 message: message.content.notBlank
-        color:
-            - Regex:
-                pattern: ^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$
-                message: message.color.regex
         endDate:
             - Date:
                 message: campaing.endDate.date

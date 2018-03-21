@@ -8,10 +8,6 @@ App\Entity\Message:
     fields:
         content:
             type: text
-        color:
-            type: string
-        bold:
-            type: boolean
         endDate:
             type: datetime
             column: end_date

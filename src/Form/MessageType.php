@@ -3,8 +3,6 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -48,14 +46,6 @@ class MessageType extends AbstractType
             ->add('content', TextareaType::class, array(
                 'label'    => 'form.label.content',
                 'required' => true,
-            ))
-            ->add('color', ColorType::class, array(
-                'label' => 'form.label.color',
-                'required' => false,
-            ))
-            ->add('bold', CheckboxType::class, array(
-                'label' => 'form.label.bold',
-                'required' => false,
             ));
     }
 

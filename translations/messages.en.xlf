@@ -341,14 +341,6 @@
                 <source>form.label.content</source>
                 <target>Content</target>
             </trans-unit>
-            <trans-unit id="form.label.color">
-                <source>form.label.color</source>
-                <target>Color (hexadecimal code)</target>
-            </trans-unit>
-            <trans-unit id="form.label.bold">
-                <source>form.label.bold</source>
-                <target>Bold</target>
-            </trans-unit>
             <trans-unit id="form.label.message">
                 <source>form.label.message</source>
                 <target>Message</target>

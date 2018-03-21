@@ -70,10 +70,6 @@
                 <source>message.content.notBlank</source>
                 <target>Votre message doit impérativement posséder un contenu.</target>
             </trans-unit>
-            <trans-unit id="message.color.regex">
-                <source>message.color.regex</source>
-                <target>La couleur saisie n'a pas été reconnue.</target>
-            </trans-unit>
             <trans-unit id="message.endDate.date">
                 <source>campaign.endDate.date</source>
                 <target>La date de fin saisie n'est pas valide.</target>
