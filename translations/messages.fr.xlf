@@ -265,7 +265,7 @@
                 <source>sentence.numberOfCampaigns</source>
                 <target>
                     {0}Aucune campagne n'est enregistrée.
-                    |{1}Une campagne de message est enreigstée.
+                    |{1}Une campagne de message est enregistrée.
                     |] 1, Inf]%count% campagnes de messages sont enregistrées.
                 </target>
             </trans-unit>
